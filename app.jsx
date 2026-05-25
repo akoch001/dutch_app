@@ -52,6 +52,7 @@ function Home({ allVocab, allVerbs, allExpressions, onVocab, onVerbs, onExpressi
         <div style={s.label}>Nederlands</div>
         <h1 style={{ fontSize: 32, fontWeight: 700, color: "#e8e4df", fontFamily: "'Playfair Display',serif", marginTop: 8 }}>Woordenschat</h1>
       </div>
+      <div style={{ fontSize: 12, color: "#4a5568", marginBottom: 32, fontFamily: "'DM Sans',sans-serif" }}>built by Adam</div>
       <div style={{ width: "100%", maxWidth: 340, display: "flex", flexDirection: "column", gap: 12 }}>
         <button onClick={onVocab} style={{ padding: "16px 20px", background: "linear-gradient(135deg,rgba(100,180,255,0.1),rgba(100,180,255,0.04))", border: "1px solid rgba(100,180,255,0.2)", borderRadius: 16, display: "flex", alignItems: "center", gap: 14, cursor: "pointer", fontFamily: "'DM Sans',sans-serif", textAlign: "left" }}>
           <span style={{ fontSize: 24 }}>📖</span>
