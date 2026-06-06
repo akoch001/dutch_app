@@ -1,0 +1,73 @@
+{
+  "currentChapter": 8,
+  "oldChapters": "3 / 4 / 5",
+  "days": [
+    {
+      "day": "Maandag",
+      "note": "Kantoor + gym",
+      "tasks": [
+        { "tag": "Podcast", "mins": 20, "label": "Een Beetje Nederlands — listen during training" },
+        { "tag": "TV",      "mins": 25, "label": "Dutch TV at lunch — Dutch subtitles only" },
+        { "tag": "Schr.",   "mins": 25, "label": "Write a short piece in Dutch → send to Claude (eve)" },
+        { "tag": "Vocab",   "mins": 20, "label": "App — Chapter 8 words (breaks)" }
+      ]
+    },
+    {
+      "day": "Dinsdag",
+      "note": "Gym + verdieping",
+      "tasks": [
+        { "tag": "Podcast", "mins": 20, "label": "Een Beetje Nederlands — listen during training" },
+        { "tag": "Tekst",   "mins": 20, "label": "Read that episode's transcript, pull words → app (eve)" },
+        { "tag": "Verbs",   "mins": 15, "label": "App — verb conjugation drills" },
+        { "tag": "Vocab",   "mins": 20, "label": "App — Chapter 8 words" }
+      ]
+    },
+    {
+      "day": "Woensdag",
+      "note": "Kantoor + gym · Les met Tessa",
+      "tasks": [
+        { "tag": "Les",     "mins": 0,  "label": "Lesson with Tessa — speaking, listening, grammar" },
+        { "tag": "Podcast", "mins": 20, "label": "Een Beetje Nederlands — listen during training" },
+        { "tag": "TV",      "mins": 25, "label": "Dutch TV at lunch — Dutch subtitles only" },
+        { "tag": "Verbs",   "mins": 15, "label": "App — verb conjugation drills (breaks)" },
+        { "tag": "Vocab",   "mins": 20, "label": "App — Chapter 8 words" }
+      ]
+    },
+    {
+      "day": "Donderdag",
+      "note": "Vrije avond · film + werkwoorden",
+      "tasks": [
+        { "tag": "TV",     "mins": 40, "label": "Dutch film / series on NPO Start — Dutch subtitles only (eve)" },
+        { "tag": "Verbs",  "mins": 15, "label": "App — verb conjugation drills" },
+        { "tag": "Vocab",  "mins": 20, "label": "App — focus older chapters (3 / 4 / 5)" },
+        { "tag": "Koffie", "mins": 15, "label": "Coffee chat — prep 10 topic words first", "opt": true }
+      ]
+    },
+    {
+      "day": "Vrijdag",
+      "note": "Gym · Les met Tessa",
+      "tasks": [
+        { "tag": "Les",     "mins": 0,  "label": "Lesson with Tessa — speaking, listening, grammar" },
+        { "tag": "Podcast", "mins": 20, "label": "Een Beetje Nederlands — listen during training" },
+        { "tag": "Tekst",   "mins": 20, "label": "Read that episode's transcript, pull words → app (eve)" },
+        { "tag": "Vocab",   "mins": 20, "label": "App — Chapter 8 words" }
+      ]
+    },
+    {
+      "day": "Zaterdag",
+      "note": "Lexi-dag · licht",
+      "tasks": [
+        { "tag": "Vocab",  "mins": 20, "label": "App — Chapter 8 words (a quiet 20)" },
+        { "tag": "Koffie", "mins": 15, "label": "Coffee chat", "opt": true }
+      ]
+    },
+    {
+      "day": "Zondag",
+      "note": "Lexi-dag · licht",
+      "tasks": [
+        { "tag": "Vocab",   "mins": 20, "label": "App — consolidate + older chapters (3 / 4 / 5)" },
+        { "tag": "Podcast", "mins": 20, "label": "Re-listen a favourite episode — relaxed, no notes" }
+      ]
+    }
+  ]
+}

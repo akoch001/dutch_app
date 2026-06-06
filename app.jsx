@@ -44,10 +44,104 @@ const s = {
   rightBtn: { padding: "14px 28px", background: "rgba(15,157,145,0.1)", border: "1px solid rgba(15,157,145,0.25)", borderRadius: 12, color: "#0f9d91", fontSize: 15, fontWeight: 600, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" },
 };
 
+// ── Progress save / load ───────────────────────────────────────────────────────
+const BACKUP_EMAIL = "adamwyldekoch@gmail.com";
+
+function getSnapshot() {
+  const snap = {};
+  for (let i = 0; i < localStorage.length; i++) {
+    const k = localStorage.key(i);
+    if (k && k.startsWith("dutch-")) {
+      try { snap[k] = JSON.parse(localStorage.getItem(k)); }
+      catch { snap[k] = localStorage.getItem(k); }
+    }
+  }
+  return JSON.stringify(snap, null, 2);
+}
+
+function ProgressModal({ onClose }) {
+  const [mode, setMode] = useState(null);
+  const [paste, setPaste] = useState("");
+  const [copied, setCopied] = useState(false);
+  const [done, setDone] = useState(false);
+  const snapshot = mode === "save" ? getSnapshot() : null;
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(snapshot).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); });
+  };
+
+  const openMailto = () => {
+    const sub = encodeURIComponent("Dutch app progress backup");
+    const body = encodeURIComponent(snapshot);
+    window.open(`mailto:${BACKUP_EMAIL}?subject=${sub}&body=${body}`);
+  };
+
+  const restore = () => {
+    try {
+      const parsed = JSON.parse(paste);
+      Object.entries(parsed).forEach(([k, v]) => localStorage.setItem(k, JSON.stringify(v)));
+      setDone(true);
+      setTimeout(() => window.location.reload(), 1200);
+    } catch { alert("Couldn't parse that — make sure you pasted the full JSON."); }
+  };
+
+  return (
+    <div style={{ position: "fixed", inset: 0, background: "rgba(28,25,23,0.55)", zIndex: 100, display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }} onClick={onClose}>
+      <div style={{ background: "#f5f0ea", borderRadius: 20, padding: 28, width: "100%", maxWidth: 420, boxShadow: "0 8px 40px rgba(0,0,0,0.18)" }} onClick={e => e.stopPropagation()}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+          <div style={{ fontSize: 16, fontWeight: 700, color: "#1c1917", fontFamily: "'Playfair Display',serif" }}>Progress backup</div>
+          <button onClick={onClose} style={{ background: "none", border: "none", fontSize: 20, color: "#a09890", cursor: "pointer", lineHeight: 1 }}>×</button>
+        </div>
+
+        {!mode && (
+          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+            <button onClick={() => setMode("save")} style={{ padding: "14px 18px", background: "rgba(184,109,30,0.08)", border: "1px solid rgba(184,109,30,0.25)", borderRadius: 14, textAlign: "left", cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>
+              <div style={{ fontWeight: 600, color: "#b86d1e", fontSize: 15 }}>💾 Save progress</div>
+              <div style={{ color: "#6b6560", fontSize: 13, marginTop: 3 }}>Copy your data and email it to yourself</div>
+            </button>
+            <button onClick={() => setMode("load")} style={{ padding: "14px 18px", background: "rgba(43,108,176,0.06)", border: "1px solid rgba(43,108,176,0.2)", borderRadius: 14, textAlign: "left", cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>
+              <div style={{ fontWeight: 600, color: "#2b6cb0", fontSize: 15 }}>📥 Load progress</div>
+              <div style={{ color: "#6b6560", fontSize: 13, marginTop: 3 }}>Paste a backup to restore your data</div>
+            </button>
+          </div>
+        )}
+
+        {mode === "save" && (
+          <div>
+            <textarea readOnly value={snapshot} style={{ width: "100%", boxSizing: "border-box", height: 180, padding: "10px 12px", fontSize: 11, fontFamily: "monospace", background: "rgba(255,255,255,0.85)", border: "1px solid rgba(184,109,30,0.2)", borderRadius: 10, color: "#6b6560", resize: "none", outline: "none" }} />
+            <div style={{ display: "flex", gap: 8, marginTop: 12 }}>
+              <button onClick={copyToClipboard} style={{ flex: 1, padding: "12px", borderRadius: 12, background: copied ? "rgba(15,157,145,0.12)" : "rgba(184,109,30,0.1)", border: `1px solid ${copied ? "rgba(15,157,145,0.3)" : "rgba(184,109,30,0.25)"}`, color: copied ? "#0f9d91" : "#b86d1e", fontWeight: 600, fontSize: 14, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>{copied ? "✓ Copied!" : "Copy"}</button>
+              <button onClick={openMailto} style={{ flex: 1, padding: "12px", borderRadius: 12, background: "rgba(43,108,176,0.08)", border: "1px solid rgba(43,108,176,0.2)", color: "#2b6cb0", fontWeight: 600, fontSize: 14, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>Email me →</button>
+            </div>
+            <p style={{ fontSize: 12, color: "#a09890", marginTop: 10, textAlign: "center" }}>Copy first, then hit "Email me" and paste into the email body.</p>
+            <button onClick={() => setMode(null)} style={{ ...s.backBtn, marginTop: 8, display: "block" }}>← Back</button>
+          </div>
+        )}
+
+        {mode === "load" && (
+          <div>
+            {done
+              ? <div style={{ textAlign: "center", color: "#0f9d91", fontSize: 15, fontWeight: 600, padding: "20px 0" }}>✓ Restored! Reloading…</div>
+              : <>
+                  <p style={{ fontSize: 14, color: "#6b6560", marginBottom: 12 }}>Paste your backup JSON below, then tap Restore.</p>
+                  <textarea value={paste} onChange={e => setPaste(e.target.value)} placeholder='{"dutch-week-tracker-v3": {...}}' style={{ width: "100%", boxSizing: "border-box", height: 180, padding: "10px 12px", fontSize: 11, fontFamily: "monospace", background: "rgba(255,255,255,0.85)", border: "1px solid rgba(43,108,176,0.2)", borderRadius: 10, color: "#1c1917", resize: "none", outline: "none" }} />
+                  <button onClick={restore} disabled={!paste.trim()} style={{ width: "100%", marginTop: 12, padding: "13px", borderRadius: 12, background: paste.trim() ? "rgba(43,108,176,0.12)" : "rgba(0,0,0,0.04)", border: `1px solid ${paste.trim() ? "rgba(43,108,176,0.3)" : "rgba(0,0,0,0.08)"}`, color: paste.trim() ? "#2b6cb0" : "#a09890", fontWeight: 600, fontSize: 15, cursor: paste.trim() ? "pointer" : "default", fontFamily: "'DM Sans',sans-serif" }}>Restore</button>
+                  <button onClick={() => setMode(null)} style={{ ...s.backBtn, marginTop: 12, display: "block" }}>← Back</button>
+                </>
+            }
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 // ── Home ──────────────────────────────────────────────────────────────────────
-function Home({ allVocab, allVerbs, allExpressions, nuances, onVocab, onVerbs, onExpressions, onNuances }) {
+function Home({ allVocab, allVerbs, allExpressions, nuances, onVocab, onVerbs, onExpressions, onNuances, onTracker }) {
+  const [showProgress, setShowProgress] = useState(false);
   return (
     <div style={s.screen}>
+      {showProgress && <ProgressModal onClose={() => setShowProgress(false)} />}
       <div style={{ textAlign: "center", marginBottom: 40 }}>
         <div style={s.label}>Nederlands</div>
         <h1 style={{ fontSize: 32, fontWeight: 700, color: "#1c1917", fontFamily: "'Playfair Display',serif", marginTop: 8 }}>Practicing Dutch</h1>
@@ -80,6 +174,17 @@ function Home({ allVocab, allVerbs, allExpressions, nuances, onVocab, onVerbs, o
             <div style={{ color: "#92600a", fontWeight: 600, fontSize: 16 }}>Nuances</div>
             <div style={{ color: "#6b6560", fontSize: 13, marginTop: 2 }}>{nuances.length} topics · confusables & grammar notes</div>
           </div>
+        </button>
+        <button onClick={onTracker} style={{ padding: "16px 20px", background: "linear-gradient(135deg,rgba(224,112,26,0.1),rgba(224,112,26,0.04))", border: "1px solid rgba(224,112,26,0.2)", borderRadius: 16, display: "flex", alignItems: "center", gap: 14, cursor: "pointer", fontFamily: "'DM Sans',sans-serif", textAlign: "left" }}>
+          <span style={{ fontSize: 24 }}>📅</span>
+          <div>
+            <div style={{ color: "#e0701a", fontWeight: 600, fontSize: 16 }}>Deze week</div>
+            <div style={{ color: "#6b6560", fontSize: 13, marginTop: 2 }}>Mon–Sun study tracker · tick & persist</div>
+          </div>
+        </button>
+        <button onClick={() => setShowProgress(true)} style={{ padding: "11px 18px", background: "transparent", border: "1px solid rgba(0,0,0,0.08)", borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center", gap: 8, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>
+          <span style={{ fontSize: 15 }}>💾</span>
+          <span style={{ color: "#6b6560", fontSize: 13 }}>Save / load progress</span>
         </button>
       </div>
     </div>
@@ -839,6 +944,103 @@ function NuancesBrowse({ onBack, nuances }) {
   );
 }
 
+// ── Week Tracker ──────────────────────────────────────────────────────────────
+const TRACKER_KEY = "dutch-week-tracker-v3";
+const trackerLoad = () => { try { return JSON.parse(localStorage.getItem(TRACKER_KEY)) || {}; } catch { return {}; } };
+const trackerSave = (s) => { try { localStorage.setItem(TRACKER_KEY, JSON.stringify(s)); } catch(e) { console.error("save failed", e); } };
+
+const trackerAccent = "#e0701a";
+const trackerInk = "#211c16";
+const trackerBlue = "#3a6b66";
+
+function WeekTracker({ weekPlan, onBack }) {
+  const [checks, setChecks] = useState(() => trackerLoad().checks || {});
+  const [mounted, setMounted] = useState(false);
+  const WEEK = weekPlan.days;
+
+  useEffect(() => { const t = setTimeout(() => setMounted(true), 30); return () => clearTimeout(t); }, []);
+  useEffect(() => { trackerSave({ checks }); }, [checks]);
+
+  const toggle = (id) => setChecks((c) => ({ ...c, [id]: !c[id] }));
+  const resetWeek = () => { if (window.confirm("Nieuwe week — clear all checks?")) setChecks({}); };
+
+  let reqTotal = 0, reqDone = 0;
+  WEEK.forEach((d, di) => d.tasks.forEach((t, ti) => {
+    if (!t.opt) { reqTotal++; if (checks[`${di}|${ti}`]) reqDone++; }
+  }));
+  const pct = reqTotal ? Math.round((reqDone / reqTotal) * 100) : 0;
+
+  return (
+    <div style={{ background: "#f5f0ea", color: trackerInk, minHeight: "100vh", position: "relative" }}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Spectral:wght@300;400;500&display=swap');
+        .tr-fr{font-family:'Fraunces',Georgia,serif}
+        .tr-sp{font-family:'Spectral',Georgia,serif}
+        .tr-rise{opacity:0;transform:translateY(10px);animation:tr-rise .5s forwards}
+        @keyframes tr-rise{to{opacity:1;transform:none}}
+      `}</style>
+      <button onClick={onBack} style={{ ...s.backBtn, position: "absolute", top: 20, left: 20 }}>← Menu</button>
+
+      <div className="tr-sp" style={{ maxWidth: 720, margin: "0 auto", padding: "56px 22px 64px" }}>
+        <div className={mounted ? "tr-rise" : ""}>
+          <div style={{ fontSize: 12, letterSpacing: 3, textTransform: "uppercase", color: trackerAccent, fontWeight: 500 }}>Mijn Nederlandse week · B1</div>
+          <h1 className="tr-fr" style={{ fontSize: 40, lineHeight: 1.05, fontWeight: 800, margin: "8px 0 6px", letterSpacing: -0.5 }}>Deze week</h1>
+          <p style={{ margin: 0, color: "#6b6256", fontSize: 16, maxWidth: 540 }}>Stacked onto the gym, lunch and break gaps — weekends kept light. Do what the day says and tick it.</p>
+        </div>
+
+        <div className={mounted ? "tr-rise" : ""} style={{ animationDelay: "80ms", marginTop: 24, padding: "16px 18px", background: "rgba(255,255,255,0.75)", border: "1px solid rgba(184,109,30,0.15)", borderRadius: 12 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", fontSize: 14, color: "#6b6256", marginBottom: 8 }}>
+            <span>Week progress</span>
+            <span><strong style={{ color: trackerInk }}>{reqDone}</strong> / {reqTotal} · {pct}%</span>
+          </div>
+          <div style={{ height: 9, background: "#ece3d2", borderRadius: 99, overflow: "hidden" }}>
+            <div style={{ height: "100%", width: `${pct}%`, background: trackerAccent, transition: "width .4s ease" }} />
+          </div>
+          <p style={{ margin: "9px 0 0", fontSize: 12, color: "#a09890" }}>Bad week? The floor is daily vocab + the gym podcast. Hit those and you held the line.</p>
+        </div>
+
+        <div style={{ marginTop: 22, display: "grid", gap: 13 }}>
+          {WEEK.map((d, di) => {
+            const reqs = d.tasks.filter((t) => !t.opt);
+            const dayDone = reqs.length > 0 && reqs.every((t) => checks[`${di}|${d.tasks.indexOf(t)}`]);
+            const isLesson = d.tasks.some((t) => t.tag === "Les");
+            return (
+              <div key={di} className={mounted ? "tr-rise" : ""} style={{ animationDelay: `${130 + di * 45}ms`, background: "rgba(255,255,255,0.75)", border: `1px solid ${isLesson ? "#cfe0dd" : "rgba(184,109,30,0.15)"}`, borderLeft: `3px solid ${isLesson ? trackerBlue : trackerAccent}`, borderRadius: 12, padding: "15px 18px", opacity: dayDone ? 0.7 : 1 }}>
+                <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 11 }}>
+                  <div style={{ display: "flex", alignItems: "baseline", gap: 12 }}>
+                    <span className="tr-fr" style={{ fontSize: 21, fontWeight: 800 }}>{d.day}</span>
+                    <span style={{ fontSize: 12, letterSpacing: 0.5, color: isLesson ? trackerBlue : "#9a8f7d" }}>{d.note}</span>
+                  </div>
+                  {dayDone && <span style={{ fontSize: 12, color: trackerAccent }}>✓ af</span>}
+                </div>
+                <div style={{ display: "grid", gap: 9 }}>
+                  {d.tasks.map((t, ti) => {
+                    const id = `${di}|${ti}`; const on = !!checks[id];
+                    const tagColor = t.tag === "Les" ? trackerBlue : "#b3a892";
+                    const tagBorder = t.tag === "Les" ? "#cfe0dd" : "rgba(184,109,30,0.15)";
+                    return (
+                      <button key={ti} onClick={() => toggle(id)} style={{ display: "flex", alignItems: "center", gap: 12, textAlign: "left", background: "transparent", border: "none", cursor: "pointer", padding: "1px 0", width: "100%" }}>
+                        <span style={{ flexShrink: 0, width: 19, height: 19, borderRadius: 3, border: `1.5px solid ${on ? trackerAccent : (t.opt ? "#d8cdb6" : "#cabfa8")}`, background: on ? trackerAccent : "transparent", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 12, fontWeight: 700 }}>{on ? "✓" : ""}</span>
+                        <span style={{ flex: 1, fontSize: 15, color: on ? "#9a8f7d" : (t.opt ? "#8a8275" : trackerInk), textDecoration: on ? "line-through" : "none", fontStyle: t.opt ? "italic" : "normal" }}>{t.label}</span>
+                        <span style={{ flexShrink: 0, fontSize: 10, letterSpacing: 0.8, textTransform: "uppercase", color: tagColor, border: `1px solid ${tagBorder}`, borderRadius: 99, padding: "2px 8px" }}>{t.tag}{t.mins ? ` · ${t.mins}m` : ""}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className={mounted ? "tr-rise" : ""} style={{ animationDelay: "520ms", marginTop: 22, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
+          <p style={{ margin: 0, fontSize: 13, color: "#9a8f7d", maxWidth: 440 }}>Subtitles always in Dutch. End of July: check in, then we open <em>Nederlands op niveau</em> for B1 → B2.</p>
+          <button onClick={resetWeek} style={{ fontSize: 13, color: trackerAccent, background: "transparent", border: `1px solid ${trackerAccent}`, borderRadius: 99, padding: "7px 16px", cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>Nieuwe week</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ── App ───────────────────────────────────────────────────────────────────────
 function App() {
   const [appData, setAppData] = useState(null);
@@ -869,7 +1071,8 @@ function App() {
       fetch("./data/expressions.json").then(r => r.json()),
       fetch("./data/expression_sentences.json").then(r => r.json()),
       fetch("./data/nuances.json").then(r => r.json()),
-    ]).then(([vocab, verbs, sentences, expressions, exprSentences, nuances]) => {
+      fetch("./data/week_plan.json").then(r => r.json()),
+    ]).then(([vocab, verbs, sentences, expressions, exprSentences, nuances, weekPlan]) => {
       const chapters = Object.keys(vocab);
       const allVocab = Object.values(vocab).flat();
       const coreVerbs = verbs.core || [];
@@ -879,7 +1082,7 @@ function App() {
       const verbGroups = { "Kern werkwoorden": coreVerbs, ...chapVerbs };
       const verbGroupNames = Object.keys(verbGroups);
       const exprCategories = [...new Set(expressions.map(e => e.category))];
-      setAppData({ vocab, chapters, allVocab, allVerbs, verbGroups, verbGroupNames, sentences, expressions, exprSentences, exprCategories, nuances });
+      setAppData({ vocab, chapters, allVocab, allVerbs, verbGroups, verbGroupNames, sentences, expressions, exprSentences, exprCategories, nuances, weekPlan });
     }).catch(err => {
       console.error("Failed to load data:", err);
       setAppData({ vocab: {}, chapters: [], allVocab: [], allVerbs: [], verbGroups: {}, verbGroupNames: [], sentences: [], expressions: [], exprSentences: [], exprCategories: [], nuances: [] });
@@ -912,7 +1115,7 @@ function App() {
     );
   }
 
-  const { vocab, chapters, allVocab, allVerbs, verbGroups, verbGroupNames, sentences, expressions, exprSentences, exprCategories, nuances } = appData;
+  const { vocab, chapters, allVocab, allVerbs, verbGroups, verbGroupNames, sentences, expressions, exprSentences, exprCategories, nuances, weekPlan } = appData;
 
   const startVerbTest = (testMode, count, selectedTenses, selectedGroups) => {
     const groups = selectedGroups || verbGroupNames;
@@ -955,7 +1158,8 @@ function App() {
   return (
     <>
       <style>{`*{box-sizing:border-box;margin:0;padding:0}body{background:#f5f0ea;font-family:system-ui,sans-serif}input::placeholder{color:#a09890}::-webkit-scrollbar{display:none}input{color:#1c1917}`}</style>
-      {screen === "home" && <Home allVocab={allVocab} allVerbs={allVerbs} allExpressions={expressions} nuances={nuances} onVocab={() => setScreen("vocabHome")} onVerbs={() => setScreen("verbs")} onExpressions={() => setScreen("expressions")} onNuances={() => setScreen("nuances")} />}
+      {screen === "home" && <Home allVocab={allVocab} allVerbs={allVerbs} allExpressions={expressions} nuances={nuances} onVocab={() => setScreen("vocabHome")} onVerbs={() => setScreen("verbs")} onExpressions={() => setScreen("expressions")} onNuances={() => setScreen("nuances")} onTracker={() => setScreen("tracker")} />}
+      {screen === "tracker" && <WeekTracker weekPlan={weekPlan} onBack={() => setScreen("home")} />}
       {screen === "nuances" && <NuancesBrowse nuances={nuances} onBack={() => setScreen("home")} />}
       {screen === "vocabHome" && <VocabHome chapters={chapters} vocab={vocab} allVocab={allVocab} onBack={() => setScreen("home")} onGlossary={() => setScreen("glossary")} onPractice={handlePractice} />}
       {screen === "glossary" && <Glossary vocab={vocab} allVocab={allVocab} chapters={chapters} onBack={() => setScreen("vocabHome")} />}
