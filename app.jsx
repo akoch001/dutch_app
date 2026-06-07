@@ -1,15 +1,44 @@
 const { useState, useEffect, useRef, useCallback } = React;
 
 // ── Utilities ─────────────────────────────────────────────────────────────────
-function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
 function normalize(str) { return (str || "").toLowerCase().trim().replace(/\s+/g, " "); }
+
+// ── Item progress stats (per word/sentence, persisted for spaced repetition) ──
+const STATS_KEY = "dutch-item-stats-v1";
+function statsLoad() { try { return JSON.parse(localStorage.getItem(STATS_KEY)) || {}; } catch { return {}; } }
+function statsSave(stats) { try { localStorage.setItem(STATS_KEY, JSON.stringify(stats)); } catch (e) { console.error("save failed", e); } }
+function recordAttempt(id, wasRight) {
+  const stats = statsLoad();
+  const cur = stats[id] || { seen: 0, wrong: 0 };
+  stats[id] = { seen: cur.seen + 1, wrong: cur.wrong + (wasRight ? 0 : 1), lastSeen: Date.now() };
+  statsSave(stats);
+}
+
+const vocabId = (c) => `vocab:${c.nl}→${c.en}`;
+const verbSentId = (it) => `verbSent:${it.verb}|${it.tense}|${it.subject}|${it.template}`;
+const exprSentId = (it) => `exprSent:${it.sentence}|${it.answer}`;
+
+// Picks `count` items at random, weighting towards items never seen before and
+// items that have been answered wrong more often — so practice sessions surface
+// unfamiliar / shaky material more than things you already know well.
+function weightedPick(items, idFn, count) {
+  const stats = statsLoad();
+  const pool = items.map(item => {
+    const st = stats[idFn(item)];
+    const seen = st?.seen || 0;
+    const wrong = st?.wrong || 0;
+    const weight = seen === 0 ? 3 : 1 + (wrong / seen) * 3;
+    return { item, weight };
+  });
+  const picked = [];
+  while (picked.length < count && pool.length) {
+    const total = pool.reduce((sum, p) => sum + p.weight, 0);
+    let r = Math.random() * total, i = 0;
+    while (i < pool.length - 1 && r > pool[i].weight) { r -= pool[i].weight; i++; }
+    picked.push(pool.splice(i, 1)[0].item);
+  }
+  return picked;
+}
 function checkAnswer(typed, correct) {
   const t = normalize(typed), c = normalize(correct);
   if (t === c) return "exact";
@@ -440,6 +469,7 @@ function VerbTest({ items, mode, onComplete, onBack }) {
   const submit = () => { if (!input.trim()) return; setStatus(checkAnswer(input, current.answer)); };
   const advance = () => {
     const wasRight = status === "exact" || status === "close";
+    recordAttempt(verbSentId(current), wasRight);
     const newScore = { right: score.right + (wasRight ? 1 : 0), wrong: score.wrong + (wasRight ? 0 : 1), wrongs: wasRight ? score.wrongs : [...score.wrongs, current] };
     setScore(newScore);
     if (index >= items.length - 1) onComplete(newScore);
@@ -796,6 +826,7 @@ function ExpressionTest({ items, onComplete, onBack }) {
   const submit = () => { if (!input.trim()) return; setStatus(checkAnswer(input, current.answer)); };
   const advance = () => {
     const wasRight = status === "exact" || status === "close";
+    recordAttempt(exprSentId(current), wasRight);
     const newScore = { right: score.right + (wasRight ? 1 : 0), wrong: score.wrong + (wasRight ? 0 : 1), wrongs: wasRight ? score.wrongs : [...score.wrongs, current] };
     setScore(newScore);
     if (index >= items.length - 1) onComplete(newScore);
@@ -1091,12 +1122,13 @@ function App() {
 
   const startDeck = useCallback((deck, m, size) => {
     const sz = size !== undefined ? size : chunkSize;
-    const sliced = shuffle(deck).slice(0, sz);
-    setCards(sliced); setIdx(0); setFlipped(false); setKnown([]); setUnknown([]);
+    const picked = weightedPick(deck, vocabId, sz);
+    setCards(picked); setIdx(0); setFlipped(false); setKnown([]); setUnknown([]);
     setMode(m); setScreen("cards");
   }, [chunkSize]);
 
   const handleNext = useCallback((result) => {
+    recordAttempt(vocabId(cards[idx]), result === "known");
     if (result === "known") setKnown(k => [...k, cards[idx]]);
     if (result === "unknown") setUnknown(u => [...u, cards[idx]]);
     if (idx >= cards.length - 1) setTimeout(() => setScreen("results"), 100);
@@ -1121,7 +1153,7 @@ function App() {
     const groups = selectedGroups || verbGroupNames;
     const verbSet = new Set(groups.flatMap(g => (verbGroups[g] || []).map(v => v.inf)));
     const pool = sentences.filter(snt => selectedTenses.includes(snt.tense) && verbSet.has(snt.verb));
-    const items = shuffle(pool).slice(0, count);
+    const items = weightedPick(pool, verbSentId, count);
     setVerbTestItems(items);
     setVerbTestMode(testMode);
     setVerbTestTenses(selectedTenses);
@@ -1134,7 +1166,7 @@ function App() {
     const catSet = new Set(selectedCats);
     const exprSet = new Set(expressions.filter(e => catSet.has(e.category)).map(e => e.nl));
     const pool = exprSentences.filter(s => exprSet.has(s.answer));
-    setExprTestItems(shuffle(pool).slice(0, count));
+    setExprTestItems(weightedPick(pool, exprSentId, count));
     setExprTestCats(selectedCats);
     setExprScore(null);
     setScreen("exprTest");
