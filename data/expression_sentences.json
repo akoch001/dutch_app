@@ -54,5 +54,13 @@
   { "sentence": "We vertrekken morgen naar Griekenland — ___!", "hint": "We're leaving for Greece tomorrow — enjoy your holiday!", "answer": "Geniet van je vakantie" },
   { "sentence": "Ik moet nu gaan, tot morgen! — ___!", "hint": "I have to go, see you tomorrow! — have a nice day!", "answer": "Fijne dag nog" },
   { "sentence": "Tot morgen! — Ja, ___!", "hint": "See you tomorrow! — Yes, have a nice evening!", "answer": "Fijne avond nog" },
-  { "sentence": "Hoe is het terras? — ___.", "hint": "How's the terrace? — I'm really enjoying this.", "answer": "Ik ben echt aan het genieten" }
+  { "sentence": "Hoe is het terras? — ___.", "hint": "How's the terrace? — I'm really enjoying this.", "answer": "Ik ben echt aan het genieten" },
+
+  { "sentence": "Sorry dat ik je tas heb omgestoten — ___.", "hint": "Sorry I knocked over your bag — no problem.", "answer": "Geen probleem" },
+  { "sentence": "Ik ben tien minuten te laat, sorry! — ___, het is rustig vandaag.", "hint": "I'm ten minutes late, sorry! — it doesn't matter, it's quiet today.", "answer": "Maakt niet uit" },
+  { "sentence": "Sorry dat ik vergeten ben terug te bellen — ___, ik begrijp het.", "hint": "Sorry I forgot to call back — it's nothing, I understand.", "answer": "Geeft niet" },
+  { "sentence": "Ik ben bang dat ik de afspraak moet verzetten — ___, dat kan gebeuren.", "hint": "I'm afraid I have to reschedule — no worries, that can happen.", "answer": "Geen zorgen" },
+  { "sentence": "Ik kom misschien iets later dan gepland — ___, we wachten wel even.", "hint": "I might come a bit later than planned — don't worry about it, we'll just wait.", "answer": "Maak je geen zorgen" },
+  { "sentence": "Heel erg bedankt voor je hulp vandaag! — ___.", "hint": "Thanks so much for your help today! — my pleasure.", "answer": "Graag gedaan" },
+  { "sentence": "Dank je wel dat je op me hebt gewacht — ___, het was geen moeite.", "hint": "Thanks for waiting for me — don't mention it, it was no trouble.", "answer": "Geen dank" }
 ]

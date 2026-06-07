@@ -54,5 +54,12 @@
   { "nl": "Geniet van je vakantie", "en": "Enjoy your holiday", "category": "Genieten", "note": "Works with vakantie and weekend" },
   { "nl": "Fijne dag nog", "en": "Have a nice day", "category": "Genieten", "note": "Use 'fijne' — not 'geniet van je dag' (sounds odd)" },
   { "nl": "Fijne avond nog", "en": "Have a nice evening", "category": "Genieten", "note": "Same pattern as 'fijne dag nog'" },
-  { "nl": "Ik ben echt aan het genieten", "en": "I'm really enjoying this", "category": "Genieten", "note": "Terrace in the sun, a great view, a quiet moment — savouring it" }
+  { "nl": "Ik ben echt aan het genieten", "en": "I'm really enjoying this", "category": "Genieten", "note": "Terrace in the sun, a great view, a quiet moment — savouring it" },
+  { "nl": "Geen probleem", "en": "No problem", "category": "Geruststellen", "note": "Casual, all-purpose — works for apologies, favours, or small requests" },
+  { "nl": "Maakt niet uit", "en": "It doesn't matter", "category": "Geruststellen", "note": "Reassures someone after a small mistake or mix-up" },
+  { "nl": "Geeft niet", "en": "It's nothing / don't worry about it", "category": "Geruststellen", "note": "Warm, everyday reply when someone says sorry" },
+  { "nl": "Geen zorgen", "en": "No worries", "category": "Geruststellen", "note": "Comforting — tells someone not to stress about it" },
+  { "nl": "Maak je geen zorgen", "en": "Don't worry about it", "category": "Geruststellen", "note": "Fuller version of 'geen zorgen', a bit more reassuring" },
+  { "nl": "Graag gedaan", "en": "My pleasure / you're welcome", "category": "Geruststellen", "note": "The standard reply to 'dank je wel'" },
+  { "nl": "Geen dank", "en": "Don't mention it", "category": "Geruststellen", "note": "A bit more modest — 'it really wasn't a big deal'" }
 ]
