@@ -1,7 +1,7 @@
 const { useState, useEffect, useRef, useCallback } = React;
 
 // ── Utilities ─────────────────────────────────────────────────────────────────
-function normalize(str) { return (str || "").toLowerCase().trim().replace(/\s+/g, " "); }
+function normalize(str) { return (str || "").toLowerCase().trim().replace(/\s*\/\s*/g, "/").replace(/\s+/g, " "); }
 
 // ── Item progress stats (per word/sentence, persisted for spaced repetition) ──
 const STATS_KEY = "dutch-item-stats-v1";

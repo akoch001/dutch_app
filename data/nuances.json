@@ -251,5 +251,47 @@
       "Ik ben vergeten is the safest perfect tense form for learners."
     ],
     "teacherQuestion": "When would you prefer Ik weet het niet meer instead of Ik ben het vergeten?"
+  },
+  {
+    "id": "maar-modal-particle",
+    "topic": "maar: kijk maar, doe maar (modal particle)",
+    "rule": "After an imperative, maar is a softening modal particle — roughly 'just' or 'go ahead'. It makes an instruction sound relaxed, reassuring, or permissive, instead of strict.",
+    "examples": [
+      { "nl": "Kijk maar.", "en": "Go ahead and look. / See for yourself.", "note": "Reassuring — invites them to look without worry." },
+      { "nl": "Doe maar.", "en": "Go ahead. / Sure, just do it.", "note": "Relaxed permission or encouragement." },
+      { "nl": "Zeg het maar.", "en": "Just tell me. / Whenever you're ready.", "note": "Invites them to speak freely, no pressure." },
+      { "nl": "Ga jij maar eerst.", "en": "You go first.", "note": "Friendly suggestion, not an order." },
+      { "nl": "Laat maar.", "en": "Never mind. / Leave it.", "note": "Gently drops the matter." },
+      { "nl": "Hij kon niet komen, maar dat geeft niet.", "en": "He couldn't come, but that's fine.", "note": "Different maar — here it's the conjunction 'but', not the softening particle." }
+    ],
+    "tips": [
+      "Placed right after an imperative, maar turns an instruction into something closer to an invitation.",
+      "Combine with eens for extra softness: Probeer maar eens. / Kijk eens maar.",
+      "Doe maar is one of the most common relaxed replies in spoken Dutch — like 'sure, go for it'.",
+      "Position and context separate the two maars: mid-sentence after a verb = softening particle; joining two clauses = the conjunction 'but'."
+    ],
+    "teacherQuestion": "Could you give me five everyday situations where you'd naturally add maar after an instruction?"
+  },
+  {
+    "id": "kennen-weten",
+    "topic": "kennen vs weten",
+    "rule": "kennen = to know through familiarity or acquaintance (people, places, books, songs, subjects); weten = to know facts, information, or answers.",
+    "examples": [
+      { "nl": "Ik ken die man al jaren.", "en": "I've known that man for years.", "note": "Personal acquaintance with a person." },
+      { "nl": "Ken je deze stad goed?", "en": "Do you know this city well?", "note": "Familiarity with a place." },
+      { "nl": "Ik ken dat liedje.", "en": "I know that song.", "note": "Familiar with a thing / work." },
+      { "nl": "Weet je hoe laat het is?", "en": "Do you know what time it is?", "note": "Factual information." },
+      { "nl": "Ik weet niet waar hij woont.", "en": "I don't know where he lives.", "note": "Information — followed by a question word." },
+      { "nl": "Ik weet het antwoord.", "en": "I know the answer.", "note": "A fact you can state directly." },
+      { "nl": "Ik ken haar, maar ik weet niet waar ze woont.", "en": "I know her, but I don't know where she lives.", "note": "Both verbs together — acquaintance vs information." }
+    ],
+    "tips": [
+      "kennen takes a direct object — a person, place, or thing you're familiar with.",
+      "weten is usually followed by a fact, a clause, or a question word (wat, waar, hoe, of...).",
+      "Quick test: 'be familiar with' → kennen; 'have the information that...' → weten.",
+      "Conjugation: ik ken, jij/hij kent, wij kennen — versus — ik weet, jij/hij weet, wij weten.",
+      "Don't say Ik weet hem for a person — say Ik ken hem."
+    ],
+    "teacherQuestion": "Is there a natural way to use kennen and weten in the same sentence, like 'I know him but I don't know where he lives'?"
   }
 ]
