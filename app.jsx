@@ -166,7 +166,7 @@ function ProgressModal({ onClose }) {
 }
 
 // ── Home ──────────────────────────────────────────────────────────────────────
-function Home({ allVocab, allVerbs, allExpressions, nuances, onVocab, onVerbs, onExpressions, onNuances, onTracker }) {
+function Home({ allVocab, allVerbs, allExpressions, nuances, podcastEpisodes, onVocab, onVerbs, onExpressions, onNuances, onTracker, onPodcast }) {
   const [showProgress, setShowProgress] = useState(false);
   return (
     <div style={s.screen}>
@@ -209,6 +209,13 @@ function Home({ allVocab, allVerbs, allExpressions, nuances, onVocab, onVerbs, o
           <div>
             <div style={{ color: "#e0701a", fontWeight: 600, fontSize: 16 }}>Deze week</div>
             <div style={{ color: "#6b6560", fontSize: 13, marginTop: 2 }}>Mon–Sun study tracker · tick & persist</div>
+          </div>
+        </button>
+        <button onClick={onPodcast} style={{ padding: "16px 20px", background: "linear-gradient(135deg,rgba(26,105,133,0.1),rgba(26,105,133,0.04))", border: "1px solid rgba(26,105,133,0.2)", borderRadius: 16, display: "flex", alignItems: "center", gap: 14, cursor: "pointer", fontFamily: "'DM Sans',sans-serif", textAlign: "left" }}>
+          <span style={{ fontSize: 24 }}>🎙️</span>
+          <div>
+            <div style={{ color: PODCAST_ACCENT, fontWeight: 600, fontSize: 16 }}>Een Beetje Nederlands</div>
+            <div style={{ color: "#6b6560", fontSize: 13, marginTop: 2 }}>{podcastEpisodes.length} {podcastEpisodes.length === 1 ? "aflevering" : "afleveringen"} · woorden & zinnen</div>
           </div>
         </button>
         <button onClick={() => setShowProgress(true)} style={{ padding: "11px 18px", background: "transparent", border: "1px solid rgba(0,0,0,0.08)", borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center", gap: 8, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>
@@ -975,6 +982,77 @@ function NuancesBrowse({ onBack, nuances }) {
   );
 }
 
+// ── Podcast home ───────────────────────────────────────────────────────────────
+const PODCAST_ACCENT = "#1a6985";
+
+function PodcastHome({ episodes, onBack, onBrowse, onPractice }) {
+  const totalWords = ep => ep.sections.reduce((n, s) => n + s.words.length, 0);
+  return (
+    <div style={{ ...s.screen, position: "relative" }}>
+      <button onClick={onBack} style={{ ...s.backBtn, position: "absolute", top: 20, left: 20 }}>← Menu</button>
+      <div style={{ textAlign: "center", marginBottom: 32 }}>
+        <div style={{ ...s.label, color: PODCAST_ACCENT }}>Podcast</div>
+        <h2 style={{ fontSize: 26, fontWeight: 700, color: "#1c1917", fontFamily: "'Playfair Display',serif", marginTop: 8 }}>Een Beetje Nederlands</h2>
+        <div style={{ color: "#6b6560", fontSize: 13, marginTop: 6 }}>Woorden & uitdrukkingen per aflevering</div>
+      </div>
+      {episodes.map(ep => (
+        <div key={ep.id} style={{ width: "100%", maxWidth: 340, marginBottom: 14, background: "rgba(255,255,255,0.75)", border: `1px solid rgba(26,105,133,0.2)`, borderRadius: 16, padding: "18px 20px" }}>
+          <div style={{ color: "#1c1917", fontWeight: 700, fontSize: 17, fontFamily: "'Playfair Display',serif", marginBottom: 4 }}>{ep.title}</div>
+          <div style={{ color: "#6b6560", fontSize: 13, marginBottom: 14, lineHeight: 1.4 }}>{ep.description}</div>
+          <div style={{ color: "#a09890", fontSize: 12, marginBottom: 14 }}>{totalWords(ep)} woorden · {ep.sections.length} secties</div>
+          <div style={{ display: "flex", gap: 8 }}>
+            <button onClick={() => onBrowse(ep)} style={{ flex: 1, padding: "11px", borderRadius: 10, background: `rgba(26,105,133,0.07)`, border: `1px solid rgba(26,105,133,0.18)`, color: PODCAST_ACCENT, fontSize: 13, fontWeight: 600, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>📖 Lees</button>
+            <button onClick={() => onPractice(ep)} style={{ flex: 1, padding: "11px", borderRadius: 10, background: `rgba(26,105,133,0.13)`, border: `1px solid rgba(26,105,133,0.3)`, color: PODCAST_ACCENT, fontSize: 13, fontWeight: 600, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>🎯 Oefen</button>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ── Episode browse ──────────────────────────────────────────────────────────────
+function EpisodeBrowse({ episode, onBack }) {
+  const [expanded, setExpanded] = useState(() => new Set([0]));
+  const toggle = i => setExpanded(prev => { const n = new Set(prev); n.has(i) ? n.delete(i) : n.add(i); return n; });
+  return (
+    <div style={{ minHeight: "100vh", background: "linear-gradient(160deg,#f5f0ea 0%,#ebe5dc 50%,#e2dbd2 100%)", fontFamily: "system-ui,sans-serif", display: "flex", flexDirection: "column" }}>
+      <div style={{ padding: "16px 20px 0", position: "sticky", top: 0, background: "linear-gradient(160deg,#f5f0ea,#ebe5dc)", zIndex: 10 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
+          <button onClick={onBack} style={s.backBtn}>← Podcast</button>
+          <div style={{ flex: 1, textAlign: "center" }}><div style={{ ...s.label, color: PODCAST_ACCENT }}>{episode.title}</div></div>
+          <div style={{ width: 60 }} />
+        </div>
+      </div>
+      <div style={{ flex: 1, padding: "0 16px 40px" }}>
+        {episode.sections.map((sec, i) => {
+          const open = expanded.has(i);
+          return (
+            <div key={i} style={{ marginBottom: 8 }}>
+              <button onClick={() => toggle(i)} style={{ width: "100%", background: open ? `rgba(26,105,133,0.09)` : "rgba(255,255,255,0.65)", border: `1px solid rgba(26,105,133,0.15)`, borderRadius: open ? "12px 12px 0 0" : 12, padding: "13px 16px", textAlign: "left", cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center", fontFamily: "'DM Sans',sans-serif" }}>
+                <span style={{ color: "#1c1917", fontWeight: 600, fontSize: 14 }}>{sec.title}</span>
+                <span style={{ color: PODCAST_ACCENT, fontSize: 12 }}>{sec.words.length} · {open ? "▲" : "▼"}</span>
+              </button>
+              {open && (
+                <div style={{ background: "rgba(255,255,255,0.55)", border: `1px solid rgba(26,105,133,0.12)`, borderTop: "none", borderRadius: "0 0 12px 12px" }}>
+                  {sec.words.map((w, j) => (
+                    <div key={j} style={{ padding: "12px 16px", borderBottom: j < sec.words.length - 1 ? "1px solid rgba(255,255,255,0.85)" : "none" }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 12, marginBottom: w.note ? 5 : 0 }}>
+                        <span style={{ color: "#1c1917", fontSize: 14, fontWeight: 500, flex: "0 0 auto", maxWidth: "55%" }}>{w.nl}</span>
+                        <span style={{ color: "#6b6560", fontSize: 13, textAlign: "right" }}>{w.en}</span>
+                      </div>
+                      {w.note && <div style={{ color: "#a09890", fontSize: 12, fontStyle: "italic", lineHeight: 1.5, marginTop: 3 }}>{w.note}</div>}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 // ── Week Tracker ──────────────────────────────────────────────────────────────
 const TRACKER_KEY = "dutch-week-tracker-v3";
 const trackerLoad = () => { try { return JSON.parse(localStorage.getItem(TRACKER_KEY)) || {}; } catch { return {}; } };
@@ -1093,6 +1171,8 @@ function App() {
   const [exprScore, setExprScore] = useState(null);
   const [practicePool, setPracticePool] = useState([]);
   const [practiceTitle, setPracticeTitle] = useState("");
+  const [practiceSource, setPracticeSource] = useState("vocabHome");
+  const [podcastEpisode, setPodcastEpisode] = useState(null);
 
   useEffect(() => {
     Promise.all([
@@ -1103,7 +1183,8 @@ function App() {
       fetch("./data/expression_sentences.json").then(r => r.json()),
       fetch("./data/nuances.json").then(r => r.json()),
       fetch("./data/week_plan.json").then(r => r.json()),
-    ]).then(([vocab, verbs, sentences, expressions, exprSentences, nuances, weekPlan]) => {
+      fetch("./data/podcast.json").then(r => r.json()),
+    ]).then(([vocab, verbs, sentences, expressions, exprSentences, nuances, weekPlan, podcast]) => {
       const chapters = Object.keys(vocab);
       const allVocab = Object.values(vocab).flat();
       const coreVerbs = verbs.core || [];
@@ -1113,7 +1194,8 @@ function App() {
       const verbGroups = { "Kern werkwoorden": coreVerbs, ...chapVerbs };
       const verbGroupNames = Object.keys(verbGroups);
       const exprCategories = [...new Set(expressions.map(e => e.category))];
-      setAppData({ vocab, chapters, allVocab, allVerbs, verbGroups, verbGroupNames, sentences, expressions, exprSentences, exprCategories, nuances, weekPlan });
+      const podcastEpisodes = podcast.episodes || [];
+      setAppData({ vocab, chapters, allVocab, allVerbs, verbGroups, verbGroupNames, sentences, expressions, exprSentences, exprCategories, nuances, weekPlan, podcastEpisodes });
     }).catch(err => {
       console.error("Failed to load data:", err);
       setAppData({ vocab: {}, chapters: [], allVocab: [], allVerbs: [], verbGroups: {}, verbGroupNames: [], sentences: [], expressions: [], exprSentences: [], exprCategories: [], nuances: [] });
@@ -1147,7 +1229,7 @@ function App() {
     );
   }
 
-  const { vocab, chapters, allVocab, allVerbs, verbGroups, verbGroupNames, sentences, expressions, exprSentences, exprCategories, nuances, weekPlan } = appData;
+  const { vocab, chapters, allVocab, allVerbs, verbGroups, verbGroupNames, sentences, expressions, exprSentences, exprCategories, nuances, weekPlan, podcastEpisodes } = appData;
 
   const startVerbTest = (testMode, count, selectedTenses, selectedGroups) => {
     const groups = selectedGroups || verbGroupNames;
@@ -1172,12 +1254,12 @@ function App() {
     setScreen("exprTest");
   };
 
-  const handlePractice = (deck, title) => { setPracticePool(deck); setPracticeTitle(title); setScreen("mode"); };
+  const handlePractice = (deck, title, source = "vocabHome") => { setPracticePool(deck); setPracticeTitle(title); setPracticeSource(source); setScreen("mode"); };
   const handleMode = (m, size) => { setChunkSize(size); startDeck(practicePool, m, size); };
 
   const cardsScreen = (
     <div style={{ minHeight: "100vh", background: "linear-gradient(160deg,#f5f0ea 0%,#ebe5dc 50%,#e2dbd2 100%)", fontFamily: "system-ui,sans-serif", position: "relative" }}>
-      <button onClick={() => setScreen("vocabHome")} style={{ ...s.backBtn, position: "absolute", top: 18, left: 18, zIndex: 10 }}>← Menu</button>
+      <button onClick={() => setScreen(practiceSource)} style={{ ...s.backBtn, position: "absolute", top: 18, left: 18, zIndex: 10 }}>← Menu</button>
       <button onClick={() => setScreen("glossary")} style={{ position: "absolute", top: 14, left: "50%", transform: "translateX(-50%)", zIndex: 10, background: "rgba(43,108,176,0.08)", border: "1px solid rgba(43,108,176,0.2)", borderRadius: 8, color: "#2b6cb0", fontSize: 12, padding: "6px 12px", cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>📖 Lijst</button>
       <button onClick={() => startDeck(practicePool, mode === "flip" ? "type" : "flip", chunkSize)} style={{ position: "absolute", top: 14, right: 16, zIndex: 10, background: "rgba(0,0,0,0.05)", border: "1px solid rgba(184,109,30,0.15)", borderRadius: 8, color: "#b86d1e", fontSize: 12, padding: "6px 12px", cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>{mode === "flip" ? "⌨️ Typen" : "🃏 Kaarten"}</button>
       {mode === "flip"
@@ -1190,7 +1272,9 @@ function App() {
   return (
     <>
       <style>{`*{box-sizing:border-box;margin:0;padding:0}body{background:#f5f0ea;font-family:system-ui,sans-serif}input::placeholder{color:#a09890}::-webkit-scrollbar{display:none}input{color:#1c1917}`}</style>
-      {screen === "home" && <Home allVocab={allVocab} allVerbs={allVerbs} allExpressions={expressions} nuances={nuances} onVocab={() => setScreen("vocabHome")} onVerbs={() => setScreen("verbs")} onExpressions={() => setScreen("expressions")} onNuances={() => setScreen("nuances")} onTracker={() => setScreen("tracker")} />}
+      {screen === "home" && <Home allVocab={allVocab} allVerbs={allVerbs} allExpressions={expressions} nuances={nuances} podcastEpisodes={podcastEpisodes} onVocab={() => setScreen("vocabHome")} onVerbs={() => setScreen("verbs")} onExpressions={() => setScreen("expressions")} onNuances={() => setScreen("nuances")} onTracker={() => setScreen("tracker")} onPodcast={() => setScreen("podcast")} />}
+      {screen === "podcast" && <PodcastHome episodes={podcastEpisodes} onBack={() => setScreen("home")} onBrowse={ep => { setPodcastEpisode(ep); setScreen("podcastBrowse"); }} onPractice={ep => { const deck = ep.sections.flatMap(s => s.words); handlePractice(deck, ep.title, "podcast"); }} />}
+      {screen === "podcastBrowse" && podcastEpisode && <EpisodeBrowse episode={podcastEpisode} onBack={() => setScreen("podcast")} />}
       {screen === "tracker" && <WeekTracker weekPlan={weekPlan} onBack={() => setScreen("home")} />}
       {screen === "nuances" && <NuancesBrowse nuances={nuances} onBack={() => setScreen("home")} />}
       {screen === "vocabHome" && <VocabHome chapters={chapters} vocab={vocab} allVocab={allVocab} onBack={() => setScreen("home")} onGlossary={() => setScreen("glossary")} onPractice={handlePractice} />}
@@ -1205,9 +1289,9 @@ function App() {
       {screen === "exprTestSetup" && <ExpressionsTestSetup categories={exprCategories} onBack={() => setScreen("expressions")} onStart={startExpressionTest} />}
       {screen === "exprTest" && <ExpressionTest items={exprTestItems} onBack={() => setScreen("exprTestSetup")} onComplete={scr => { setExprScore(scr); setScreen("exprResults"); }} />}
       {screen === "exprResults" && exprScore && <ExpressionResults score={exprScore} onRestart={() => startExpressionTest(exprTestItems.length, exprTestCats)} onRetry={wrongs => { setExprTestItems(wrongs); setExprScore(null); setScreen("exprTest"); }} onHome={() => setScreen("expressions")} />}
-      {screen === "mode" && <ModeSelect title={practiceTitle} total={practicePool.length} onSelect={handleMode} onBack={() => setScreen("vocabHome")} />}
+      {screen === "mode" && <ModeSelect title={practiceTitle} total={practicePool.length} onSelect={handleMode} onBack={() => setScreen(practiceSource)} />}
       {screen === "cards" && cards.length > 0 && cardsScreen}
-      {screen === "results" && <Results known={known} unknown={unknown} onRestart={() => startDeck(practicePool, mode, chunkSize)} onHome={() => setScreen("vocabHome")} onRetry={() => startDeck(unknown, mode, unknown.length)} />}
+      {screen === "results" && <Results known={known} unknown={unknown} onRestart={() => startDeck(practicePool, mode, chunkSize)} onHome={() => setScreen(practiceSource)} onRetry={() => startDeck(unknown, mode, unknown.length)} />}
     </>
   );
 }

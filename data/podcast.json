@@ -1,0 +1,112 @@
+{
+  "episodes": [
+    {
+      "id": "aletta-jacobs",
+      "title": "Aletta Jacobs",
+      "description": "Vrouwenrechten, universiteitstoegang en stemrecht in Nederland",
+      "sections": [
+        {
+          "title": "Intro: wie is Aletta Jacobs",
+          "words": [
+            { "nl": "aflevering", "en": "episode", "note": "\"In deze aflevering…\" = \"In this episode…\" The speaker introduces the podcast topic: Aletta Jacobs." },
+            { "nl": "beroemd", "en": "famous", "note": "Aletta Jacobs is beroemd in Nederland because she fought for women's rights." },
+            { "nl": "gevochten", "en": "fought", "note": "From vechten = to fight. \"Ze heeft gevochten voor de rechten voor vrouwen.\"" },
+            { "nl": "hiermee", "en": "with this / by doing this", "note": "\"Hiermee heeft ze Nederland veranderd\" = \"By doing this, she changed the Netherlands.\"" },
+            { "nl": "wilde ze heel graag net zoals", "en": "she really wanted to, just like", "note": "\"Ze wilde heel graag net zoals haar vader dokter worden\" = she really wanted to become a doctor, just like her father." },
+            { "nl": "beroep", "en": "profession / job", "note": "\"Om dat beroep te kunnen doen…\" = \"To be able to do that profession…\" Here, the profession is doctor." }
+          ]
+        },
+        {
+          "title": "Vrouwen in de 19e eeuw",
+          "words": [
+            { "nl": "huishouden", "en": "housework / household", "note": "Women were expected to marry, have children, and do het huishouden: cleaning, cooking, caring for children." },
+            { "nl": "de adel", "en": "the nobility / aristocracy", "note": "\"De macht van de adel en van de kerk werd steeds minder\" = the power of the nobility and the church became weaker." },
+            { "nl": "vrijheden", "en": "freedoms / liberties", "note": "Men gained more rights and freedoms around the French Revolution — but women did not." },
+            { "nl": "Vrijheid, gelijkheid, broederschap", "en": "Liberty, equality, brotherhood", "note": "Dutch translation of the French slogan \"liberté, égalité, fraternité.\"" },
+            { "nl": "veranderde er weinig en ze kregen geen nieuwe rechten", "en": "little changed and they received no new rights", "note": "For women, the political changes of the French Revolution did not bring much progress." },
+            { "nl": "toegestaan", "en": "allowed / permitted", "note": "\"Verder studeren was niet toegestaan\" = further study was not allowed for girls/women." },
+            { "nl": "trouwen", "en": "to marry", "note": "Many women worked until they got married — after which they were fired." },
+            { "nl": "daarna werden ze ontslagen", "en": "after that they were dismissed / fired", "note": "Women were often fired from their jobs after marriage — this was the norm." },
+            { "nl": "Mijn eigen oma heeft nog meegemaakt dat ze werd ontslagen toen ze trouwde met mijn opa", "en": "My own grandmother still experienced being fired when she married my grandfather", "note": "The speaker's personal example — this was not ancient history at all." },
+            { "nl": "Pas in 1955 werd het automatisch ontslag bij huwelijk uit de wet gehaald", "en": "Only in 1955 was automatic dismissal upon marriage removed from the law", "note": "Pas = only / not until. Uit de wet gehaald = removed from the law." },
+            { "nl": "vooral", "en": "especially / mainly", "note": "\"Thorbecke is vooral bekend omdat…\" = Thorbecke is especially known because…" }
+          ]
+        },
+        {
+          "title": "Armoede, werk en ondersteuning",
+          "words": [
+            { "nl": "In arme gezinnen werkte de vrouw vaak wel, om rond te komen", "en": "In poor families, the woman often did work, to make ends meet", "note": "Rondkomen = to earn enough to live on." },
+            { "nl": "bijstand", "en": "welfare / social assistance", "note": "\"Er was nog geen bijstand vanuit de overheid\" = there was not yet government welfare support." },
+            { "nl": "vanuit de overheid", "en": "from the government", "note": "Support coming from the state, as opposed to family, church, or charity." },
+            { "nl": "iedereen moest zijn steentje bijdragen", "en": "everyone had to do their bit / contribute", "note": "Literally: contribute their little stone. Everyone had to help financially." }
+          ]
+        },
+        {
+          "title": "Aletta en de universiteit",
+          "words": [
+            { "nl": "grondwet", "en": "constitution", "note": "Thorbecke is known for writing the Dutch grondwet (constitution)." },
+            { "nl": "een uitzondering krijgen op de regels", "en": "to get an exception to the rules", "note": "Aletta wrote to Thorbecke asking for an exception so she could study medicine." },
+            { "nl": "zodat ze toch kon studeren", "en": "so that she could study after all", "note": "Toch = after all / despite the obstacle. Zodat = so that, sending the verb to the end." },
+            { "nl": "vlak voor de dood van Thorbecke", "en": "shortly before the death of Thorbecke", "note": "Vlak voor = shortly before / just before. She received the exception just in time." },
+            { "nl": "aanwezigheid", "en": "presence", "note": "People worried about the aanwezigheid (presence) of a woman in university lecture halls." },
+            { "nl": "de jongemannen afleiden", "en": "to distract the young men", "note": "Afleiden = to distract. The fear was that Aletta would distract the male students." },
+            { "nl": "opvalt", "en": "stands out / is noticeable", "note": "\"Een jurk die niet opvalt\" = a dress that does not stand out. She tried to blend in." },
+            { "nl": "gepest", "en": "bullied", "note": "Aletta was gepest (bullied) by fellow students at university." },
+            { "nl": "niet serieus genomen", "en": "not taken seriously", "note": "As a woman, she was often not taken seriously by professors and peers." },
+            { "nl": "gaf niet op", "en": "did not give up", "note": "She continued despite the resistance and opposition she faced." }
+          ]
+        },
+        {
+          "title": "Geneeskunde, anticonceptie en gezondheid",
+          "words": [
+            { "nl": "voorbehoedsmiddelen", "en": "contraceptives / birth-control methods", "note": "Few people used condoms or other voorbehoedsmiddelen at the time." },
+            { "nl": "erg zwaar", "en": "very difficult / very hard", "note": "Repeated pregnancies were erg zwaar (very heavy/hard) for women's health and wellbeing." },
+            { "nl": "het zogenaamde pessarium", "en": "the so-called pessary / diaphragm", "note": "Zogenaamde = so-called. A contraceptive device Aletta introduced to poor women for free." },
+            { "nl": "meer aandacht zouden krijgen", "en": "would receive more attention", "note": "Smaller families meant children could receive more care and attention." },
+            { "nl": "vernieuwende gedachten", "en": "innovative / progressive ideas", "note": "Aletta's ideas about contraception and smaller families were vernieuwend (innovative) for the time." }
+          ]
+        },
+        {
+          "title": "Wet en stemrecht",
+          "words": [
+            { "nl": "in de wet stond", "en": "the law stated / the law said", "note": "\"In de Nederlandse wet stond…\" = \"In Dutch law it said…\"" },
+            { "nl": "In de wet stond namelijk niet dat dat niet zo was", "en": "After all, the law did not say that this was not the case", "note": "Aletta's clever argument: the law did not explicitly say women could not vote." },
+            { "nl": "Maar daar was niet iedereen het mee eens", "en": "But not everyone agreed with that", "note": "Officials and judges disagreed with Aletta's interpretation of the law." },
+            { "nl": "vergelijkbaar", "en": "comparable", "note": "The Dutch Hoge Raad is described as vergelijkbaar (comparable) to the US Supreme Court." },
+            { "nl": "de wet anders uitleggen", "en": "to interpret the law differently", "note": "The judges ruled the law should be interpreted as allowing only men to vote." },
+            { "nl": "kiesrecht", "en": "voting rights / suffrage", "note": "\"Het kiesrecht voor vrouwen\" = women's suffrage, the right for women to vote." },
+            { "nl": "verkiezingen", "en": "elections", "note": "Aletta wanted women to be able to vote in verkiezingen (elections)." },
+            { "nl": "toestaan", "en": "to allow / to permit", "note": "In 1919, women in the Netherlands were officially allowed (toegestaan) to vote." }
+          ]
+        },
+        {
+          "title": "Activisme en feminisme",
+          "words": [
+            { "nl": "voorzitter", "en": "chairperson / president", "note": "Aletta became voorzitter (chairperson) of the Vereeniging voor Vrouwenkiesrecht." },
+            { "nl": "bepaalde", "en": "certain / specific", "note": "\"Bepaalde onderwerpen\" = certain topics, such as politics, were considered unsuitable for women." },
+            { "nl": "Wat zou er gebeuren", "en": "What would happen", "note": "Used in the old argument against women voting: what would happen if husband and wife voted differently?" },
+            { "nl": "Probleem opgelost!", "en": "Problem solved!", "note": "Used ironically by the speaker — mocking the old argument that only men should vote to avoid conflict at home." },
+            { "nl": "Steeds meer mensen sloten zich bij hen aan om te vechten voor gelijke rechten", "en": "More and more people joined them to fight for equal rights", "note": "Zich aansluiten bij = to join. Gelijke rechten = equal rights." },
+            { "nl": "gestreden", "en": "fought / struggled", "note": "From strijden = to fight/struggle. \"Er werd gestreden voor vrouwenrechten.\"" },
+            { "nl": "baas in eigen buik", "en": "boss of one's own belly / bodily autonomy", "note": "A feminist slogan from the second wave — women wanted control over their own bodies, including abortion and contraception." }
+          ]
+        },
+        {
+          "title": "Nuttige uitdrukkingen",
+          "words": [
+            { "nl": "om rond te komen", "en": "to make ends meet" },
+            { "nl": "zijn steentje bijdragen", "en": "to do one's bit / contribute" },
+            { "nl": "niet serieus genomen worden", "en": "to not be taken seriously" },
+            { "nl": "het ergens mee eens zijn", "en": "to agree with something" },
+            { "nl": "zich aansluiten bij", "en": "to join / become part of" },
+            { "nl": "baas in eigen buik", "en": "bodily autonomy / control over one's own body" },
+            { "nl": "uit de wet gehaald worden", "en": "to be removed from the law" },
+            { "nl": "een uitzondering krijgen op de regels", "en": "to get an exception to the rules" },
+            { "nl": "vlak voor", "en": "shortly before / just before" },
+            { "nl": "de wet anders uitleggen", "en": "to interpret the law differently" }
+          ]
+        }
+      ]
+    }
+  ]
+}
