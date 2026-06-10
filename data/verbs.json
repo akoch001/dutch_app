@@ -1774,5 +1774,196 @@
       "aux": "hebben",
       "en": "to point (to / at)"
     }
+  ],
+  "H10 – Geld": [
+    {
+      "inf": "dwingen",
+      "presIk": "dwing",
+      "presJijHij": "dwingt",
+      "presWij": "dwingen",
+      "impSg": "dwong",
+      "impPl": "dwongen",
+      "vd": "gedwongen",
+      "aux": "hebben",
+      "en": "to force"
+    },
+    {
+      "inf": "meegaan",
+      "presIk": "ga mee",
+      "presJijHij": "gaat mee",
+      "presWij": "gaan mee",
+      "impSg": "ging mee",
+      "impPl": "gingen mee",
+      "vd": "meegegaan",
+      "aux": "zijn",
+      "en": "to go along"
+    },
+    {
+      "inf": "ontvangen",
+      "presIk": "ontvang",
+      "presJijHij": "ontvangt",
+      "presWij": "ontvangen",
+      "impSg": "ontving",
+      "impPl": "ontvingen",
+      "vd": "ontvangen",
+      "aux": "hebben",
+      "en": "to receive"
+    },
+    {
+      "inf": "terugvragen",
+      "presIk": "vraag terug",
+      "presJijHij": "vraagt terug",
+      "presWij": "vragen terug",
+      "impSg": "vroeg terug",
+      "impPl": "vroegen terug",
+      "vd": "teruggevraagd",
+      "aux": "hebben",
+      "en": "to ask back / request a refund"
+    },
+    {
+      "inf": "uitzetten",
+      "presIk": "zet uit",
+      "presJijHij": "zet uit",
+      "presWij": "zetten uit",
+      "impSg": "zette uit",
+      "impPl": "zetten uit",
+      "vd": "uitgezet",
+      "aux": "hebben",
+      "en": "to turn off / switch off"
+    },
+    {
+      "inf": "voorstellen",
+      "presIk": "stel voor",
+      "presJijHij": "stelt voor",
+      "presWij": "stellen voor",
+      "impSg": "stelde voor",
+      "impPl": "stelden voor",
+      "vd": "voorgesteld",
+      "aux": "hebben",
+      "en": "to suggest / propose"
+    }
+  ],
+  "H11 – Kunst": [
+    {
+      "inf": "deelnemen",
+      "presIk": "neem deel",
+      "presJijHij": "neemt deel",
+      "presWij": "nemen deel",
+      "impSg": "nam deel",
+      "impPl": "namen deel",
+      "vd": "deelgenomen",
+      "aux": "hebben",
+      "en": "to participate (in)"
+    },
+    {
+      "inf": "insluipen",
+      "presIk": "sluip in",
+      "presJijHij": "sluipt in",
+      "presWij": "sluipen in",
+      "impSg": "sloop in",
+      "impPl": "slopen in",
+      "vd": "ingeslopen",
+      "aux": "zijn",
+      "en": "to sneak in"
+    },
+    {
+      "inf": "klinken",
+      "presIk": "klink",
+      "presJijHij": "klinkt",
+      "presWij": "klinken",
+      "impSg": "klonk",
+      "impPl": "klonken",
+      "vd": "geklonken",
+      "aux": "hebben",
+      "en": "to sound"
+    },
+    {
+      "inf": "opnemen",
+      "presIk": "neem op",
+      "presJijHij": "neemt op",
+      "presWij": "nemen op",
+      "impSg": "nam op",
+      "impPl": "namen op",
+      "vd": "opgenomen",
+      "aux": "hebben",
+      "en": "to record"
+    },
+    {
+      "inf": "overslaan",
+      "presIk": "sla over",
+      "presJijHij": "slaat over",
+      "presWij": "slaan over",
+      "impSg": "sloeg over",
+      "impPl": "sloegen over",
+      "vd": "overgeslagen",
+      "aux": "hebben",
+      "en": "to skip"
+    },
+    {
+      "inf": "schrikken",
+      "presIk": "schrik",
+      "presJijHij": "schrikt",
+      "presWij": "schrikken",
+      "impSg": "schrok",
+      "impPl": "schrokken",
+      "vd": "geschrokken",
+      "aux": "zijn",
+      "en": "to be startled"
+    },
+    {
+      "inf": "afstuderen",
+      "presIk": "studeer af",
+      "presJijHij": "studeert af",
+      "presWij": "studeren af",
+      "impSg": "studeerde af",
+      "impPl": "studeerden af",
+      "vd": "afgestudeerd",
+      "aux": "zijn",
+      "en": "to graduate"
+    },
+    {
+      "inf": "misstappen",
+      "presIk": "stap mis",
+      "presJijHij": "stapt mis",
+      "presWij": "stappen mis",
+      "impSg": "stapte mis",
+      "impPl": "stapten mis",
+      "vd": "misgestapt",
+      "aux": "zijn",
+      "en": "to make a misstep / blunder"
+    },
+    {
+      "inf": "opmerken",
+      "presIk": "merk op",
+      "presJijHij": "merkt op",
+      "presWij": "merken op",
+      "impSg": "merkte op",
+      "impPl": "merkten op",
+      "vd": "opgemerkt",
+      "aux": "hebben",
+      "en": "to notice / remark"
+    },
+    {
+      "inf": "oprichten",
+      "presIk": "richt op",
+      "presJijHij": "richt op",
+      "presWij": "richten op",
+      "impSg": "richtte op",
+      "impPl": "richtten op",
+      "vd": "opgericht",
+      "aux": "hebben",
+      "en": "to found / establish"
+    },
+    {
+      "inf": "opsturen",
+      "presIk": "stuur op",
+      "presJijHij": "stuurt op",
+      "presWij": "sturen op",
+      "impSg": "stuurde op",
+      "impPl": "stuurden op",
+      "vd": "opgestuurd",
+      "aux": "hebben",
+      "en": "to send"
+    }
   ]
 }
