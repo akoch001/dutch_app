@@ -1,7 +1,7 @@
 const { useState, useEffect, useRef, useCallback } = React;
 
 // ── Utilities ─────────────────────────────────────────────────────────────────
-function normalize(str) { return (str || "").toLowerCase().trim().replace(/\s*\/\s*/g, "/").replace(/\s+/g, " "); }
+function normalize(str) { return (str || "").toLowerCase().trim().replace(/…/g, "...").replace(/\s*\/\s*/g, "/").replace(/\s+/g, " ").trim(); }
 
 // ── Item progress stats (per word/sentence, persisted for spaced repetition) ──
 const STATS_KEY = "dutch-item-stats-v1";
@@ -42,8 +42,9 @@ function weightedPick(items, idFn, count) {
 function checkAnswer(typed, correct) {
   const t = normalize(typed), c = normalize(correct);
   if (t === c) return "exact";
-  const strip = s => s.replace(/^(de|het|een) /, "").replace(/\s*\(.*?\)/g, "").replace(/\.{2,}$/, "").trim();
-  const variants = [c, strip(c), c.replace(/\.{2,}$/, "").trim()];
+  const stripEllipsis = s => s.replace(/\.{2,}/g, "").replace(/\s+/g, " ").trim();
+  const strip = s => stripEllipsis(s.replace(/^(de|het|een) /, "").replace(/\s*\(.*?\)/g, ""));
+  const variants = [c, strip(c), stripEllipsis(c)];
   if (variants.some(v => t === v)) return "close";
   return "wrong";
 }
