@@ -19,7 +19,7 @@
       fetch('./app.jsx')
         .then(function(r) { return r.text(); })
         .then(function(code) {
-          var result = Babel.transform(code, { presets: ['react'], filename: 'app.jsx' });
+          var result = Babel.transform(code, { presets: [['react', { runtime: 'classic' }]], filename: 'app.jsx' });
           var s = document.createElement('script');
           s.text = result.code;
           document.body.appendChild(s);
