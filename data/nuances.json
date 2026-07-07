@@ -133,15 +133,21 @@
     "topic": "verlaten vs kwijtraken vs kwijt zijn",
     "rule": "verlaten = leave / abandon deliberately; kwijtraken = lose accidentally; kwijt zijn = be unable to find something right now.",
     "examples": [
-      { "nl": "Ik verlaat het gebouw.", "en": "I leave the building.", "note": "Deliberate leaving." },
-      { "nl": "Hij heeft haar verlaten.", "en": "He left / abandoned her.", "note": "Person / relationship." },
+      { "nl": "Ik verlaat het gebouw.", "en": "I leave the building.", "note": "Grammatically correct but sounds formal. More natural in speech: Ik ga het gebouw uit / Ik ga weg uit het gebouw." },
+      { "nl": "Ik ga het gebouw uit.", "en": "I am leaving the building.", "note": "Natural, everyday Dutch." },
+      { "nl": "Hij heeft haar verlaten.", "en": "He left / abandoned her.", "note": "Sounds like abandonment — heavy. For ending a relationship, hij heeft het uitgemaakt is more natural." },
+      { "nl": "Hij heeft het uitgemaakt.", "en": "He ended the relationship. / He broke it off.", "note": "Natural way to say someone ended a relationship." },
       { "nl": "Ik raak altijd mijn sleutels kwijt.", "en": "I always lose my keys.", "note": "Losing event / habit." },
       { "nl": "Ik ben mijn telefoon kwijtgeraakt.", "en": "I lost my phone.", "note": "Completed losing event." },
       { "nl": "Ik ben mijn sleutels kwijt.", "en": "I cannot find my keys.", "note": "Current state." },
-      { "nl": "Ik heb mijn tas thuis laten liggen.", "en": "I left my bag at home.", "note": "Not verlaten — you left it behind." }
+      { "nl": "Ik heb mijn tas thuis laten liggen.", "en": "I left my bag at home.", "note": "Not verlaten — you left it behind. laten liggen = left it lying there." },
+      { "nl": "Waar heb ik mijn sleutels gelaten?", "en": "Where did I leave my keys?", "note": "laten works naturally for misplaced objects: keys, phone, book, etc." }
     ],
     "tips": [
+      "verlaten sounds formal for leaving a building — prefer Ik ga het gebouw uit in everyday speech.",
+      "For ending a relationship, hij heeft het uitgemaakt is more natural than verlaten.",
       "Do not use verlaten for accidentally losing a phone or keys.",
+      "Waar heb ik X gelaten? is natural for misplaced objects (sleutels, telefoon, boek).",
       "kwijt zijn = current state: I cannot find it.",
       "kwijtraken = the event: I lost it.",
       "verliezen also means 'to lose', especially in games or competitions."
@@ -156,13 +162,16 @@
       { "nl": "Mag ik je pen lenen?", "en": "Can I borrow your pen?", "note": "Subject wants to borrow." },
       { "nl": "Mag ik een pen van je lenen?", "en": "Can I borrow a pen from you?", "note": "van makes the direction clear." },
       { "nl": "Ik leen een boek van Sam.", "en": "I borrow a book from Sam.", "note": "Borrow from = lenen van." },
-      { "nl": "Ik leen jou mijn pen.", "en": "I lend you my pen.", "note": "Owner gives temporarily." },
-      { "nl": "Ik leen mijn fiets aan Lisa uit.", "en": "I lend my bike to Lisa.", "note": "Lend to = uitlenen aan." },
+      { "nl": "Ik leen jou mijn pen.", "en": "I lend you my pen.", "note": "Owner gives temporarily — fine without uit for small everyday items." },
+      { "nl": "Ik leen mijn fiets aan Lisa uit.", "en": "I lend my bike to Lisa.", "note": "uitlenen fits larger or special objects well." },
+      { "nl": "Ik leen Lisa mijn fiets.", "en": "I lend my bike to Lisa.", "note": "Also natural — without aan or uit." },
       { "nl": "Ik heb geld van mijn broer geleend.", "en": "I borrowed money from my brother.", "note": "Perfect tense." }
     ],
     "tips": [
       "When you are the borrower, say lenen van.",
-      "When you are the lender, uitlenen aan is often clearer.",
+      "uitlenen fits larger or special objects — saying ik leen mijn pen uit sounds odd for small items.",
+      "geld uitlenen is also unusual, since you never return the exact same notes.",
+      "When you are the lender, Ik leen Lisa mijn fiets or Ik leen mijn fiets aan Lisa are both natural.",
       "Mag ik even je pen lenen? is a very natural request."
     ],
     "teacherQuestion": "In daily speech, do people prefer lenen or uitlenen when they mean 'lend'?"
@@ -170,18 +179,18 @@
   {
     "id": "toestemming",
     "topic": "Toestemming vragen",
-    "rule": "Mag ik...? = normal and direct; Zou ik mogen...? = more polite; Is het goed als...? = asks if the situation is acceptable.",
+    "rule": "Mag ik...? = normal and direct; Zou ik mogen...? = leaves more room for the other person to say no (not necessarily more formal — also used with friends); Is het goed als...? = asks if the situation is acceptable.",
     "examples": [
       { "nl": "Mag ik hier zitten?", "en": "May I sit here?", "note": "Normal and direct." },
       { "nl": "Mag ik naar de wc?", "en": "May I go to the toilet?", "note": "Normal classroom question." },
-      { "nl": "Zou ik hier mogen zitten?", "en": "Would I be allowed to sit here?", "note": "More polite / careful." },
+      { "nl": "Zou ik hier mogen zitten?", "en": "Would it be OK if I sat here?", "note": "Leaves space for the other person to say no — also natural with friends, not only in formal situations." },
       { "nl": "Zou ik vandaag iets eerder weg mogen?", "en": "Could I leave a bit earlier today?", "note": "Good for bigger requests." },
       { "nl": "Is het goed als ik morgen later kom?", "en": "Is it okay if I come later tomorrow?", "note": "Checks if the situation is acceptable." },
       { "nl": "Is het goed als ik dit thuis afmaak?", "en": "Is it okay if I finish this at home?", "note": "als sends the verb to the end." }
     ],
     "tips": [
       "Mag ik...? is not rude — it is normal.",
-      "Zou ik mogen...? is safer for teachers, strangers, or special permission.",
+      "Zou ik mogen...? is not necessarily more formal — Tessa uses it with friends too. It simply leaves more room for the other person to decline.",
       "After als, put the verb at the end: Is het goed als ik eerder wegga?"
     ],
     "teacherQuestion": "Which form sounds most natural when speaking to you as my teacher?"
@@ -216,7 +225,8 @@
       { "nl": "Ik kan me zijn naam niet herinneren.", "en": "I cannot remember his name.", "note": "Trying to recall right now." },
       { "nl": "Ik moet dit wachtwoord onthouden.", "en": "I have to remember this password.", "note": "Keep in memory for later." },
       { "nl": "Ik kan namen niet goed onthouden.", "en": "I am not good at remembering names.", "note": "Names do not stay in memory." },
-      { "nl": "Dat herinner ik me nog.", "en": "I still remember that.", "note": "Very natural word order." },
+      { "nl": "Dat weet ik nog.", "en": "I still remember that.", "note": "Often more natural in everyday Dutch than Dat herinner ik me nog." },
+      { "nl": "Dat herinner ik me nog.", "en": "I still remember that.", "note": "Correct, but nog weten is usually the more natural spoken choice." },
       { "nl": "Denk eraan om melk te kopen.", "en": "Remember to buy milk.", "note": "Remember to do = think of it / do not forget." }
     ],
     "tips": [
@@ -246,9 +256,8 @@
       "Use niet meer weten for 'I do not remember anymore' — a current state.",
       "Use vergeten for 'I forgot', especially when you failed to do something.",
       "You cannot say: Ik weet niet meer hem te bellen. Say: Ik ben vergeten hem te bellen.",
-      "vergat = I / he / she / it forgot (simple past singular).",
-      "vergaten = we / you plural / they forgot (simple past plural).",
-      "Ik ben vergeten is the safest perfect tense form for learners."
+      "vergat / vergaten (simple past) technically exist but are almost never used in everyday spoken Dutch — do not worry about them.",
+      "Ik ben vergeten is the safest and most natural form — use this."
     ],
     "teacherQuestion": "When would you prefer Ik weet het niet meer instead of Ik ben het vergeten?"
   },
@@ -259,14 +268,14 @@
     "examples": [
       { "nl": "Kijk maar.", "en": "Go ahead and look. / See for yourself.", "note": "Reassuring — invites them to look without worry." },
       { "nl": "Doe maar.", "en": "Go ahead. / Sure, just do it.", "note": "Relaxed permission or encouragement." },
-      { "nl": "Zeg het maar.", "en": "Just tell me. / Whenever you're ready.", "note": "Invites them to speak freely, no pressure." },
+      { "nl": "Zeg het maar.", "en": "Just tell me. / Go ahead and say it.", "note": "Invites them to speak freely, no pressure." },
       { "nl": "Ga jij maar eerst.", "en": "You go first.", "note": "Friendly suggestion, not an order." },
       { "nl": "Laat maar.", "en": "Never mind. / Leave it.", "note": "Gently drops the matter." },
       { "nl": "Hij kon niet komen, maar dat geeft niet.", "en": "He couldn't come, but that's fine.", "note": "Different maar — here it's the conjunction 'but', not the softening particle." }
     ],
     "tips": [
       "Placed right after an imperative, maar turns an instruction into something closer to an invitation.",
-      "Combine with eens for extra softness: Probeer maar eens. / Kijk eens maar.",
+      "Combine with eens for extra softness: Probeer maar eens / Kijk maar eens. Important: maar always comes before eens — Kijk eens maar is incorrect.",
       "Doe maar is one of the most common relaxed replies in spoken Dutch — like 'sure, go for it'.",
       "Position and context separate the two maars: mid-sentence after a verb = softening particle; joining two clauses = the conjunction 'but'."
     ],
