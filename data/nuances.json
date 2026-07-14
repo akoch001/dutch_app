@@ -302,5 +302,28 @@
       "Don't say Ik weet hem for a person — say Ik ken hem."
     ],
     "teacherQuestion": "Is there a natural way to use kennen and weten in the same sentence, like 'I know him but I don't know where he lives'?"
+  },
+  {
+    "id": "discussie-frases",
+    "topic": "Een discussie voeren",
+    "rule": "Dutch uses specific phrases to interrupt politely, reclaim your turn, challenge a claim, or ask for clarification — without being rude.",
+    "examples": [
+      { "nl": "Sorry dat ik je even onderbreek, maar ...", "en": "Sorry for interrupting, but ...", "note": "Polite interruption. maar ... lets you add your point without completely shutting the other person down." },
+      { "nl": "Mag ik je even onderbreken?", "en": "May I interrupt you for a moment?", "note": "Direct but polite. even softens it — makes the interruption feel smaller." },
+      { "nl": "Sorry, wil je me laten uitpraten alsjeblieft?", "en": "Will you please let me finish?", "note": "Reclaiming your turn. uitpraten = to finish speaking. laten uitpraten = to let someone finish." },
+      { "nl": "Mag ik mijn verhaal even afmaken?", "en": "Can I finish what I was saying?", "note": "Softer than the above. Verhaal here means 'what I was saying', not literally a story." },
+      { "nl": "Je zei daarnet dat ..., maar ...", "en": "You just said that ..., but ...", "note": "Pointing out a contradiction. daarnet = just now / a moment ago — very useful word." },
+      { "nl": "Maar vind je niet dat ...?", "en": "But don't you think that ...?", "note": "Gentle challenge — invites the other person to reconsider without saying they are wrong." },
+      { "nl": "Weet je dat zeker?", "en": "Are you sure about that?", "note": "Short, direct challenge. Works in both casual conversation and formal debate." },
+      { "nl": "Kun je dat met argumenten onderbouwen?", "en": "Can you back that up with arguments?", "note": "onderbouwen = to support / substantiate with evidence or reasoning." },
+      { "nl": "Wat bedoel je precies?", "en": "What exactly do you mean?", "note": "Asking for clarification. precies = exactly / precisely. Very natural and non-confrontational." }
+    ],
+    "tips": [
+      "uitpraten = to finish speaking. Laat me uitpraten = let me finish. Mag ik uitpraten? = can I finish?",
+      "daarnet = just now / a moment ago — Je zei daarnet dat... is the go-to phrase for 'you just said...'.",
+      "onderbouwen = to support with evidence or arguments — slightly formal, but used in discussion.",
+      "even appears in several phrases (even onderbreken, mijn verhaal even afmaken) — it softens the request and makes the action sound smaller."
+    ],
+    "teacherQuestion": "Which of these would feel too direct or confrontational in a casual conversation with a friend?"
   }
 ]
