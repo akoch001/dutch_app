@@ -466,7 +466,15 @@ function VerbTest({ items, mode, onComplete, onBack }) {
   const inputRef = useRef(null);
   const current = items[index];
   useEffect(() => { setInput(""); setStatus(null); setTimeout(() => inputRef.current?.focus(), 80); }, [index]);
-  if (!current) return null;
+  if (!current) {
+    if (items.length === 0) return (
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 24, padding: "60px 24px", fontFamily: "'DM Sans',sans-serif" }}>
+        <div style={{ fontSize: 16, color: "#6b6560", textAlign: "center", lineHeight: 1.6 }}>Geen oefenzinnen beschikbaar voor de geselecteerde groepen en tijden.</div>
+        <button onClick={onBack} style={{ padding: "12px 28px", borderRadius: 12, background: "rgba(107,70,193,0.1)", border: "1px solid rgba(107,70,193,0.3)", color: "#6b46c1", fontSize: 15, fontWeight: 600, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>← Terug</button>
+      </div>
+    );
+    return null;
+  }
   const submit = () => { if (!input.trim()) return; setStatus(checkAnswer(input, current.answer)); };
   const advance = () => {
     const wasRight = status === "exact" || status === "close";
