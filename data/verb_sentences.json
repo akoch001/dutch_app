@@ -2441,5 +2441,456 @@
     "template": "Ze {} ons al vroeg {} op het risico.",
     "hint": "They pointed out the risk to us early on.",
     "split": true
+  },
+  {
+    "verb": "dwingen",
+    "tense": "presens",
+    "subject": "hij",
+    "answer": "dwingt",
+    "template": "Hij {} haar een contract te tekenen.",
+    "hint": "He forces her to sign a contract."
+  },
+  {
+    "verb": "dwingen",
+    "tense": "imperfectum",
+    "subject": "ik",
+    "answer": "dwong",
+    "template": "Ik {} hem zijn schuld terug te betalen.",
+    "hint": "I forced him to pay back his debt."
+  },
+  {
+    "verb": "dwingen",
+    "tense": "perfectum",
+    "subject": "ze",
+    "answer": "hebben gedwongen",
+    "template": "Ze {} de bank {} hen een lening te geven.",
+    "hint": "They forced the bank to give them a loan.",
+    "split": true
+  },
+  {
+    "verb": "meegaan",
+    "tense": "presens",
+    "subject": "ik",
+    "answer": "ga mee",
+    "template": "Ik {} niet {} met zo'n oneerlijk aanbod.",
+    "hint": "I am not going along with such an unfair offer.",
+    "split": true
+  },
+  {
+    "verb": "meegaan",
+    "tense": "imperfectum",
+    "subject": "ik",
+    "answer": "ging mee",
+    "template": "Ik {} {} in zijn plan om de kosten te verdelen.",
+    "hint": "I went along with his plan to split the costs.",
+    "split": true
+  },
+  {
+    "verb": "meegaan",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "ben meegegaan",
+    "template": "Ik {} uiteindelijk {} in zijn voorstel.",
+    "hint": "I eventually went along with his proposal.",
+    "split": true
+  },
+  {
+    "verb": "ontvangen",
+    "tense": "presens",
+    "subject": "ik",
+    "answer": "ontvang",
+    "template": "Ik {} elke maand mijn salaris op de eerste.",
+    "hint": "I receive my salary on the first of every month."
+  },
+  {
+    "verb": "ontvangen",
+    "tense": "imperfectum",
+    "subject": "wij",
+    "answer": "ontvingen",
+    "template": "Wij {} vorig jaar een financiële bijdrage van de overheid.",
+    "hint": "We received a financial contribution from the government last year."
+  },
+  {
+    "verb": "ontvangen",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "heb ontvangen",
+    "template": "Ik {} een brief over mijn belastingteruggave {}.",
+    "hint": "I have received a letter about my tax refund.",
+    "split": true
+  },
+  {
+    "verb": "terugvragen",
+    "tense": "presens",
+    "subject": "ik",
+    "answer": "vraag terug",
+    "template": "Ik {} het geld {} dat hij me schuldig is.",
+    "hint": "I ask for the money back that he owes me.",
+    "split": true
+  },
+  {
+    "verb": "terugvragen",
+    "tense": "imperfectum",
+    "subject": "ik",
+    "answer": "vroeg terug",
+    "template": "Ik {} de aanbetaling {} na de annulering.",
+    "hint": "I asked for the deposit back after the cancellation.",
+    "split": true
+  },
+  {
+    "verb": "terugvragen",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "heb teruggevraagd",
+    "template": "Ik {} de kosten bij zijn werkgever {}.",
+    "hint": "I have claimed the costs back from his employer.",
+    "split": true
+  },
+  {
+    "verb": "uitzetten",
+    "tense": "presens",
+    "subject": "ik",
+    "answer": "zet uit",
+    "template": "Ik {} het spaargeld {} bij een veilige bank.",
+    "hint": "I invest the savings at a safe bank.",
+    "split": true
+  },
+  {
+    "verb": "uitzetten",
+    "tense": "imperfectum",
+    "subject": "wij",
+    "answer": "zetten uit",
+    "template": "Wij {} ons budget {} voor het komende kwartaal.",
+    "hint": "We allocated our budget for the coming quarter.",
+    "split": true
+  },
+  {
+    "verb": "uitzetten",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "heb uitgezet",
+    "template": "Ik {} de reserve als noodfonds {}.",
+    "hint": "I have set aside the reserve as an emergency fund.",
+    "split": true
+  },
+  {
+    "verb": "voorstellen",
+    "tense": "presens",
+    "subject": "ik",
+    "answer": "stel voor",
+    "template": "Ik {} {} dat we een spaarrekening openen.",
+    "hint": "I suggest that we open a savings account.",
+    "split": true
+  },
+  {
+    "verb": "voorstellen",
+    "tense": "imperfectum",
+    "subject": "hij",
+    "answer": "stelde voor",
+    "template": "Hij {} {} een andere betalingsregeling te treffen.",
+    "hint": "He proposed to arrange a different payment plan.",
+    "split": true
+  },
+  {
+    "verb": "voorstellen",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "heb voorgesteld",
+    "template": "Ik {} al eerder dat we de kosten zouden delen {}.",
+    "hint": "I already suggested earlier that we split the costs.",
+    "split": true
+  },
+  {
+    "verb": "deelnemen",
+    "tense": "presens",
+    "subject": "ik",
+    "answer": "neem deel",
+    "template": "Ik {} {} aan het kunstfestival dit weekend.",
+    "hint": "I am participating in the art festival this weekend.",
+    "split": true
+  },
+  {
+    "verb": "deelnemen",
+    "tense": "imperfectum",
+    "subject": "wij",
+    "answer": "namen deel",
+    "template": "Wij {} {} aan een workshop over schilderen.",
+    "hint": "We participated in a workshop about painting.",
+    "split": true
+  },
+  {
+    "verb": "deelnemen",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "heb deelgenomen",
+    "template": "Ik {} al drie keer aan dit filmfestival {}.",
+    "hint": "I have already participated in this film festival three times.",
+    "split": true
+  },
+  {
+    "verb": "insluipen",
+    "tense": "presens",
+    "subject": "hij",
+    "answer": "sluipt in",
+    "template": "Er {} langzaam een fout {} in zijn werk.",
+    "hint": "An error slowly creeps into his work.",
+    "split": true
+  },
+  {
+    "verb": "insluipen",
+    "tense": "imperfectum",
+    "subject": "ik",
+    "answer": "sloop in",
+    "template": "Ik {} stiekem {} tijdens de voorstelling.",
+    "hint": "I sneaked in quietly during the performance.",
+    "split": true
+  },
+  {
+    "verb": "insluipen",
+    "tense": "perfectum",
+    "subject": "hij",
+    "answer": "is ingeslopen",
+    "template": "Er {} een tikfout in het gedicht {}.",
+    "hint": "A typo has crept into the poem.",
+    "split": true
+  },
+  {
+    "verb": "klinken",
+    "tense": "presens",
+    "subject": "hij",
+    "answer": "klinkt",
+    "template": "Dat {} als een interessant concept voor de tentoonstelling.",
+    "hint": "That sounds like an interesting concept for the exhibition."
+  },
+  {
+    "verb": "klinken",
+    "tense": "imperfectum",
+    "subject": "hij",
+    "answer": "klonk",
+    "template": "De muziek {} wondermooi in de grote concertzaal.",
+    "hint": "The music sounded wonderful in the large concert hall."
+  },
+  {
+    "verb": "klinken",
+    "tense": "perfectum",
+    "subject": "hij",
+    "answer": "heeft geklonken",
+    "template": "Het verhaal {} erg vertrouwd {} in mijn oren.",
+    "hint": "The story has sounded very familiar to my ears.",
+    "split": true
+  },
+  {
+    "verb": "opnemen",
+    "tense": "presens",
+    "subject": "ik",
+    "answer": "neem op",
+    "template": "Ik {} volgende week een nieuw nummer {}.",
+    "hint": "I am recording a new song next week.",
+    "split": true
+  },
+  {
+    "verb": "opnemen",
+    "tense": "imperfectum",
+    "subject": "hij",
+    "answer": "nam op",
+    "template": "Hij {} zijn eerste album {} in een professionele studio.",
+    "hint": "He recorded his first album in a professional studio.",
+    "split": true
+  },
+  {
+    "verb": "opnemen",
+    "tense": "perfectum",
+    "subject": "ze",
+    "answer": "hebben opgenomen",
+    "template": "Ze {} drie afleveringen van het radioprogramma {}.",
+    "hint": "They have recorded three episodes of the radio programme.",
+    "split": true
+  },
+  {
+    "verb": "overslaan",
+    "tense": "presens",
+    "subject": "ik",
+    "answer": "sla over",
+    "template": "Ik {} nooit een hoofdstuk {} als ik een boek lees.",
+    "hint": "I never skip a chapter when I read a book.",
+    "split": true
+  },
+  {
+    "verb": "overslaan",
+    "tense": "imperfectum",
+    "subject": "ik",
+    "answer": "sloeg over",
+    "template": "Ik {} de inleiding {} en begon meteen aan de roman.",
+    "hint": "I skipped the introduction and started straight on the novel.",
+    "split": true
+  },
+  {
+    "verb": "overslaan",
+    "tense": "perfectum",
+    "subject": "hij",
+    "answer": "heeft overgeslagen",
+    "template": "Hij {} het eerste deel en begreep het verhaal niet {}.",
+    "hint": "He skipped the first part and did not understand the story.",
+    "split": true
+  },
+  {
+    "verb": "schrikken",
+    "tense": "presens",
+    "subject": "ik",
+    "answer": "schrik",
+    "template": "Ik {} altijd van dat harde geluid achter het podium.",
+    "hint": "I always get startled by that loud noise behind the stage."
+  },
+  {
+    "verb": "schrikken",
+    "tense": "imperfectum",
+    "subject": "ik",
+    "answer": "schrok",
+    "template": "Ik {} van het grote schilderij aan de muur.",
+    "hint": "I was startled by the large painting on the wall."
+  },
+  {
+    "verb": "schrikken",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "ben geschrokken",
+    "template": "Ik {} van de hoge prijs van het kunstwerk {}.",
+    "hint": "I was startled by the high price of the artwork.",
+    "split": true
+  },
+  {
+    "verb": "afstuderen",
+    "tense": "presens",
+    "subject": "ik",
+    "answer": "studeer af",
+    "template": "Ik {} dit jaar {} aan de kunstacademie.",
+    "hint": "I am graduating from the art academy this year.",
+    "split": true
+  },
+  {
+    "verb": "afstuderen",
+    "tense": "imperfectum",
+    "subject": "hij",
+    "answer": "studeerde af",
+    "template": "Hij {} vorig jaar {} als muzikant in Amsterdam.",
+    "hint": "He graduated last year as a musician in Amsterdam.",
+    "split": true
+  },
+  {
+    "verb": "afstuderen",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "ben afgestudeerd",
+    "template": "Ik {} net na vier jaar aan de filmacademie {}.",
+    "hint": "I have just graduated after four years at the film academy.",
+    "split": true
+  },
+  {
+    "verb": "misstappen",
+    "tense": "presens",
+    "subject": "hij",
+    "answer": "stapt mis",
+    "template": "Een kunstenaar {} soms {} maar dat hoort erbij.",
+    "hint": "An artist sometimes makes a misstep, but that is part of it.",
+    "split": true
+  },
+  {
+    "verb": "misstappen",
+    "tense": "imperfectum",
+    "subject": "ik",
+    "answer": "stapte mis",
+    "template": "Ik {} {} met mijn eerste solo-tentoonstelling.",
+    "hint": "I made a misstep with my first solo exhibition.",
+    "split": true
+  },
+  {
+    "verb": "misstappen",
+    "tense": "perfectum",
+    "subject": "hij",
+    "answer": "is misgestapt",
+    "template": "Hij {} eens met zijn uitspraken over moderne kunst {}.",
+    "hint": "He once made a misstep with his statements about modern art.",
+    "split": true
+  },
+  {
+    "verb": "opmerken",
+    "tense": "presens",
+    "subject": "ik",
+    "answer": "merk op",
+    "template": "Ik {} {} dat het schilderij niet goed in het licht hangt.",
+    "hint": "I notice that the painting is not hanging in good light.",
+    "split": true
+  },
+  {
+    "verb": "opmerken",
+    "tense": "imperfectum",
+    "subject": "hij",
+    "answer": "merkte op",
+    "template": "Hij {} {} dat de bezoekers weinig enthousiasme toonden.",
+    "hint": "He remarked that the visitors showed little enthusiasm.",
+    "split": true
+  },
+  {
+    "verb": "opmerken",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "heb opgemerkt",
+    "template": "Ik {} dat het museum de openingstijden had aangepast {}.",
+    "hint": "I noticed that the museum had adjusted its opening hours.",
+    "split": true
+  },
+  {
+    "verb": "oprichten",
+    "tense": "presens",
+    "subject": "ik",
+    "answer": "richt op",
+    "template": "Ik {} een galerie {} voor jonge kunstenaars.",
+    "hint": "I am founding a gallery for young artists.",
+    "split": true
+  },
+  {
+    "verb": "oprichten",
+    "tense": "imperfectum",
+    "subject": "hij",
+    "answer": "richtte op",
+    "template": "Hij {} een muziekstudio {} in zijn eigen huis.",
+    "hint": "He set up a music studio in his own home.",
+    "split": true
+  },
+  {
+    "verb": "oprichten",
+    "tense": "perfectum",
+    "subject": "ze",
+    "answer": "hebben opgericht",
+    "template": "Ze {} een stichting voor kunstonderwijs {}.",
+    "hint": "They have founded a foundation for arts education.",
+    "split": true
+  },
+  {
+    "verb": "opsturen",
+    "tense": "presens",
+    "subject": "ik",
+    "answer": "stuur op",
+    "template": "Ik {} mijn portfolio {} naar het theater.",
+    "hint": "I am sending my portfolio to the theatre.",
+    "split": true
+  },
+  {
+    "verb": "opsturen",
+    "tense": "imperfectum",
+    "subject": "ik",
+    "answer": "stuurde op",
+    "template": "Ik {} mijn inschrijvingsformulier {} voor het festival.",
+    "hint": "I sent off my registration form for the festival.",
+    "split": true
+  },
+  {
+    "verb": "opsturen",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "heb opgestuurd",
+    "template": "Ik {} mijn eerste roman naar drie uitgeverijen {}.",
+    "hint": "I have sent my first novel to three publishers.",
+    "split": true
   }
 ]

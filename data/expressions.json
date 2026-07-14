@@ -1,65 +1,404 @@
 [
-  { "nl": "Dat snap ik", "en": "I get it", "category": "Instemmen", "note": "Comprehension, not agreement — you follow what they're saying" },
-  { "nl": "Dat is logisch", "en": "That makes sense", "category": "Instemmen", "note": "Validating their reasoning — stronger than just 'I follow'" },
-  { "nl": "Dat klopt", "en": "That's correct", "category": "Instemmen", "note": "Confirming a fact is accurate" },
-  { "nl": "Dat vind ik ook", "en": "I think so too", "category": "Instemmen", "note": "Natural way to agree with an opinion — very common" },
-  { "nl": "Dat denk ik ook", "en": "I think so too", "category": "Instemmen", "note": "Slightly more 'I reckon so too'" },
-  { "nl": "Daar ben ik het mee eens", "en": "I agree with that", "category": "Instemmen", "note": "Full agreement — formal & professional" },
-  { "nl": "Mee eens", "en": "Agreed", "category": "Instemmen", "note": "Casual short version — always needs 'mee' (not just 'eens')" },
-  { "nl": "Helemaal mee eens", "en": "Totally agree", "category": "Instemmen", "note": "Emphatic — always with 'mee'" },
-  { "nl": "Ja, je hebt gelijk", "en": "You're right", "category": "Instemmen", "note": "Acknowledging someone is right (opinion or fact)" },
-  { "nl": "Daar zit wat in", "en": "You've got a point", "category": "Instemmen", "note": "Partial — 'fair point' without fully committing" },
-  { "nl": "Afgesproken", "en": "Deal / Done", "category": "Instemmen", "note": "Locking in a plan — like 'done' or 'deal'" },
-  { "nl": "Precies", "en": "Exactly", "category": "Instemmen", "note": "Quick agreement — very common" },
-  { "nl": "Inderdaad", "en": "Indeed", "category": "Instemmen", "note": "Less formal than it sounds in English — use it loads" },
-  { "nl": "Zeker", "en": "For sure / Definitely", "category": "Instemmen", "note": "'Zeker weten' is the emphatic version" },
-  { "nl": "Tuurlijk", "en": "Of course / Sure", "category": "Instemmen", "note": "Casual 'of course' — agreeing, permission, or 'well duh'. Drawn out = sarcastic." },
-  { "nl": "Ja, klopt", "en": "Yep", "category": "Instemmen", "note": "Quick casual confirmation" },
-  { "nl": "Dat klopt, maar...", "en": "That's right, but...", "category": "Instemmen", "note": "Standard 'yes, but'" },
-  { "nl": "Dat klopt, alleen...", "en": "That's right, however...", "category": "Instemmen", "note": "Softer 'but' — very common in Dutch" },
-  { "nl": "Dat snap ik, maar...", "en": "I get that, but...", "category": "Instemmen", "note": "Understanding without agreeing" },
-  { "nl": "Ja, maar toch...", "en": "Yes, but still...", "category": "Instemmen", "note": "Acknowledging with reservation" },
-
-  { "nl": "Super, dank je", "en": "Great, thanks", "category": "Reageren", "note": "Warm and appreciative — best when receiving something (coffee, food, a favour)" },
-  { "nl": "Fijn, dank je", "en": "Nice, thanks", "category": "Reageren", "note": "Softer and warm — works everywhere, in person and emails" },
-  { "nl": "Top", "en": "Great / Awesome", "category": "Reageren", "note": "Casual and upbeat — very common. 'Top, dank je!'" },
-  { "nl": "Prima", "en": "Sure / Fine", "category": "Reageren", "note": "For acknowledging info/plans — can sound cold/indifferent when receiving something nice" },
-  { "nl": "Mooi", "en": "Nice one / Great", "category": "Reageren", "note": "Satisfied acknowledgment — literally 'beautiful'" },
-  { "nl": "Goed hoor", "en": "All good", "category": "Reageren", "note": "'Hoor' adds a reassuring, easygoing vibe — like 'that's totally fine'" },
-  { "nl": "Lekker", "en": "Nice! / Sweet!", "category": "Reageren", "note": "Not just food — anything going well. 'We zijn op tijd' → 'Lekker!' Very Dutch." },
-
-  { "nl": "Wat zie je er leuk uit", "en": "You look nice / great", "category": "Complimenten", "note": "Safe everyday go-to for people" },
-  { "nl": "Wat zie je er mooi uit", "en": "You look beautiful", "category": "Complimenten", "note": "More romantic / sincere — good for date night" },
-  { "nl": "Je ziet er goed uit", "en": "You're looking good", "category": "Complimenten", "note": "Casual and versatile" },
-  { "nl": "Dat ziet er echt leuk uit", "en": "That looks really nice", "category": "Complimenten", "note": "For things/outfits — use 'dat ziet er ___ uit' (not 'wat ziet dat er...')" },
-  { "nl": "Dat ziet er mooi uit", "en": "That looks beautiful", "category": "Complimenten", "note": "Nicely presented food, a view, art" },
-  { "nl": "Dat ziet er lekker uit", "en": "That looks delicious", "category": "Complimenten", "note": "The standard one when food arrives" },
-  { "nl": "Wat gaaf", "en": "How cool!", "category": "Complimenten", "note": "Something impressive — a view, someone's work, a new car" },
-  { "nl": "Prachtig", "en": "Gorgeous / Stunning", "category": "Complimenten", "note": "Views, food, art, outfits — strong but natural in Dutch" },
-
-  { "nl": "Ik heb er zin in", "en": "I'm excited for it", "category": "Enthousiasme", "note": "THE one — Dutch for 'I'm excited'. Use constantly." },
-  { "nl": "Ik heb er echt veel zin in", "en": "I'm so excited for it", "category": "Enthousiasme", "note": "Emphatic — use 'echt' instead of 'zo' to intensify (sounds more natural)" },
-  { "nl": "Ik kijk ernaar uit", "en": "I'm looking forward to it", "category": "Enthousiasme", "note": "More polished / formal — good for work or emails" },
-  { "nl": "Ik kan niet wachten", "en": "I can't wait", "category": "Enthousiasme", "note": "Direct translation — works perfectly in Dutch too" },
-  { "nl": "Heb je er zin in?", "en": "Are you excited?", "category": "Enthousiasme", "note": "Casual everyday way to ask" },
-  { "nl": "Kijk je ernaar uit?", "en": "Are you looking forward to it?", "category": "Enthousiasme", "note": "Slightly more formal version" },
-
-  { "nl": "Het was echt leuk", "en": "It was really fun", "category": "Plezier", "note": "The most natural way to say you had a good time" },
-  { "nl": "Het was zo leuk", "en": "It was so fun", "category": "Plezier", "note": "'Echt' and 'zo' are both fine here" },
-  { "nl": "Het was geweldig", "en": "It was amazing", "category": "Plezier", "note": "A step up in enthusiasm" },
-  { "nl": "Was het leuk?", "en": "Was it fun?", "category": "Plezier", "note": "The simplest and most natural way to ask" },
-  { "nl": "Heb je er een beetje van genoten?", "en": "Did you enjoy it?", "category": "Plezier", "note": "More reflective — always said with 'een beetje' in Dutch" },
-
-  { "nl": "Veel plezier!", "en": "Have fun! / Enjoy!", "category": "Genieten", "note": "The natural 'enjoy!' — someone going out, on holiday, to a party" },
-  { "nl": "Geniet van je vakantie", "en": "Enjoy your holiday", "category": "Genieten", "note": "Works with vakantie and weekend" },
-  { "nl": "Fijne dag nog", "en": "Have a nice day", "category": "Genieten", "note": "Use 'fijne' — not 'geniet van je dag' (sounds odd)" },
-  { "nl": "Fijne avond nog", "en": "Have a nice evening", "category": "Genieten", "note": "Same pattern as 'fijne dag nog'" },
-  { "nl": "Ik ben echt aan het genieten", "en": "I'm really enjoying this", "category": "Genieten", "note": "Terrace in the sun, a great view, a quiet moment — savouring it" },
-  { "nl": "Geen probleem", "en": "No problem", "category": "Geruststellen", "note": "Casual, all-purpose — works for apologies, favours, or small requests" },
-  { "nl": "Maakt niet uit", "en": "It doesn't matter", "category": "Geruststellen", "note": "Reassures someone after a small mistake or mix-up" },
-  { "nl": "Geeft niet", "en": "It's nothing / don't worry about it", "category": "Geruststellen", "note": "Warm, everyday reply when someone says sorry" },
-  { "nl": "Geen zorgen", "en": "No worries", "category": "Geruststellen", "note": "Comforting — tells someone not to stress about it" },
-  { "nl": "Maak je geen zorgen", "en": "Don't worry about it", "category": "Geruststellen", "note": "Fuller version of 'geen zorgen', a bit more reassuring" },
-  { "nl": "Graag gedaan", "en": "My pleasure / you're welcome", "category": "Geruststellen", "note": "The standard reply to 'dank je wel'" },
-  { "nl": "Geen dank", "en": "Don't mention it", "category": "Geruststellen", "note": "A bit more modest — 'it really wasn't a big deal'" }
+  {
+    "nl": "Dat snap ik",
+    "en": "I get it",
+    "category": "Instemmen",
+    "note": "Comprehension, not agreement — you follow what they're saying"
+  },
+  {
+    "nl": "Dat is logisch",
+    "en": "That makes sense",
+    "category": "Instemmen",
+    "note": "Validating their reasoning — stronger than just 'I follow'"
+  },
+  {
+    "nl": "Dat klopt",
+    "en": "That's correct",
+    "category": "Instemmen",
+    "note": "Confirming a fact is accurate"
+  },
+  {
+    "nl": "Dat vind ik ook",
+    "en": "I think so too",
+    "category": "Instemmen",
+    "note": "Natural way to agree with an opinion — very common"
+  },
+  {
+    "nl": "Dat denk ik ook",
+    "en": "I think so too",
+    "category": "Instemmen",
+    "note": "Slightly more 'I reckon so too'"
+  },
+  {
+    "nl": "Daar ben ik het mee eens",
+    "en": "I agree with that",
+    "category": "Instemmen",
+    "note": "Full agreement — formal & professional"
+  },
+  {
+    "nl": "Mee eens",
+    "en": "Agreed",
+    "category": "Instemmen",
+    "note": "Casual short version — always needs 'mee' (not just 'eens')"
+  },
+  {
+    "nl": "Helemaal mee eens",
+    "en": "Totally agree",
+    "category": "Instemmen",
+    "note": "Emphatic — always with 'mee'"
+  },
+  {
+    "nl": "Ja, je hebt gelijk",
+    "en": "You're right",
+    "category": "Instemmen",
+    "note": "Acknowledging someone is right (opinion or fact)"
+  },
+  {
+    "nl": "Daar zit wat in",
+    "en": "You've got a point",
+    "category": "Instemmen",
+    "note": "Partial — 'fair point' without fully committing"
+  },
+  {
+    "nl": "Afgesproken",
+    "en": "Deal / Done",
+    "category": "Instemmen",
+    "note": "Locking in a plan — like 'done' or 'deal'"
+  },
+  {
+    "nl": "Precies",
+    "en": "Exactly",
+    "category": "Instemmen",
+    "note": "Quick agreement — very common"
+  },
+  {
+    "nl": "Inderdaad",
+    "en": "Indeed",
+    "category": "Instemmen",
+    "note": "Less formal than it sounds in English — use it loads"
+  },
+  {
+    "nl": "Zeker",
+    "en": "For sure / Definitely",
+    "category": "Instemmen",
+    "note": "'Zeker weten' is the emphatic version"
+  },
+  {
+    "nl": "Tuurlijk",
+    "en": "Of course / Sure",
+    "category": "Instemmen",
+    "note": "Casual 'of course' — agreeing, permission, or 'well duh'. Drawn out = sarcastic."
+  },
+  {
+    "nl": "Ja, klopt",
+    "en": "Yep",
+    "category": "Instemmen",
+    "note": "Quick casual confirmation"
+  },
+  {
+    "nl": "Dat klopt, maar...",
+    "en": "That's right, but...",
+    "category": "Instemmen",
+    "note": "Standard 'yes, but'"
+  },
+  {
+    "nl": "Dat klopt, alleen...",
+    "en": "That's right, however...",
+    "category": "Instemmen",
+    "note": "Softer 'but' — very common in Dutch"
+  },
+  {
+    "nl": "Dat snap ik, maar...",
+    "en": "I get that, but...",
+    "category": "Instemmen",
+    "note": "Understanding without agreeing"
+  },
+  {
+    "nl": "Ja, maar toch...",
+    "en": "Yes, but still...",
+    "category": "Instemmen",
+    "note": "Acknowledging with reservation"
+  },
+  {
+    "nl": "Super, dank je",
+    "en": "Great, thanks",
+    "category": "Reageren",
+    "note": "Warm and appreciative — best when receiving something (coffee, food, a favour)"
+  },
+  {
+    "nl": "Fijn, dank je",
+    "en": "Nice, thanks",
+    "category": "Reageren",
+    "note": "Softer and warm — works everywhere, in person and emails"
+  },
+  {
+    "nl": "Top",
+    "en": "Great / Awesome",
+    "category": "Reageren",
+    "note": "Casual and upbeat — very common. 'Top, dank je!'"
+  },
+  {
+    "nl": "Prima",
+    "en": "Sure / Fine",
+    "category": "Reageren",
+    "note": "For acknowledging info/plans — can sound cold/indifferent when receiving something nice"
+  },
+  {
+    "nl": "Mooi",
+    "en": "Nice one / Great",
+    "category": "Reageren",
+    "note": "Satisfied acknowledgment — literally 'beautiful'"
+  },
+  {
+    "nl": "Goed hoor",
+    "en": "All good",
+    "category": "Reageren",
+    "note": "'Hoor' adds a reassuring, easygoing vibe — like 'that's totally fine'"
+  },
+  {
+    "nl": "Lekker",
+    "en": "Nice! / Sweet!",
+    "category": "Reageren",
+    "note": "Not just food — anything going well. 'We zijn op tijd' → 'Lekker!' Very Dutch."
+  },
+  {
+    "nl": "Wat zie je er leuk uit",
+    "en": "You look nice / great",
+    "category": "Complimenten",
+    "note": "Safe everyday go-to for people"
+  },
+  {
+    "nl": "Wat zie je er mooi uit",
+    "en": "You look beautiful",
+    "category": "Complimenten",
+    "note": "More romantic / sincere — good for date night"
+  },
+  {
+    "nl": "Je ziet er goed uit",
+    "en": "You're looking good",
+    "category": "Complimenten",
+    "note": "Casual and versatile"
+  },
+  {
+    "nl": "Dat ziet er echt leuk uit",
+    "en": "That looks really nice",
+    "category": "Complimenten",
+    "note": "For things/outfits — use 'dat ziet er ___ uit' (not 'wat ziet dat er...')"
+  },
+  {
+    "nl": "Dat ziet er mooi uit",
+    "en": "That looks beautiful",
+    "category": "Complimenten",
+    "note": "Nicely presented food, a view, art"
+  },
+  {
+    "nl": "Dat ziet er lekker uit",
+    "en": "That looks delicious",
+    "category": "Complimenten",
+    "note": "The standard one when food arrives"
+  },
+  {
+    "nl": "Wat gaaf",
+    "en": "How cool!",
+    "category": "Complimenten",
+    "note": "Something impressive — a view, someone's work, a new car"
+  },
+  {
+    "nl": "Prachtig",
+    "en": "Gorgeous / Stunning",
+    "category": "Complimenten",
+    "note": "Views, food, art, outfits — strong but natural in Dutch"
+  },
+  {
+    "nl": "Ik heb er zin in",
+    "en": "I'm excited for it",
+    "category": "Enthousiasme",
+    "note": "THE one — Dutch for 'I'm excited'. Use constantly."
+  },
+  {
+    "nl": "Ik heb er echt veel zin in",
+    "en": "I'm so excited for it",
+    "category": "Enthousiasme",
+    "note": "Emphatic — use 'echt' instead of 'zo' to intensify (sounds more natural)"
+  },
+  {
+    "nl": "Ik kijk ernaar uit",
+    "en": "I'm looking forward to it",
+    "category": "Enthousiasme",
+    "note": "More polished / formal — good for work or emails"
+  },
+  {
+    "nl": "Ik kan niet wachten",
+    "en": "I can't wait",
+    "category": "Enthousiasme",
+    "note": "Direct translation — works perfectly in Dutch too"
+  },
+  {
+    "nl": "Heb je er zin in?",
+    "en": "Are you excited?",
+    "category": "Enthousiasme",
+    "note": "Casual everyday way to ask"
+  },
+  {
+    "nl": "Kijk je ernaar uit?",
+    "en": "Are you looking forward to it?",
+    "category": "Enthousiasme",
+    "note": "Slightly more formal version"
+  },
+  {
+    "nl": "Het was echt leuk",
+    "en": "It was really fun",
+    "category": "Plezier",
+    "note": "The most natural way to say you had a good time"
+  },
+  {
+    "nl": "Het was zo leuk",
+    "en": "It was so fun",
+    "category": "Plezier",
+    "note": "'Echt' and 'zo' are both fine here"
+  },
+  {
+    "nl": "Het was geweldig",
+    "en": "It was amazing",
+    "category": "Plezier",
+    "note": "A step up in enthusiasm"
+  },
+  {
+    "nl": "Was het leuk?",
+    "en": "Was it fun?",
+    "category": "Plezier",
+    "note": "The simplest and most natural way to ask"
+  },
+  {
+    "nl": "Heb je er een beetje van genoten?",
+    "en": "Did you enjoy it?",
+    "category": "Plezier",
+    "note": "More reflective — always said with 'een beetje' in Dutch"
+  },
+  {
+    "nl": "Veel plezier!",
+    "en": "Have fun! / Enjoy!",
+    "category": "Genieten",
+    "note": "The natural 'enjoy!' — someone going out, on holiday, to a party"
+  },
+  {
+    "nl": "Geniet van je vakantie",
+    "en": "Enjoy your holiday",
+    "category": "Genieten",
+    "note": "Works with vakantie and weekend"
+  },
+  {
+    "nl": "Fijne dag nog",
+    "en": "Have a nice day",
+    "category": "Genieten",
+    "note": "Use 'fijne' — not 'geniet van je dag' (sounds odd)"
+  },
+  {
+    "nl": "Fijne avond nog",
+    "en": "Have a nice evening",
+    "category": "Genieten",
+    "note": "Same pattern as 'fijne dag nog'"
+  },
+  {
+    "nl": "Ik ben echt aan het genieten",
+    "en": "I'm really enjoying this",
+    "category": "Genieten",
+    "note": "Terrace in the sun, a great view, a quiet moment — savouring it"
+  },
+  {
+    "nl": "Geen probleem",
+    "en": "No problem",
+    "category": "Geruststellen",
+    "note": "Casual, all-purpose — works for apologies, favours, or small requests"
+  },
+  {
+    "nl": "Maakt niet uit",
+    "en": "It doesn't matter",
+    "category": "Geruststellen",
+    "note": "Reassures someone after a small mistake or mix-up"
+  },
+  {
+    "nl": "Geeft niet",
+    "en": "It's nothing / don't worry about it",
+    "category": "Geruststellen",
+    "note": "Warm, everyday reply when someone says sorry"
+  },
+  {
+    "nl": "Geen zorgen",
+    "en": "No worries",
+    "category": "Geruststellen",
+    "note": "Comforting — tells someone not to stress about it"
+  },
+  {
+    "nl": "Maak je geen zorgen",
+    "en": "Don't worry about it",
+    "category": "Geruststellen",
+    "note": "Fuller version of 'geen zorgen', a bit more reassuring"
+  },
+  {
+    "nl": "Graag gedaan",
+    "en": "My pleasure / you're welcome",
+    "category": "Geruststellen",
+    "note": "The standard reply to 'dank je wel'"
+  },
+  {
+    "nl": "Geen dank",
+    "en": "Don't mention it",
+    "category": "Geruststellen",
+    "note": "A bit more modest — 'it really wasn't a big deal'"
+  },
+  {
+    "nl": "Sorry dat ik je even onderbreek, maar ...",
+    "en": "Sorry for interrupting, but ...",
+    "category": "Discussie",
+    "note": "Polite interruption. maar ... lets you add your point without shutting the other person down."
+  },
+  {
+    "nl": "Mag ik je even onderbreken?",
+    "en": "May I interrupt you for a moment?",
+    "category": "Discussie",
+    "note": "Direct but polite. even softens the request and makes the interruption feel smaller."
+  },
+  {
+    "nl": "Sorry, wil je me laten uitpraten alsjeblieft?",
+    "en": "Will you please let me finish?",
+    "category": "Discussie",
+    "note": "Reclaiming your turn. uitpraten = to finish speaking. laten uitpraten = to let someone finish."
+  },
+  {
+    "nl": "Mag ik mijn verhaal even afmaken?",
+    "en": "Can I finish what I was saying?",
+    "category": "Discussie",
+    "note": "Softer version of asking to finish. Verhaal here = 'what I was saying', not literally a story."
+  },
+  {
+    "nl": "Je zei daarnet dat ..., maar ...",
+    "en": "You just said that ..., but ...",
+    "category": "Discussie",
+    "note": "Pointing out a contradiction. daarnet = just now / a moment ago."
+  },
+  {
+    "nl": "Maar vind je niet dat ...?",
+    "en": "But don't you think that ...?",
+    "category": "Discussie",
+    "note": "Gentle challenge — invites the other person to reconsider without saying they are wrong."
+  },
+  {
+    "nl": "Weet je dat zeker?",
+    "en": "Are you sure about that?",
+    "category": "Discussie",
+    "note": "Short, direct challenge. Works in both casual conversation and formal debate."
+  },
+  {
+    "nl": "Kun je dat met argumenten onderbouwen?",
+    "en": "Can you back that up with arguments?",
+    "category": "Discussie",
+    "note": "onderbouwen = to support / substantiate. Used when you want someone to justify a claim."
+  },
+  {
+    "nl": "Wat bedoel je precies?",
+    "en": "What exactly do you mean?",
+    "category": "Discussie",
+    "note": "Asking for clarification. precies = exactly / precisely. Non-confrontational."
+  }
 ]

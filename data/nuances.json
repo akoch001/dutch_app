@@ -4,11 +4,31 @@
     "topic": "laten zien vs tonen",
     "rule": "laten zien = normal spoken 'show'; tonen = formal, display, or demonstrate.",
     "examples": [
-      { "nl": "Kun je me dat laten zien?", "en": "Can you show me that?", "note": "Normal spoken Dutch." },
-      { "nl": "Ik laat je mijn kamer zien.", "en": "I will show you my room.", "note": "Everyday physical showing." },
-      { "nl": "De grafiek toont een stijging.", "en": "The graph shows an increase.", "note": "Formal / objective display." },
-      { "nl": "Het scherm toont een foutmelding.", "en": "The screen shows an error message.", "note": "Technical / display use." },
-      { "nl": "Hij toonde weinig emotie.", "en": "He showed little emotion.", "note": "Abstract / formal use." }
+      {
+        "nl": "Kun je me dat laten zien?",
+        "en": "Can you show me that?",
+        "note": "Normal spoken Dutch."
+      },
+      {
+        "nl": "Ik laat je mijn kamer zien.",
+        "en": "I will show you my room.",
+        "note": "Everyday physical showing."
+      },
+      {
+        "nl": "De grafiek toont een stijging.",
+        "en": "The graph shows an increase.",
+        "note": "Formal / objective display."
+      },
+      {
+        "nl": "Het scherm toont een foutmelding.",
+        "en": "The screen shows an error message.",
+        "note": "Technical / display use."
+      },
+      {
+        "nl": "Hij toonde weinig emotie.",
+        "en": "He showed little emotion.",
+        "note": "Abstract / formal use."
+      }
     ],
     "tips": [
       "laten zien literally means 'let see' — safest in all normal conversation.",
@@ -23,11 +43,31 @@
     "topic": "wakker worden & opstaan",
     "rule": "wakker zijn = be awake; wakker worden = wake up; wakker maken = wake someone else; opstaan = get out of bed.",
     "examples": [
-      { "nl": "Ik ben wakker.", "en": "I am awake.", "note": "State: awake." },
-      { "nl": "Ik word om zeven uur wakker.", "en": "I wake up at seven.", "note": "Change: sleeping → awake." },
-      { "nl": "Maak me om acht uur wakker.", "en": "Wake me up at eight.", "note": "Cause someone else to wake." },
-      { "nl": "Ik sta om half acht op.", "en": "I get up at half past seven.", "note": "Leave the bed / start the day." },
-      { "nl": "Ik word om zeven uur wakker, maar ik sta pas om acht uur op.", "en": "I wake up at seven, but I only get up at eight.", "note": "Awake and out of bed are different." }
+      {
+        "nl": "Ik ben wakker.",
+        "en": "I am awake.",
+        "note": "State: awake."
+      },
+      {
+        "nl": "Ik word om zeven uur wakker.",
+        "en": "I wake up at seven.",
+        "note": "Change: sleeping → awake."
+      },
+      {
+        "nl": "Maak me om acht uur wakker.",
+        "en": "Wake me up at eight.",
+        "note": "Cause someone else to wake."
+      },
+      {
+        "nl": "Ik sta om half acht op.",
+        "en": "I get up at half past seven.",
+        "note": "Leave the bed / start the day."
+      },
+      {
+        "nl": "Ik word om zeven uur wakker, maar ik sta pas om acht uur op.",
+        "en": "I wake up at seven, but I only get up at eight.",
+        "note": "Awake and out of bed are different."
+      }
     ],
     "tips": [
       "wakker zijn = to be awake (state).",
@@ -42,10 +82,26 @@
     "topic": "Moe wakker worden",
     "rule": "Ik werd moe wakker = clean simple past. Ik ben moe wakker geworden = result still relevant now.",
     "examples": [
-      { "nl": "Vanochtend werd ik moe wakker.", "en": "This morning I woke up tired.", "note": "Natural past narrative." },
-      { "nl": "Ik werd wakker met hoofdpijn.", "en": "I woke up with a headache.", "note": "Common pattern." },
-      { "nl": "Ik ben vandaag moe wakker geworden.", "en": "I woke up tired today.", "note": "Result is relevant now." },
-      { "nl": "Ik was moe toen ik wakker werd.", "en": "I was tired when I woke up.", "note": "Very safe learner sentence." }
+      {
+        "nl": "Vanochtend werd ik moe wakker.",
+        "en": "This morning I woke up tired.",
+        "note": "Natural past narrative."
+      },
+      {
+        "nl": "Ik werd wakker met hoofdpijn.",
+        "en": "I woke up with a headache.",
+        "note": "Common pattern."
+      },
+      {
+        "nl": "Ik ben vandaag moe wakker geworden.",
+        "en": "I woke up tired today.",
+        "note": "Result is relevant now."
+      },
+      {
+        "nl": "Ik was moe toen ik wakker werd.",
+        "en": "I was tired when I woke up.",
+        "note": "Very safe learner sentence."
+      }
     ],
     "tips": [
       "Ik werd moe wakker is very natural when telling a past event.",
@@ -58,11 +114,31 @@
     "topic": "brein, hersenen, hersens",
     "rule": "hersenen = biological brain; brein = brain / mind / mastermind; hersens = informal brains.",
     "examples": [
-      { "nl": "De hersenen verwerken informatie.", "en": "The brain processes information.", "note": "Biological / scientific." },
-      { "nl": "Het menselijk brein is complex.", "en": "The human brain is complex.", "note": "Abstract / popular science." },
-      { "nl": "Zij is het brein achter het plan.", "en": "She is the mastermind behind the plan.", "note": "Figurative use." },
-      { "nl": "Gebruik je hersens!", "en": "Use your brain!", "note": "Informal / colloquial." },
-      { "nl": "Hij heeft goede hersens.", "en": "He has good brains.", "note": "Informal intelligence." }
+      {
+        "nl": "De hersenen verwerken informatie.",
+        "en": "The brain processes information.",
+        "note": "Biological / scientific."
+      },
+      {
+        "nl": "Het menselijk brein is complex.",
+        "en": "The human brain is complex.",
+        "note": "Abstract / popular science."
+      },
+      {
+        "nl": "Zij is het brein achter het plan.",
+        "en": "She is the mastermind behind the plan.",
+        "note": "Figurative use."
+      },
+      {
+        "nl": "Gebruik je hersens!",
+        "en": "Use your brain!",
+        "note": "Informal / colloquial."
+      },
+      {
+        "nl": "Hij heeft goede hersens.",
+        "en": "He has good brains.",
+        "note": "Informal intelligence."
+      }
     ],
     "tips": [
       "de hersenen is grammatically plural in Dutch when referring to the organ.",
@@ -76,12 +152,36 @@
     "topic": "vroeg, eerder, vroeger",
     "rule": "vroeg = early; eerder = earlier / sooner / previously; vroeger = formerly / in the past.",
     "examples": [
-      { "nl": "Ik sta vroeg op.", "en": "I get up early.", "note": "vroeg = early." },
-      { "nl": "Je bent te vroeg.", "en": "You are too early.", "note": "Before the expected time." },
-      { "nl": "Kun je iets eerder komen?", "en": "Can you come a bit earlier?", "note": "Earlier than planned." },
-      { "nl": "Eerder vandaag heb ik hem gezien.", "en": "Earlier today I saw him.", "note": "Previously today." },
-      { "nl": "Vroeger woonde ik in Engeland.", "en": "I used to live in England.", "note": "Formerly / in the past." },
-      { "nl": "Morgen moet ik vroeger opstaan.", "en": "Tomorrow I have to get up earlier.", "note": "Earlier on the clock." }
+      {
+        "nl": "Ik sta vroeg op.",
+        "en": "I get up early.",
+        "note": "vroeg = early."
+      },
+      {
+        "nl": "Je bent te vroeg.",
+        "en": "You are too early.",
+        "note": "Before the expected time."
+      },
+      {
+        "nl": "Kun je iets eerder komen?",
+        "en": "Can you come a bit earlier?",
+        "note": "Earlier than planned."
+      },
+      {
+        "nl": "Eerder vandaag heb ik hem gezien.",
+        "en": "Earlier today I saw him.",
+        "note": "Previously today."
+      },
+      {
+        "nl": "Vroeger woonde ik in Engeland.",
+        "en": "I used to live in England.",
+        "note": "Formerly / in the past."
+      },
+      {
+        "nl": "Morgen moet ik vroeger opstaan.",
+        "en": "Tomorrow I have to get up earlier.",
+        "note": "Earlier on the clock."
+      }
     ],
     "tips": [
       "Do not translate every English 'earlier' as vroeger.",
@@ -95,12 +195,36 @@
     "topic": "eerder vs vroeger",
     "rule": "eerder compares moments in sequence; vroeger points to the past as a period or to an earlier clock time.",
     "examples": [
-      { "nl": "Eerder vandaag was ik moe.", "en": "Earlier today I was tired.", "note": "Before now, same day." },
-      { "nl": "Vroeger was ik vaak moe.", "en": "In the past, I was often tired.", "note": "Past period / habit." },
-      { "nl": "Hij kwam eerder dan verwacht.", "en": "He came earlier than expected.", "note": "Comparison with expectation." },
-      { "nl": "Hoe eerder, hoe beter.", "en": "The sooner, the better.", "note": "Sooner = eerder." },
-      { "nl": "Mijn vroegere leraar.", "en": "My former teacher.", "note": "From the past." },
-      { "nl": "Een eerdere versie.", "en": "An earlier / previous version.", "note": "Before this version." }
+      {
+        "nl": "Eerder vandaag was ik moe.",
+        "en": "Earlier today I was tired.",
+        "note": "Before now, same day."
+      },
+      {
+        "nl": "Vroeger was ik vaak moe.",
+        "en": "In the past, I was often tired.",
+        "note": "Past period / habit."
+      },
+      {
+        "nl": "Hij kwam eerder dan verwacht.",
+        "en": "He came earlier than expected.",
+        "note": "Comparison with expectation."
+      },
+      {
+        "nl": "Hoe eerder, hoe beter.",
+        "en": "The sooner, the better.",
+        "note": "Sooner = eerder."
+      },
+      {
+        "nl": "Mijn vroegere leraar.",
+        "en": "My former teacher.",
+        "note": "From the past."
+      },
+      {
+        "nl": "Een eerdere versie.",
+        "en": "An earlier / previous version.",
+        "note": "Before this version."
+      }
     ],
     "tips": [
       "eerder vandaag is normal; vroeger vandaag is usually unnatural.",
@@ -114,12 +238,36 @@
     "topic": "blijf vs bleef",
     "rule": "blijf (present) has a moving ij/ei diphthong; bleef (past) has a longer, steadier ee vowel.",
     "examples": [
-      { "nl": "Ik blijf hier.", "en": "I am staying here.", "note": "Present tense — ij/ei sound." },
-      { "nl": "Ik bleef hier.", "en": "I stayed here.", "note": "Past tense — ee sound." },
-      { "nl": "Blijf je thuis?", "en": "Are you staying home?", "note": "ij/ei sound." },
-      { "nl": "Bleef je thuis?", "en": "Did you stay home?", "note": "ee sound." },
-      { "nl": "vijf – lijf – blijf", "en": "five – body – stay", "note": "Same ij sound." },
-      { "nl": "geef – leef – bleef", "en": "give – live – stayed", "note": "Same ee sound." }
+      {
+        "nl": "Ik blijf hier.",
+        "en": "I am staying here.",
+        "note": "Present tense — ij/ei sound."
+      },
+      {
+        "nl": "Ik bleef hier.",
+        "en": "I stayed here.",
+        "note": "Past tense — ee sound."
+      },
+      {
+        "nl": "Blijf je thuis?",
+        "en": "Are you staying home?",
+        "note": "ij/ei sound."
+      },
+      {
+        "nl": "Bleef je thuis?",
+        "en": "Did you stay home?",
+        "note": "ee sound."
+      },
+      {
+        "nl": "vijf – lijf – blijf",
+        "en": "five – body – stay",
+        "note": "Same ij sound."
+      },
+      {
+        "nl": "geef – leef – bleef",
+        "en": "give – live – stayed",
+        "note": "Same ee sound."
+      }
     ],
     "tips": [
       "Practice in pairs: blijf/bleef, schrijf/schreef, rij/reed.",
@@ -133,15 +281,51 @@
     "topic": "verlaten vs kwijtraken vs kwijt zijn",
     "rule": "verlaten = leave / abandon deliberately; kwijtraken = lose accidentally; kwijt zijn = be unable to find something right now.",
     "examples": [
-      { "nl": "Ik verlaat het gebouw.", "en": "I leave the building.", "note": "Grammatically correct but sounds formal. More natural in speech: Ik ga het gebouw uit / Ik ga weg uit het gebouw." },
-      { "nl": "Ik ga het gebouw uit.", "en": "I am leaving the building.", "note": "Natural, everyday Dutch." },
-      { "nl": "Hij heeft haar verlaten.", "en": "He left / abandoned her.", "note": "Sounds like abandonment — heavy. For ending a relationship, hij heeft het uitgemaakt is more natural." },
-      { "nl": "Hij heeft het uitgemaakt.", "en": "He ended the relationship. / He broke it off.", "note": "Natural way to say someone ended a relationship." },
-      { "nl": "Ik raak altijd mijn sleutels kwijt.", "en": "I always lose my keys.", "note": "Losing event / habit." },
-      { "nl": "Ik ben mijn telefoon kwijtgeraakt.", "en": "I lost my phone.", "note": "Completed losing event." },
-      { "nl": "Ik ben mijn sleutels kwijt.", "en": "I cannot find my keys.", "note": "Current state." },
-      { "nl": "Ik heb mijn tas thuis laten liggen.", "en": "I left my bag at home.", "note": "Not verlaten — you left it behind. laten liggen = left it lying there." },
-      { "nl": "Waar heb ik mijn sleutels gelaten?", "en": "Where did I leave my keys?", "note": "laten works naturally for misplaced objects: keys, phone, book, etc." }
+      {
+        "nl": "Ik verlaat het gebouw.",
+        "en": "I leave the building.",
+        "note": "Grammatically correct but sounds formal. More natural in speech: Ik ga het gebouw uit / Ik ga weg uit het gebouw."
+      },
+      {
+        "nl": "Ik ga het gebouw uit.",
+        "en": "I am leaving the building.",
+        "note": "Natural, everyday Dutch."
+      },
+      {
+        "nl": "Hij heeft haar verlaten.",
+        "en": "He left / abandoned her.",
+        "note": "Sounds like abandonment — heavy. For ending a relationship, hij heeft het uitgemaakt is more natural."
+      },
+      {
+        "nl": "Hij heeft het uitgemaakt.",
+        "en": "He ended the relationship. / He broke it off.",
+        "note": "Natural way to say someone ended a relationship."
+      },
+      {
+        "nl": "Ik raak altijd mijn sleutels kwijt.",
+        "en": "I always lose my keys.",
+        "note": "Losing event / habit."
+      },
+      {
+        "nl": "Ik ben mijn telefoon kwijtgeraakt.",
+        "en": "I lost my phone.",
+        "note": "Completed losing event."
+      },
+      {
+        "nl": "Ik ben mijn sleutels kwijt.",
+        "en": "I cannot find my keys.",
+        "note": "Current state."
+      },
+      {
+        "nl": "Ik heb mijn tas thuis laten liggen.",
+        "en": "I left my bag at home.",
+        "note": "Not verlaten — you left it behind. laten liggen = left it lying there."
+      },
+      {
+        "nl": "Waar heb ik mijn sleutels gelaten?",
+        "en": "Where did I leave my keys?",
+        "note": "laten works naturally for misplaced objects: keys, phone, book, etc."
+      }
     ],
     "tips": [
       "verlaten sounds formal for leaving a building — prefer Ik ga het gebouw uit in everyday speech.",
@@ -159,13 +343,41 @@
     "topic": "lenen: borrow & lend",
     "rule": "lenen van = borrow from someone; uitlenen aan = lend to someone.",
     "examples": [
-      { "nl": "Mag ik je pen lenen?", "en": "Can I borrow your pen?", "note": "Subject wants to borrow." },
-      { "nl": "Mag ik een pen van je lenen?", "en": "Can I borrow a pen from you?", "note": "van makes the direction clear." },
-      { "nl": "Ik leen een boek van Sam.", "en": "I borrow a book from Sam.", "note": "Borrow from = lenen van." },
-      { "nl": "Ik leen jou mijn pen.", "en": "I lend you my pen.", "note": "Owner gives temporarily — fine without uit for small everyday items." },
-      { "nl": "Ik leen mijn fiets aan Lisa uit.", "en": "I lend my bike to Lisa.", "note": "uitlenen fits larger or special objects well." },
-      { "nl": "Ik leen Lisa mijn fiets.", "en": "I lend my bike to Lisa.", "note": "Also natural — without aan or uit." },
-      { "nl": "Ik heb geld van mijn broer geleend.", "en": "I borrowed money from my brother.", "note": "Perfect tense." }
+      {
+        "nl": "Mag ik je pen lenen?",
+        "en": "Can I borrow your pen?",
+        "note": "Subject wants to borrow."
+      },
+      {
+        "nl": "Mag ik een pen van je lenen?",
+        "en": "Can I borrow a pen from you?",
+        "note": "van makes the direction clear."
+      },
+      {
+        "nl": "Ik leen een boek van Sam.",
+        "en": "I borrow a book from Sam.",
+        "note": "Borrow from = lenen van."
+      },
+      {
+        "nl": "Ik leen jou mijn pen.",
+        "en": "I lend you my pen.",
+        "note": "Owner gives temporarily — fine without uit for small everyday items."
+      },
+      {
+        "nl": "Ik leen mijn fiets aan Lisa uit.",
+        "en": "I lend my bike to Lisa.",
+        "note": "uitlenen fits larger or special objects well."
+      },
+      {
+        "nl": "Ik leen Lisa mijn fiets.",
+        "en": "I lend my bike to Lisa.",
+        "note": "Also natural — without aan or uit."
+      },
+      {
+        "nl": "Ik heb geld van mijn broer geleend.",
+        "en": "I borrowed money from my brother.",
+        "note": "Perfect tense."
+      }
     ],
     "tips": [
       "When you are the borrower, say lenen van.",
@@ -181,12 +393,36 @@
     "topic": "Toestemming vragen",
     "rule": "Mag ik...? = normal and direct; Zou ik mogen...? = leaves more room for the other person to say no (not necessarily more formal — also used with friends); Is het goed als...? = asks if the situation is acceptable.",
     "examples": [
-      { "nl": "Mag ik hier zitten?", "en": "May I sit here?", "note": "Normal and direct." },
-      { "nl": "Mag ik naar de wc?", "en": "May I go to the toilet?", "note": "Normal classroom question." },
-      { "nl": "Zou ik hier mogen zitten?", "en": "Would it be OK if I sat here?", "note": "Leaves space for the other person to say no — also natural with friends, not only in formal situations." },
-      { "nl": "Zou ik vandaag iets eerder weg mogen?", "en": "Could I leave a bit earlier today?", "note": "Good for bigger requests." },
-      { "nl": "Is het goed als ik morgen later kom?", "en": "Is it okay if I come later tomorrow?", "note": "Checks if the situation is acceptable." },
-      { "nl": "Is het goed als ik dit thuis afmaak?", "en": "Is it okay if I finish this at home?", "note": "als sends the verb to the end." }
+      {
+        "nl": "Mag ik hier zitten?",
+        "en": "May I sit here?",
+        "note": "Normal and direct."
+      },
+      {
+        "nl": "Mag ik naar de wc?",
+        "en": "May I go to the toilet?",
+        "note": "Normal classroom question."
+      },
+      {
+        "nl": "Zou ik hier mogen zitten?",
+        "en": "Would it be OK if I sat here?",
+        "note": "Leaves space for the other person to say no — also natural with friends, not only in formal situations."
+      },
+      {
+        "nl": "Zou ik vandaag iets eerder weg mogen?",
+        "en": "Could I leave a bit earlier today?",
+        "note": "Good for bigger requests."
+      },
+      {
+        "nl": "Is het goed als ik morgen later kom?",
+        "en": "Is it okay if I come later tomorrow?",
+        "note": "Checks if the situation is acceptable."
+      },
+      {
+        "nl": "Is het goed als ik dit thuis afmaak?",
+        "en": "Is it okay if I finish this at home?",
+        "note": "als sends the verb to the end."
+      }
     ],
     "tips": [
       "Mag ik...? is not rude — it is normal.",
@@ -200,12 +436,36 @@
     "topic": "even",
     "rule": "even often means 'just', 'briefly', or 'for a moment'. It softens requests and makes actions sound smaller.",
     "examples": [
-      { "nl": "Mag ik even je pen lenen?", "en": "Can I just borrow your pen for a moment?", "note": "Small temporary request." },
-      { "nl": "Wacht even.", "en": "Wait a second.", "note": "Brief time." },
-      { "nl": "Ik kijk even.", "en": "I will just have a quick look.", "note": "Quick action." },
-      { "nl": "Kun je me even helpen?", "en": "Can you help me for a moment?", "note": "Softened request." },
-      { "nl": "Ik bel je even.", "en": "I will give you a quick call.", "note": "Short / simple action." },
-      { "nl": "Kom even hier.", "en": "Come here for a moment.", "note": "Friendly or direct, depending on tone." }
+      {
+        "nl": "Mag ik even je pen lenen?",
+        "en": "Can I just borrow your pen for a moment?",
+        "note": "Small temporary request."
+      },
+      {
+        "nl": "Wacht even.",
+        "en": "Wait a second.",
+        "note": "Brief time."
+      },
+      {
+        "nl": "Ik kijk even.",
+        "en": "I will just have a quick look.",
+        "note": "Quick action."
+      },
+      {
+        "nl": "Kun je me even helpen?",
+        "en": "Can you help me for a moment?",
+        "note": "Softened request."
+      },
+      {
+        "nl": "Ik bel je even.",
+        "en": "I will give you a quick call.",
+        "note": "Short / simple action."
+      },
+      {
+        "nl": "Kom even hier.",
+        "en": "Come here for a moment.",
+        "note": "Friendly or direct, depending on tone."
+      }
     ],
     "tips": [
       "even can make a request sound smaller and easier to grant.",
@@ -219,15 +479,51 @@
     "topic": "Herinneren: nog weten, herinneren, onthouden",
     "rule": "nog weten = still know a fact; herinneren = recall an event or experience; onthouden = store something in memory for later.",
     "examples": [
-      { "nl": "Weet je dat nog?", "en": "Do you remember that?", "note": "Literally: do you still know that?" },
-      { "nl": "Ik weet zijn naam nog.", "en": "I still remember his name.", "note": "Fact / information." },
-      { "nl": "Ik herinner me die dag nog goed.", "en": "I still remember that day well.", "note": "Recall an event / experience." },
-      { "nl": "Ik kan me zijn naam niet herinneren.", "en": "I cannot remember his name.", "note": "Trying to recall right now." },
-      { "nl": "Ik moet dit wachtwoord onthouden.", "en": "I have to remember this password.", "note": "Keep in memory for later." },
-      { "nl": "Ik kan namen niet goed onthouden.", "en": "I am not good at remembering names.", "note": "Names do not stay in memory." },
-      { "nl": "Dat weet ik nog.", "en": "I still remember that.", "note": "Often more natural in everyday Dutch than Dat herinner ik me nog." },
-      { "nl": "Dat herinner ik me nog.", "en": "I still remember that.", "note": "Correct, but nog weten is usually the more natural spoken choice." },
-      { "nl": "Denk eraan om melk te kopen.", "en": "Remember to buy milk.", "note": "Remember to do = think of it / do not forget." }
+      {
+        "nl": "Weet je dat nog?",
+        "en": "Do you remember that?",
+        "note": "Literally: do you still know that?"
+      },
+      {
+        "nl": "Ik weet zijn naam nog.",
+        "en": "I still remember his name.",
+        "note": "Fact / information."
+      },
+      {
+        "nl": "Ik herinner me die dag nog goed.",
+        "en": "I still remember that day well.",
+        "note": "Recall an event / experience."
+      },
+      {
+        "nl": "Ik kan me zijn naam niet herinneren.",
+        "en": "I cannot remember his name.",
+        "note": "Trying to recall right now."
+      },
+      {
+        "nl": "Ik moet dit wachtwoord onthouden.",
+        "en": "I have to remember this password.",
+        "note": "Keep in memory for later."
+      },
+      {
+        "nl": "Ik kan namen niet goed onthouden.",
+        "en": "I am not good at remembering names.",
+        "note": "Names do not stay in memory."
+      },
+      {
+        "nl": "Dat weet ik nog.",
+        "en": "I still remember that.",
+        "note": "Often more natural in everyday Dutch than Dat herinner ik me nog."
+      },
+      {
+        "nl": "Dat herinner ik me nog.",
+        "en": "I still remember that.",
+        "note": "Correct, but nog weten is usually the more natural spoken choice."
+      },
+      {
+        "nl": "Denk eraan om melk te kopen.",
+        "en": "Remember to buy milk.",
+        "note": "Remember to do = think of it / do not forget."
+      }
     ],
     "tips": [
       "nog weten is extremely common in everyday Dutch for facts and information.",
@@ -245,12 +541,36 @@
     "topic": "Vergeten & niet meer weten",
     "rule": "niet meer weten = you no longer remember right now (current state); vergeten = you forgot, or failed to do something.",
     "examples": [
-      { "nl": "Ik weet het niet meer.", "en": "I do not remember anymore.", "note": "Current state." },
-      { "nl": "Ik weet zijn naam niet meer.", "en": "I do not remember his name anymore.", "note": "No longer in memory." },
-      { "nl": "Ik ben zijn naam vergeten.", "en": "I have forgotten his name.", "note": "Very similar meaning to above." },
-      { "nl": "Ik ben vergeten te bellen.", "en": "I forgot to call.", "note": "Failed to do something." },
-      { "nl": "Vergeet niet te betalen.", "en": "Do not forget to pay.", "note": "Negative command." },
-      { "nl": "Het is me ontschoten.", "en": "It slipped my mind.", "note": "Softer, useful phrase." }
+      {
+        "nl": "Ik weet het niet meer.",
+        "en": "I do not remember anymore.",
+        "note": "Current state."
+      },
+      {
+        "nl": "Ik weet zijn naam niet meer.",
+        "en": "I do not remember his name anymore.",
+        "note": "No longer in memory."
+      },
+      {
+        "nl": "Ik ben zijn naam vergeten.",
+        "en": "I have forgotten his name.",
+        "note": "Very similar meaning to above."
+      },
+      {
+        "nl": "Ik ben vergeten te bellen.",
+        "en": "I forgot to call.",
+        "note": "Failed to do something."
+      },
+      {
+        "nl": "Vergeet niet te betalen.",
+        "en": "Do not forget to pay.",
+        "note": "Negative command."
+      },
+      {
+        "nl": "Het is me ontschoten.",
+        "en": "It slipped my mind.",
+        "note": "Softer, useful phrase."
+      }
     ],
     "tips": [
       "Use niet meer weten for 'I do not remember anymore' — a current state.",
@@ -266,12 +586,36 @@
     "topic": "maar: kijk maar, doe maar (modal particle)",
     "rule": "After an imperative, maar is a softening modal particle — roughly 'just' or 'go ahead'. It makes an instruction sound relaxed, reassuring, or permissive, instead of strict.",
     "examples": [
-      { "nl": "Kijk maar.", "en": "Go ahead and look. / See for yourself.", "note": "Reassuring — invites them to look without worry." },
-      { "nl": "Doe maar.", "en": "Go ahead. / Sure, just do it.", "note": "Relaxed permission or encouragement." },
-      { "nl": "Zeg het maar.", "en": "Just tell me. / Go ahead and say it.", "note": "Invites them to speak freely, no pressure." },
-      { "nl": "Ga jij maar eerst.", "en": "You go first.", "note": "Friendly suggestion, not an order." },
-      { "nl": "Laat maar.", "en": "Never mind. / Leave it.", "note": "Gently drops the matter." },
-      { "nl": "Hij kon niet komen, maar dat geeft niet.", "en": "He couldn't come, but that's fine.", "note": "Different maar — here it's the conjunction 'but', not the softening particle." }
+      {
+        "nl": "Kijk maar.",
+        "en": "Go ahead and look. / See for yourself.",
+        "note": "Reassuring — invites them to look without worry."
+      },
+      {
+        "nl": "Doe maar.",
+        "en": "Go ahead. / Sure, just do it.",
+        "note": "Relaxed permission or encouragement."
+      },
+      {
+        "nl": "Zeg het maar.",
+        "en": "Just tell me. / Go ahead and say it.",
+        "note": "Invites them to speak freely, no pressure."
+      },
+      {
+        "nl": "Ga jij maar eerst.",
+        "en": "You go first.",
+        "note": "Friendly suggestion, not an order."
+      },
+      {
+        "nl": "Laat maar.",
+        "en": "Never mind. / Leave it.",
+        "note": "Gently drops the matter."
+      },
+      {
+        "nl": "Hij kon niet komen, maar dat geeft niet.",
+        "en": "He couldn't come, but that's fine.",
+        "note": "Different maar — here it's the conjunction 'but', not the softening particle."
+      }
     ],
     "tips": [
       "Placed right after an imperative, maar turns an instruction into something closer to an invitation.",
@@ -286,13 +630,41 @@
     "topic": "kennen vs weten",
     "rule": "kennen = to know through familiarity or acquaintance (people, places, books, songs, subjects); weten = to know facts, information, or answers.",
     "examples": [
-      { "nl": "Ik ken die man al jaren.", "en": "I've known that man for years.", "note": "Personal acquaintance with a person." },
-      { "nl": "Ken je deze stad goed?", "en": "Do you know this city well?", "note": "Familiarity with a place." },
-      { "nl": "Ik ken dat liedje.", "en": "I know that song.", "note": "Familiar with a thing / work." },
-      { "nl": "Weet je hoe laat het is?", "en": "Do you know what time it is?", "note": "Factual information." },
-      { "nl": "Ik weet niet waar hij woont.", "en": "I don't know where he lives.", "note": "Information — followed by a question word." },
-      { "nl": "Ik weet het antwoord.", "en": "I know the answer.", "note": "A fact you can state directly." },
-      { "nl": "Ik ken haar, maar ik weet niet waar ze woont.", "en": "I know her, but I don't know where she lives.", "note": "Both verbs together — acquaintance vs information." }
+      {
+        "nl": "Ik ken die man al jaren.",
+        "en": "I've known that man for years.",
+        "note": "Personal acquaintance with a person."
+      },
+      {
+        "nl": "Ken je deze stad goed?",
+        "en": "Do you know this city well?",
+        "note": "Familiarity with a place."
+      },
+      {
+        "nl": "Ik ken dat liedje.",
+        "en": "I know that song.",
+        "note": "Familiar with a thing / work."
+      },
+      {
+        "nl": "Weet je hoe laat het is?",
+        "en": "Do you know what time it is?",
+        "note": "Factual information."
+      },
+      {
+        "nl": "Ik weet niet waar hij woont.",
+        "en": "I don't know where he lives.",
+        "note": "Information — followed by a question word."
+      },
+      {
+        "nl": "Ik weet het antwoord.",
+        "en": "I know the answer.",
+        "note": "A fact you can state directly."
+      },
+      {
+        "nl": "Ik ken haar, maar ik weet niet waar ze woont.",
+        "en": "I know her, but I don't know where she lives.",
+        "note": "Both verbs together — acquaintance vs information."
+      }
     ],
     "tips": [
       "kennen takes a direct object — a person, place, or thing you're familiar with.",
@@ -302,28 +674,5 @@
       "Don't say Ik weet hem for a person — say Ik ken hem."
     ],
     "teacherQuestion": "Is there a natural way to use kennen and weten in the same sentence, like 'I know him but I don't know where he lives'?"
-  },
-  {
-    "id": "discussie-frases",
-    "topic": "Een discussie voeren",
-    "rule": "Dutch uses specific phrases to interrupt politely, reclaim your turn, challenge a claim, or ask for clarification — without being rude.",
-    "examples": [
-      { "nl": "Sorry dat ik je even onderbreek, maar ...", "en": "Sorry for interrupting, but ...", "note": "Polite interruption. maar ... lets you add your point without completely shutting the other person down." },
-      { "nl": "Mag ik je even onderbreken?", "en": "May I interrupt you for a moment?", "note": "Direct but polite. even softens it — makes the interruption feel smaller." },
-      { "nl": "Sorry, wil je me laten uitpraten alsjeblieft?", "en": "Will you please let me finish?", "note": "Reclaiming your turn. uitpraten = to finish speaking. laten uitpraten = to let someone finish." },
-      { "nl": "Mag ik mijn verhaal even afmaken?", "en": "Can I finish what I was saying?", "note": "Softer than the above. Verhaal here means 'what I was saying', not literally a story." },
-      { "nl": "Je zei daarnet dat ..., maar ...", "en": "You just said that ..., but ...", "note": "Pointing out a contradiction. daarnet = just now / a moment ago — very useful word." },
-      { "nl": "Maar vind je niet dat ...?", "en": "But don't you think that ...?", "note": "Gentle challenge — invites the other person to reconsider without saying they are wrong." },
-      { "nl": "Weet je dat zeker?", "en": "Are you sure about that?", "note": "Short, direct challenge. Works in both casual conversation and formal debate." },
-      { "nl": "Kun je dat met argumenten onderbouwen?", "en": "Can you back that up with arguments?", "note": "onderbouwen = to support / substantiate with evidence or reasoning." },
-      { "nl": "Wat bedoel je precies?", "en": "What exactly do you mean?", "note": "Asking for clarification. precies = exactly / precisely. Very natural and non-confrontational." }
-    ],
-    "tips": [
-      "uitpraten = to finish speaking. Laat me uitpraten = let me finish. Mag ik uitpraten? = can I finish?",
-      "daarnet = just now / a moment ago — Je zei daarnet dat... is the go-to phrase for 'you just said...'.",
-      "onderbouwen = to support with evidence or arguments — slightly formal, but used in discussion.",
-      "even appears in several phrases (even onderbreken, mijn verhaal even afmaken) — it softens the request and makes the action sound smaller."
-    ],
-    "teacherQuestion": "Which of these would feel too direct or confrontational in a casual conversation with a friend?"
   }
 ]
