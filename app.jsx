@@ -1059,6 +1059,7 @@ function EpisodeBrowse({ episode, onBack }) {
 function App() {
   const [appData, setAppData] = useState(null);
   const [screen, setScreen] = useState("home");
+  const [darkMode, setDarkMode] = useState(() => localStorage.getItem("dutch-dark-mode") === "1");
   const [mode, setMode] = useState("flip");
   const [cards, setCards] = useState([]);
   const [idx, setIdx] = useState(0);
@@ -1078,6 +1079,13 @@ function App() {
   const [practiceTitle, setPracticeTitle] = useState("");
   const [practiceSource, setPracticeSource] = useState("vocabHome");
   const [podcastEpisode, setPodcastEpisode] = useState(null);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.style.filter = darkMode ? "invert(1) hue-rotate(180deg)" : "";
+    root.style.background = darkMode ? "#000" : "";
+    localStorage.setItem("dutch-dark-mode", darkMode ? "1" : "0");
+  }, [darkMode]);
 
   useEffect(() => {
     Promise.all([
@@ -1176,6 +1184,7 @@ function App() {
   return (
     <>
       <style>{`*{box-sizing:border-box;margin:0;padding:0}body{background:#f5f0ea;font-family:system-ui,sans-serif}input::placeholder{color:#a09890}::-webkit-scrollbar{display:none}input{color:#1c1917}`}</style>
+      <button onClick={() => setDarkMode(d => !d)} style={{ position: "fixed", bottom: 20, right: 20, zIndex: 9999, width: 44, height: 44, borderRadius: "50%", border: "1px solid rgba(0,0,0,0.12)", background: "rgba(255,255,255,0.85)", fontSize: 20, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", backdropFilter: "blur(8px)", boxShadow: "0 2px 12px rgba(0,0,0,0.1)" }}>{darkMode ? "☀️" : "🌙"}</button>
       {screen === "home" && <Home allVocab={allVocab} allVerbs={allVerbs} allExpressions={expressions} nuances={nuances} podcastEpisodes={podcastEpisodes} onVocab={() => setScreen("vocabHome")} onVerbs={() => setScreen("verbs")} onExpressions={() => setScreen("expressions")} onNuances={() => setScreen("nuances")} onPodcast={() => setScreen("podcast")} />}
       {screen === "podcast" && <PodcastHome episodes={podcastEpisodes} onBack={() => setScreen("home")} onBrowse={ep => { setPodcastEpisode(ep); setScreen("podcastBrowse"); }} onPractice={ep => { const deck = ep.sections.flatMap(s => s.words); handlePractice(deck, ep.title, "podcast"); }} />}
       {screen === "podcastBrowse" && podcastEpisode && <EpisodeBrowse episode={podcastEpisode} onBack={() => setScreen("podcast")} />}

@@ -477,109 +477,138 @@
   {
     "id": "herinneren-onthouden",
     "topic": "Herinneren: nog weten, herinneren, onthouden",
-    "rule": "nog weten = still know a fact; herinneren = recall an event or experience; onthouden = store something in memory for later.",
+    "rule": "Dutch mostly uses nog weten / niet meer weten instead of herinneren. nog weten = still remember (a fact); herinneren = recall an event or experience; onthouden = store in memory for later.",
     "examples": [
       {
         "nl": "Weet je dat nog?",
         "en": "Do you remember that?",
-        "note": "Literally: do you still know that?"
+        "note": "Most natural everyday form. Literally: do you still know that?"
+      },
+      {
+        "nl": "Weet je nog dat we samen in Parijs waren?",
+        "en": "Do you remember that we were in Paris together?",
+        "note": "Weet je nog dat... = Do you remember that (something happened)?"
+      },
+      {
+        "nl": "Ik weet het nog.",
+        "en": "I still remember it.",
+        "note": "Most natural spoken form for 'I still remember'."
+      },
+      {
+        "nl": "Dat weet ik nog goed.",
+        "en": "I still remember that well.",
+        "note": "Common and very natural."
       },
       {
         "nl": "Ik weet zijn naam nog.",
         "en": "I still remember his name.",
-        "note": "Fact / information."
+        "note": "Fact or piece of information still in memory."
+      },
+      {
+        "nl": "Nu weet ik het weer!",
+        "en": "Now I remember! / I've just remembered!",
+        "note": "Use this when it suddenly comes back to you."
+      },
+      {
+        "nl": "Het schiet me ineens te binnen.",
+        "en": "It suddenly comes to me. / I've just remembered.",
+        "note": "te binnen schieten = to suddenly come to mind."
       },
       {
         "nl": "Ik herinner me die dag nog goed.",
         "en": "I still remember that day well.",
-        "note": "Recall an event / experience."
+        "note": "herinneren is natural for events and experiences — not for simple facts."
       },
       {
         "nl": "Ik kan me zijn naam niet herinneren.",
         "en": "I cannot remember his name.",
-        "note": "Trying to recall right now."
+        "note": "Trying to recall right now — natural with names, events, details."
       },
       {
         "nl": "Ik moet dit wachtwoord onthouden.",
         "en": "I have to remember this password.",
-        "note": "Keep in memory for later."
-      },
-      {
-        "nl": "Ik kan namen niet goed onthouden.",
-        "en": "I am not good at remembering names.",
-        "note": "Names do not stay in memory."
-      },
-      {
-        "nl": "Dat weet ik nog.",
-        "en": "I still remember that.",
-        "note": "Often more natural in everyday Dutch than Dat herinner ik me nog."
-      },
-      {
-        "nl": "Dat herinner ik me nog.",
-        "en": "I still remember that.",
-        "note": "Correct, but nog weten is usually the more natural spoken choice."
+        "note": "onthouden = store in memory for future use."
       },
       {
         "nl": "Denk eraan om melk te kopen.",
         "en": "Remember to buy milk.",
-        "note": "Remember to do = think of it / do not forget."
+        "note": "Remember to do something = Denk eraan... or Vergeet niet..."
       }
     ],
     "tips": [
-      "nog weten is extremely common in everyday Dutch for facts and information.",
-      "Use herinneren for events, experiences, images, feelings — recall from the past.",
-      "Use onthouden for storing something: 'keep this in memory.'",
-      "Do not use onthouden for a whole life event — Ik onthoud mijn eerste schooldag nog sounds unnatural.",
+      "nog weten is the everyday Dutch pattern — use it for almost everything.",
+      "'Do you remember X?' → Weet je X nog? or Weet je nog dat...?",
+      "'I still remember' → Ik weet het nog / Dat weet ik nog.",
+      "'I've just remembered!' → Nu weet ik het weer! or Het schiet me ineens te binnen.",
+      "Use herinneren for events and experiences (not bare facts): Ik herinner me die vakantie nog goed.",
       "Conjugation of herinneren: ik herinner me, jij herinnert je, hij herinnert zich, wij herinneren ons.",
-      "Weet je nog...? is the go-to form for 'Do you remember...?' in conversation.",
-      "Use Denk eraan... or Vergeet niet... for 'remember to do something.'"
+      "Use onthouden for 'store this for later' — not for recalling a past event.",
+      "For 'remember to do something', say Denk eraan om... or Vergeet niet om..."
     ],
-    "teacherQuestion": "For everyday 'Do you remember...?', should I usually say Weet je nog...?"
+    "teacherQuestion": "When it suddenly comes back to you, which sounds more natural — Nu weet ik het weer or Het schiet me te binnen?"
   },
   {
     "id": "vergeten-niet-meer-weten",
     "topic": "Vergeten & niet meer weten",
-    "rule": "niet meer weten = you no longer remember right now (current state); vergeten = you forgot, or failed to do something.",
+    "rule": "niet meer weten = you no longer have it in memory right now (current state); vergeten = you forgot it, or failed to do something. Dutch rarely uses the simple past vergat — use Ik ben vergeten instead.",
     "examples": [
       {
         "nl": "Ik weet het niet meer.",
-        "en": "I do not remember anymore.",
-        "note": "Current state."
+        "en": "I can't remember anymore. / I don't remember.",
+        "note": "Current state — it is no longer in memory."
       },
       {
         "nl": "Ik weet zijn naam niet meer.",
-        "en": "I do not remember his name anymore.",
-        "note": "No longer in memory."
+        "en": "I can't remember his name.",
+        "note": "Natural alternative to 'I have forgotten his name'."
       },
       {
         "nl": "Ik ben zijn naam vergeten.",
         "en": "I have forgotten his name.",
-        "note": "Very similar meaning to above."
+        "note": "Very similar to above — both are natural."
+      },
+      {
+        "nl": "Ik ben het vergeten.",
+        "en": "I forgot it. / I have forgotten it.",
+        "note": "Covers both 'I forgot' and 'I have forgotten' — Dutch uses the same form."
       },
       {
         "nl": "Ik ben vergeten te bellen.",
         "en": "I forgot to call.",
-        "note": "Failed to do something."
+        "note": "Failed to do something — very common pattern."
+      },
+      {
+        "nl": "Ik vergeet het steeds.",
+        "en": "I keep forgetting it. / I still keep forgetting.",
+        "note": "Repeated or ongoing forgetting — steeds = still / keep doing."
+      },
+      {
+        "nl": "Ik was het vergeten.",
+        "en": "I had forgotten it.",
+        "note": "Pluperfect — when you forgot before another past moment."
       },
       {
         "nl": "Vergeet niet te betalen.",
-        "en": "Do not forget to pay.",
+        "en": "Don't forget to pay.",
         "note": "Negative command."
       },
       {
         "nl": "Het is me ontschoten.",
         "en": "It slipped my mind.",
-        "note": "Softer, useful phrase."
+        "note": "Softer way to say you forgot — less your fault."
       }
     ],
     "tips": [
-      "Use niet meer weten for 'I do not remember anymore' — a current state.",
-      "Use vergeten for 'I forgot', especially when you failed to do something.",
-      "You cannot say: Ik weet niet meer hem te bellen. Say: Ik ben vergeten hem te bellen.",
-      "vergat / vergaten (simple past) technically exist but are almost never used in everyday spoken Dutch — do not worry about them.",
-      "Ik ben vergeten is the safest and most natural form — use this."
+      "'I can't remember X' → Ik weet X niet meer (most natural) or Ik kan me X niet herinneren.",
+      "'I forgot' / 'I have forgotten' → Ik ben het vergeten (same Dutch form covers both).",
+      "'I have forgotten to do X' → Ik ben vergeten X te doen.",
+      "'I keep forgetting' / 'I still forget' → Ik vergeet het steeds.",
+      "'I had forgotten' → Ik was het vergeten.",
+      "vergat / vergaten (simple past) technically exist but are almost never used in spoken Dutch — do not use them.",
+      "Ik ben vergeten is the safest, most natural form — use it for both 'I forgot' and 'I have forgotten'.",
+      "You cannot say Ik weet niet meer hem te bellen — say Ik ben vergeten hem te bellen."
     ],
-    "teacherQuestion": "When would you prefer Ik weet het niet meer instead of Ik ben het vergeten?"
+    "teacherQuestion": "When would you prefer Ik weet het niet meer over Ik ben het vergeten — is there a real difference in feeling?"
   },
   {
     "id": "maar-modal-particle",
