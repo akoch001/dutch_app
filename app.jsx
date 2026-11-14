@@ -1,7 +1,45 @@
-const { useState, useEffect, useRef, useCallback } = React;
+const { useState, useEffect, useRef, useCallback, useMemo } = React;
 
 // ── Utilities ─────────────────────────────────────────────────────────────────
 function normalize(str) { return (str || "").toLowerCase().trim().replace(/…/g, "...").replace(/\s*\/\s*/g, "/").replace(/\s+/g, " ").trim(); }
+
+function shuffle(arr) { const a = [...arr]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+// setTimeout that is cancelled if the component goes away first (e.g. you tap
+// "Menu" during the short pause after a correct answer).
+function useLater() { const t = useRef(); useEffect(() => () => clearTimeout(t.current), []); return (fn, ms) => { t.current = setTimeout(fn, ms); }; }
+
+// Once an answer is showing, the text input is gone, so Enter has to be caught
+// on the window. Assign the action to the returned ref. Registered a tick late
+// so the Enter that submitted the answer doesn't also skip the feedback.
+function useEnterToAdvance(active) {
+  const ref = useRef(null);
+  useEffect(() => {
+    if (!active) return;
+    // preventDefault: if a button still has focus, Enter must not also click it.
+    const onKey = e => { if (e.key === "Enter") { e.preventDefault(); ref.current?.(); } };
+    const t = setTimeout(() => window.addEventListener("keydown", onKey), 0);
+    return () => { clearTimeout(t); window.removeEventListener("keydown", onKey); };
+  }, [active]);
+  return ref;
+}
+
+// ── Speech (browser's built-in Dutch voice; absent on some devices) ───────────
+const canSpeak = "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
+function speak(text) {
+  if (!canSpeak) return;
+  const u = new SpeechSynthesisUtterance(text.replace(/[()]/g, "").replace(/\s*\/\s*/g, ", ").replace(/\.{2,}|…/g, " ").trim());
+  u.lang = "nl-NL"; u.rate = 0.9;
+  const voice = speechSynthesis.getVoices().find(v => v.lang.replace("_", "-").toLowerCase().startsWith("nl"));
+  if (voice) u.voice = voice;
+  speechSynthesis.cancel();
+  speechSynthesis.speak(u);
+}
+function SpeakBtn({ text }) {
+  if (!canSpeak) return null;
+  const stop = e => e.stopPropagation();
+  return <button aria-label="Luister" onClick={e => { e.stopPropagation(); speak(text); }} onTouchStart={stop} onTouchEnd={stop} style={{ width: 38, height: 38, borderRadius: "50%", background: "rgba(var(--accent-rgb),0.1)", border: "1px solid rgba(var(--accent-rgb),0.25)", fontSize: 16, cursor: "pointer" }}>🔊</button>;
+}
 
 // ── Item progress stats (per word/sentence, persisted for spaced repetition) ──
 const STATS_KEY = "dutch-item-stats-v1";
@@ -34,6 +72,50 @@ function getStreak(daily, now = new Date()) {
 const vocabId = (c) => `vocab:${c.nl}→${c.en}`;
 const verbSentId = (it) => `verbSent:${it.verb}|${it.tense}|${it.subject}|${it.template}`;
 const exprSentId = (it) => `exprSent:${it.sentence}|${it.answer}`;
+
+// A word counts as "learned" once it's been practised at least twice and
+// answered right at least two times out of three.
+const isKnown = (st) => !!st && st.seen >= 2 && st.wrong / st.seen <= 1 / 3;
+const isShaky = (st) => !!st && st.seen >= 1 && st.wrong / st.seen > 1 / 3;
+
+// Quick round: up to half the cards are words you've been getting wrong, the
+// rest follow the usual new-and-shaky weighting.
+function quickPick(items, count) {
+  const stats = statsLoad();
+  const shaky = weightedPick(items.filter(c => isShaky(stats[vocabId(c)])), vocabId, Math.ceil(count / 2));
+  const taken = new Set(shaky.map(vocabId));
+  return shuffle([...shaky, ...weightedPick(items.filter(c => !taken.has(vocabId(c))), vocabId, count - shaky.length)]);
+}
+
+// ── Multiple-choice options for the sentence tests ───────────────────────────
+const AUX_SWAP = { heb: "ben", ben: "heb", hebt: "bent", bent: "hebt", heeft: "is", is: "heeft", hebben: "zijn", zijn: "hebben" };
+// Wrong options are other forms of the same verb first (wrong tense, wrong
+// person, wrong auxiliary) because that is the confusion being trained; other
+// verbs only fill up the list if there aren't enough.
+function verbOptions(item, sentences, allVerbs) {
+  const v = allVerbs.find(x => x.inf === item.verb);
+  const [aux, ...rest] = item.answer.split(" ");
+  const sameVerb = [
+    ...(item.tense === "perfectum" && AUX_SWAP[aux] ? [[AUX_SWAP[aux], ...rest].join(" ")] : []),
+    ...sentences.filter(x => x.verb === item.verb).map(x => x.answer),
+    ...(v ? [v.presIk, v.presJijHij, v.presWij, v.impSg, v.impPl] : []),
+  ];
+  const fill = sentences.filter(x => x.verb !== item.verb && x.tense === item.tense).map(x => x.answer);
+  const seen = new Set([normalize(item.answer)]), wrong = [];
+  for (const c of [...shuffle(sameVerb), ...shuffle(fill)]) {
+    if (wrong.length === 3) break;
+    if (!c || seen.has(normalize(c))) continue;
+    seen.add(normalize(c)); wrong.push(c);
+  }
+  return shuffle([item.answer, ...wrong]);
+}
+// Wrong options come from other categories: expressions in the same category
+// are often near-synonyms that would fit the sentence just as well.
+function exprOptions(item, expressions) {
+  const cat = expressions.find(e => e.nl === item.answer)?.category;
+  const others = [...new Set(expressions.filter(e => e.nl !== item.answer && e.category !== cat).map(e => e.nl))];
+  return shuffle([item.answer, ...shuffle(others).slice(0, 3)]);
+}
 
 // Picks `count` items at random, weighting towards items never seen before and
 // items that have been answered wrong more often — so practice sessions surface
@@ -184,6 +266,8 @@ function ProgressModal({ onClose }) {
 }
 
 // ── Streak strip / celebration ────────────────────────────────────────────────
+const DAILY_GOAL = 30;
+const RING = 2 * Math.PI * 18;
 function StreakStrip() {
   const daily = dailyLoad();
   const streak = getStreak(daily);
@@ -191,9 +275,16 @@ function StreakStrip() {
   const days = Array.from({ length: 7 }, (_, i) => { const d = new Date(); d.setDate(d.getDate() - (6 - i)); return { label: "ZMDWDVZ"[d.getDay()], done: !!daily[dayKey(d)], isToday: i === 6 }; });
   return (
     <div style={{ width: "100%", maxWidth: 340, marginBottom: 16, padding: "14px 18px", background: "rgba(var(--surface-rgb),0.75)", border: "1px solid rgba(var(--accent-rgb),0.15)", borderRadius: 16, fontFamily: "'DM Sans',sans-serif" }}>
-      <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 12 }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
         <div style={{ fontSize: 20, fontWeight: 700, color: "var(--text)" }}>{streak > 0 ? "🔥" : "💤"} {streak} <span style={{ fontSize: 13, fontWeight: 500, color: "var(--muted)" }}>{streak === 1 ? "dag" : "dagen"} op rij</span></div>
-        <div style={{ fontSize: 13, color: "var(--muted)" }}>Vandaag <b style={{ color: "var(--accent)", fontSize: 15 }}>{today}</b></div>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <div style={{ fontSize: 12, color: "var(--muted)", textAlign: "right", lineHeight: 1.35 }}>vandaag<br />doel {DAILY_GOAL}</div>
+          <svg width="46" height="46" viewBox="0 0 46 46" role="img" aria-label={`${today} van ${DAILY_GOAL} vandaag`}>
+            <circle cx="23" cy="23" r="18" fill="none" strokeWidth="4" style={{ stroke: "rgba(var(--ink-rgb),0.08)" }} />
+            <circle cx="23" cy="23" r="18" fill="none" strokeWidth="4" strokeLinecap="round" strokeDasharray={RING} strokeDashoffset={RING * (1 - Math.min(1, today / DAILY_GOAL))} transform="rotate(-90 23 23)" style={{ stroke: today >= DAILY_GOAL ? "var(--green)" : "var(--accent)", transition: "stroke-dashoffset 0.6s" }} />
+            <text x="23" y="27.5" textAnchor="middle" fontSize="13" fontWeight="700" style={{ fill: "var(--text)" }}>{today}</text>
+          </svg>
+        </div>
       </div>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         {days.map((d, i) => (
@@ -225,7 +316,7 @@ function Confetti() {
 }
 
 // ── Home ──────────────────────────────────────────────────────────────────────
-function Home({ allVocab, allVerbs, allExpressions, nuances, podcastEpisodes, onVocab, onVerbs, onExpressions, onNuances, onPodcast }) {
+function Home({ allVocab, allVerbs, allExpressions, nuances, podcastEpisodes, onVocab, onVerbs, onExpressions, onNuances, onPodcast, onQuick }) {
   const [showProgress, setShowProgress] = useState(false);
   return (
     <div style={s.screen}>
@@ -235,6 +326,13 @@ function Home({ allVocab, allVerbs, allExpressions, nuances, podcastEpisodes, on
         <h1 style={{ fontSize: 32, fontWeight: 700, color: "var(--text)", fontFamily: "'Playfair Display',serif", marginTop: 8 }}>B1 → B2</h1>
       </div>
       <StreakStrip />
+      <button onClick={onQuick} style={{ ...s.allBtn, marginTop: 0, marginBottom: 16, padding: "16px 20px", display: "flex", alignItems: "center", gap: 14 }}>
+        <span style={{ fontSize: 24 }}>🚀</span>
+        <div>
+          <div style={{ fontWeight: 700, fontSize: 16 }}>Snelle ronde</div>
+          <div style={{ color: "var(--muted)", fontSize: 13, marginTop: 2, fontWeight: 400 }}>15 woorden · kiezen · nieuw & lastig eerst</div>
+        </div>
+      </button>
       <div style={{ width: "100%", maxWidth: 340, display: "flex", flexDirection: "column", gap: 12 }}>
         <button onClick={onVocab} style={{ padding: "16px 20px", background: "linear-gradient(135deg,rgba(var(--blue-rgb),0.1),rgba(var(--blue-rgb),0.04))", border: "1px solid rgba(var(--blue-rgb),0.2)", borderRadius: 16, display: "flex", alignItems: "center", gap: 14, cursor: "pointer", fontFamily: "'DM Sans',sans-serif", textAlign: "left" }}>
           <span style={{ fontSize: 24 }}>📖</span>
@@ -288,6 +386,7 @@ function VocabHome({ onBack, onGlossary, onPractice, chapters, vocab, allVocab }
   const combinedCount = selected.size === 0 ? 0 : [...selected].reduce((n, ch) => n + (vocab[ch]?.length ?? 0), 0);
   const combinedDeck = [...selected].flatMap(ch => vocab[ch] || []);
   const allSelected = selected.size === chapters.length;
+  const stats = statsLoad();
   return (
     <div style={{ minHeight: "100vh", background: "linear-gradient(160deg,var(--bg1) 0%,var(--bg2) 50%,var(--bg3) 100%)", fontFamily: "system-ui,sans-serif", display: "flex", flexDirection: "column", alignItems: "center", padding: "60px 24px 100px", position: "relative" }}>
       <button onClick={onBack} style={{ ...s.backBtn, position: "absolute", top: 20, left: 20 }}>← Menu</button>
@@ -309,12 +408,14 @@ function VocabHome({ onBack, onGlossary, onPractice, chapters, vocab, allVocab }
       </div>
       {chapters.map((ch, i) => {
         const active = selected.has(ch);
+        const learned = vocab[ch].filter(c => isKnown(stats[vocabId(c)])).length;
         return (
           <button key={ch} onClick={() => toggle(ch)} style={{ ...s.chapterBtn, borderColor: active ? "rgba(var(--accent-rgb),0.4)" : "rgba(var(--accent-rgb),0.15)", background: active ? "rgba(var(--accent-rgb),0.08)" : "rgba(var(--surface-rgb),0.75)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <div>
+            <div style={{ flex: 1, marginRight: 16 }}>
               <div style={{ fontSize: 11, color: "var(--accent)", letterSpacing: 2, textTransform: "uppercase", marginBottom: 6 }}>Hoofdstuk {i + 1}</div>
               <div style={{ color: "var(--text)" }}>{ch.split("–")[1]?.trim()}</div>
-              <div style={{ fontSize: 13, color: "var(--muted)", marginTop: 4 }}>{vocab[ch].length} woorden</div>
+              <div style={{ fontSize: 13, color: "var(--muted)", marginTop: 4 }}>{vocab[ch].length} woorden · <span style={{ color: learned > 0 ? "var(--green)" : "var(--muted)" }}>{learned} geleerd</span></div>
+              <div style={{ height: 4, borderRadius: 2, background: "rgba(var(--ink-rgb),0.07)", marginTop: 8, overflow: "hidden" }}><div style={{ height: "100%", width: `${(learned / vocab[ch].length) * 100}%`, background: "var(--green)", borderRadius: 2 }} /></div>
             </div>
             <div style={{ width: 22, height: 22, borderRadius: "50%", border: `2px solid ${active ? "var(--accent)" : "rgba(var(--ink-rgb),0.15)"}`, background: active ? "var(--accent)" : "transparent", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
               {active && <span style={{ color: "var(--bg1)", fontSize: 13, fontWeight: 700 }}>✓</span>}
@@ -447,8 +548,22 @@ function VerbStudy({ onBack, verbGroups, verbGroupNames }) {
   );
 }
 
+// ── Typen / Kiezen switch for the sentence tests ─────────────────────────────
+function InputModeToggle({ mc, onMc, accent }) {
+  return (
+    <div style={{ width: "100%", maxWidth: 340, marginBottom: 20 }}>
+      <div style={{ fontSize: 11, letterSpacing: 3, textTransform: "uppercase", color: "var(--muted)", fontWeight: 600, marginBottom: 10 }}>Antwoorden</div>
+      <div style={{ display: "flex", gap: 8 }}>
+        {[{ v: false, label: "⌨️ Typen" }, { v: true, label: "👆 Kiezen" }].map(o => (
+          <button key={o.label} onClick={() => onMc(o.v)} style={{ flex: 1, padding: "10px 0", borderRadius: 12, fontSize: 14, fontWeight: 600, cursor: "pointer", fontFamily: "'DM Sans',sans-serif", background: mc === o.v ? `rgba(var(--${accent}-rgb),0.15)` : "rgba(var(--surface-rgb),0.75)", border: mc === o.v ? `1px solid rgba(var(--${accent}-rgb),0.5)` : "1px solid rgba(var(--ink-rgb),0.07)", color: mc === o.v ? `var(--${accent})` : "var(--muted)" }}>{o.label}</button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // ── Verb test setup ───────────────────────────────────────────────────────────
-function VerbTestSetup({ onBack, onStart, verbGroupNames }) {
+function VerbTestSetup({ onBack, onStart, verbGroupNames, mc, onMc }) {
   const [mode, setMode] = useState("context");
   const [count, setCount] = useState(15);
   const [tenses, setTenses] = useState({ presens: true, imperfectum: true, perfectum: true });
@@ -503,6 +618,7 @@ function VerbTestSetup({ onBack, onStart, verbGroupNames }) {
           </button>
         ))}
       </div>
+      <InputModeToggle mc={mc} onMc={onMc} accent="purple" />
       <div style={{ width: "100%", maxWidth: 340, marginBottom: 24 }}>
         <div style={{ fontSize: 11, letterSpacing: 3, textTransform: "uppercase", color: "var(--muted)", fontWeight: 600, marginBottom: 10 }}>Aantal vragen</div>
         <div style={{ display: "flex", gap: 8 }}>
@@ -517,13 +633,20 @@ function VerbTestSetup({ onBack, onStart, verbGroupNames }) {
 }
 
 // ── Verb test ─────────────────────────────────────────────────────────────────
-function VerbTest({ items, mode, onComplete, onBack }) {
+function VerbTest({ items, mode, onComplete, onBack, inputMode, optionsFor }) {
   const [index, setIndex] = useState(0);
   const [input, setInput] = useState("");
   const [status, setStatus] = useState(null);
   const [score, setScore] = useState({ right: 0, wrong: 0, wrongs: [] });
   const inputRef = useRef(null);
   const current = items[index];
+  const typing = inputMode !== "mc";
+  const [pickState, setPickState] = useState(null);
+  const picked = pickState && pickState.index === index ? pickState.opt : null;
+  const options = useMemo(() => (!typing && current ? optionsFor(current) : []), [current, typing]);
+  const pickedWrong = picked !== null && picked !== current?.answer;
+  const later = useLater();
+  const enterRef = useEnterToAdvance(typing ? !!status : pickedWrong);
   useEffect(() => { setInput(""); setStatus(null); setTimeout(() => inputRef.current?.focus(), 80); }, [index]);
   if (!current) {
     if (items.length === 0) return (
@@ -535,13 +658,19 @@ function VerbTest({ items, mode, onComplete, onBack }) {
     return null;
   }
   const submit = () => { if (!input.trim()) return; setStatus(checkAnswer(input, current.answer)); };
-  const advance = () => {
-    const wasRight = status === "exact" || status === "close";
+  const advance = (forced) => {
+    const wasRight = typeof forced === "boolean" ? forced : status === "exact" || status === "close";
     recordAttempt(verbSentId(current), wasRight);
     const newScore = { right: score.right + (wasRight ? 1 : 0), wrong: score.wrong + (wasRight ? 0 : 1), wrongs: wasRight ? score.wrongs : [...score.wrongs, current] };
     setScore(newScore);
     if (index >= items.length - 1) onComplete(newScore);
     else setIndex(i => i + 1);
+  };
+  enterRef.current = () => advance(typing ? undefined : false);
+  const pick = opt => {
+    if (picked !== null) return;
+    setPickState({ index, opt });
+    if (opt === current.answer) later(() => advance(true), 700);
   };
   const handleKey = e => { if (e.key === "Enter") { if (status) advance(); else submit(); } };
   const pct = (index / items.length) * 100;
@@ -578,15 +707,21 @@ function VerbTest({ items, mode, onComplete, onBack }) {
       <button onClick={onBack} style={{ ...s.backBtn, position: "absolute", top: 18, left: 18 }}>← Test menu</button>
       <div style={{ position: "absolute", top: 18, right: 18, fontSize: 12, color: "var(--muted)" }}>{index + 1} / {items.length} · <span style={{ color: "var(--green)" }}>✓ {score.right}</span> <span style={{ color: "var(--red)" }}>✗ {score.wrong}</span></div>
       <div style={{ width: "100%", maxWidth: 400 }}>
-        <div key={index} className="card-in" style={{ background: "rgba(var(--surface-rgb),0.75)", border: "1px solid rgba(var(--purple-rgb),0.18)", borderRadius: 20, padding: "28px 24px", textAlign: "center", marginBottom: 18 }}>{display}</div>
-        {!status && (
+        <div key={`q-${index}`} className="card-in" style={{ background: "rgba(var(--surface-rgb),0.75)", border: "1px solid rgba(var(--purple-rgb),0.18)", borderRadius: 20, padding: "28px 24px", textAlign: "center", marginBottom: 18 }}>{display}</div>
+        {!typing && (
+          <>
+            <OptionButtons key={index} options={options} answer={current.answer} picked={picked} onPick={pick} accent="purple" />
+            <button onClick={() => advance(false)} disabled={!pickedWrong} style={{ visibility: pickedWrong ? "visible" : "hidden", marginTop: 4, width: "100%", background: "linear-gradient(135deg,rgba(var(--purple-rgb),0.2),rgba(var(--purple-rgb),0.08))", border: "1px solid rgba(var(--purple-rgb),0.35)", borderRadius: 14, color: "var(--purple)", fontSize: 16, fontWeight: 600, padding: "15px", cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>{index >= items.length - 1 ? "Klaar →" : "Volgende →"}</button>
+          </>
+        )}
+        {typing && !status && (
           <div style={{ position: "relative" }}>
             <input ref={inputRef} value={input} onChange={e => setInput(e.target.value)} onKeyDown={handleKey} placeholder={current.split ? "type both parts" : "type the verb form..."} style={{ width: "100%", boxSizing: "border-box", padding: "16px 60px 16px 18px", fontSize: 17, background: "rgba(var(--surface-rgb),0.85)", border: "1px solid rgba(var(--purple-rgb),0.25)", borderRadius: 14, color: "var(--text)", outline: "none", fontFamily: "'DM Sans',sans-serif", caretColor: "var(--purple)" }} />
             <button onClick={submit} style={{ position: "absolute", right: 10, top: "50%", transform: "translateY(-50%)", background: "rgba(var(--purple-rgb),0.18)", border: "1px solid rgba(var(--purple-rgb),0.35)", borderRadius: 8, color: "var(--purple)", padding: "8px 14px", fontSize: 13, cursor: "pointer", fontFamily: "'DM Sans',sans-serif", fontWeight: 600 }}>↵</button>
           </div>
         )}
-        {!status && <button onClick={() => setStatus("wrong")} style={{ marginTop: 12, width: "100%", background: "none", border: "1px solid rgba(var(--ink-rgb),0.05)", borderRadius: 12, color: "var(--faint)", fontSize: 13, padding: "10px", cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>Toon antwoord</button>}
-        {status && (
+        {typing && !status && <button onClick={() => setStatus("wrong")} style={{ marginTop: 12, width: "100%", background: "none", border: "1px solid rgba(var(--ink-rgb),0.05)", borderRadius: 12, color: "var(--faint)", fontSize: 13, padding: "10px", cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>Toon antwoord</button>}
+        {typing && status && (
           <>
             <div style={{ background: `rgba(${status === "exact" ? "78,205,196" : status === "close" ? "244,162,97" : "231,111,81"},0.08)`, border: `1px solid rgba(${status === "exact" ? "78,205,196" : status === "close" ? "244,162,97" : "231,111,81"},0.25)`, borderRadius: 16, padding: "20px", textAlign: "center" }}>
               <div style={{ fontSize: 13, fontWeight: 700, color: sc, marginBottom: 14, letterSpacing: 1 }}>{sm}</div>
@@ -674,7 +809,7 @@ function Flashcard({ card, flipped, onFlip, onNext, onPrev, index, total, known,
     else if (Math.abs(dx) < 10 && dt < 300) onFlip();
     setSwipeX(0);
   };
-  const pct = total > 0 ? ((known + unknown) / total) * 100 : 0;
+  const pct = total > 0 ? (index / total) * 100 : 0;
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "100vh", padding: "20px", position: "relative" }}>
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: "rgba(var(--surface-rgb),0.85)" }}><div style={{ height: "100%", width: `${pct}%`, background: "linear-gradient(90deg,var(--accent),var(--red))", transition: "width 0.4s", borderRadius: "0 2px 2px 0" }} /></div>
@@ -685,8 +820,8 @@ function Flashcard({ card, flipped, onFlip, onNext, onPrev, index, total, known,
       <div key={index} className="card-in" onTouchStart={onTS} onTouchMove={onTM} onTouchEnd={onTE} onClick={() => { if (!('ontouchstart' in window)) onFlip(); }} style={{ width: "100%", maxWidth: 360, minHeight: 240, cursor: "pointer", transform: `translateX(${swipeX}px)`, transition: swipeX === 0 ? "transform 0.3s" : "none", userSelect: "none" }}>
         <div key={flipped ? "back" : "front"} className={flipped ? "flip-in" : undefined} style={{ width: "100%", minHeight: 240, background: flipped ? "linear-gradient(145deg,rgba(var(--accent-rgb),0.08),rgba(var(--accent-rgb),0.02))" : "rgba(var(--surface-rgb),0.75)", border: `1px solid ${flipped ? "rgba(var(--accent-rgb),0.2)" : "rgba(var(--accent-rgb),0.12)"}`, borderRadius: 20, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "40px 28px", boxSizing: "border-box", transition: "background 0.3s, border-color 0.3s" }}>
           {!flipped
-            ? <><div style={s.label}>Nederlands</div><div style={{ fontSize: card.nl.length > 25 ? 22 : 28, fontWeight: 600, color: "var(--text)", textAlign: "center", lineHeight: 1.4, fontFamily: "'Playfair Display',serif", marginTop: 12 }}>{card.nl}</div><div style={{ fontSize: 12, color: "var(--faint)", marginTop: 24 }}>tap to reveal</div></>
-            : <><div style={s.label}>Nederlands</div><div style={{ fontSize: 18, color: "var(--muted)", textAlign: "center", marginBottom: 16 }}>{card.nl}</div><div style={{ width: 40, height: 1, background: "rgba(var(--accent-rgb),0.3)", marginBottom: 16 }} /><div style={{ ...s.label, color: "var(--accent)" }}>English</div><div style={{ fontSize: card.en.length > 30 ? 20 : 24, fontWeight: 600, color: "var(--text)", textAlign: "center", lineHeight: 1.4, fontFamily: "'Playfair Display',serif", marginTop: 10 }}>{card.en}</div></>
+            ? <><div style={s.label}>Nederlands</div><div style={{ fontSize: card.nl.length > 25 ? 22 : 28, fontWeight: 600, color: "var(--text)", textAlign: "center", lineHeight: 1.4, fontFamily: "'Playfair Display',serif", marginTop: 12 }}>{card.nl}</div><div style={{ marginTop: 16 }}><SpeakBtn text={card.nl} /></div><div style={{ fontSize: 12, color: "var(--faint)", marginTop: 16 }}>tap to reveal</div></>
+            : <><div style={s.label}>Nederlands</div><div style={{ fontSize: 18, color: "var(--muted)", textAlign: "center", marginBottom: 16 }}>{card.nl}</div><div style={{ width: 40, height: 1, background: "rgba(var(--accent-rgb),0.3)", marginBottom: 16 }} /><div style={{ ...s.label, color: "var(--accent)" }}>English</div><div style={{ fontSize: card.en.length > 30 ? 20 : 24, fontWeight: 600, color: "var(--text)", textAlign: "center", lineHeight: 1.4, fontFamily: "'Playfair Display',serif", marginTop: 10 }}>{card.en}</div><div style={{ marginTop: 16 }}><SpeakBtn text={card.nl} /></div></>
           }
         </div>
       </div>
@@ -706,8 +841,10 @@ function TypingCard({ card, index, total, known, unknown, onNext }) {
   useEffect(() => { setInput(""); setStatus(null); setTimeout(() => inputRef.current?.focus(), 80); }, [index]);
   const submit = () => { if (!input.trim()) return; setStatus(checkAnswer(input, card.nl)); };
   const advance = () => onNext(status === "wrong" ? "unknown" : "known");
+  const enterRef = useEnterToAdvance(!!status);
+  enterRef.current = advance;
   const handleKey = e => { if (e.key === "Enter") { if (status) advance(); else submit(); } };
-  const pct = total > 0 ? ((known + unknown) / total) * 100 : 0;
+  const pct = total > 0 ? (index / total) * 100 : 0;
   const sc = status === "exact" ? "var(--green)" : status === "close" ? "var(--accent)" : "var(--red)";
   const sm = status === "exact" ? "Precies goed! 🎉" : status === "close" ? "Bijna! (Kleine afwijking geaccepteerd)" : "Niet helemaal...";
   return (
@@ -733,6 +870,7 @@ function TypingCard({ card, index, total, known, unknown, onNext }) {
           <div style={{ background: `rgba(${status === "exact" ? "78,205,196" : status === "close" ? "244,162,97" : "231,111,81"},0.08)`, border: `1px solid rgba(${status === "exact" ? "78,205,196" : status === "close" ? "244,162,97" : "231,111,81"},0.25)`, borderRadius: 16, padding: "24px 20px", textAlign: "center" }}>
             <div style={{ fontSize: 14, fontWeight: 700, color: sc, marginBottom: 16, letterSpacing: 1 }}>{sm}</div>
             <DiffDisplay typed={input} correct={card.nl} />
+            <div style={{ marginTop: 12 }}><SpeakBtn text={card.nl} /></div>
           </div>
         )}
         {!status && <button onClick={() => setStatus("wrong")} style={{ marginTop: 14, width: "100%", background: "none", border: "1px solid rgba(var(--ink-rgb),0.05)", borderRadius: 12, color: "var(--faint)", fontSize: 14, padding: "12px", cursor: "pointer", fontFamily: "system-ui,sans-serif" }}>Toon antwoord</button>}
@@ -742,44 +880,52 @@ function TypingCard({ card, index, total, known, unknown, onNext }) {
   );
 }
 
-// ── Multiple choice card ──────────────────────────────────────────────────────
-// Middle ground between flashcards and typing: recognise the Dutch among 4
-// options. Distractors come from the same deck so they're plausible.
-function ChoiceCard({ card, pool, index, total, known, unknown, onNext }) {
-  const [picked, setPicked] = useState(null);
-  const [options, setOptions] = useState([]);
+// ── Multiple choice ───────────────────────────────────────────────────────────
+// Shared answer buttons for vocab Kiezen and the verb / expression tests.
+// `picked` is null until an option is chosen; keys 1-4 also work.
+function OptionButtons({ options, answer, picked, onPick, accent = "accent" }) {
   useEffect(() => {
-    const others = pool.filter(c => c.nl !== card.nl && c.en !== card.en);
-    const uniq = Array.from(new Map(others.map(c => [c.nl, c])).values());
-    const distractors = [];
-    while (distractors.length < 3 && uniq.length) distractors.push(uniq.splice(Math.floor(Math.random() * uniq.length), 1)[0]);
-    const opts = [card, ...distractors];
-    for (let i = opts.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [opts[i], opts[j]] = [opts[j], opts[i]]; }
-    setOptions(opts); setPicked(null);
-  }, [index, card]);
-  const isRight = picked && picked.nl === card.nl;
-  const choose = opt => {
-    if (picked) return;
-    setPicked(opt);
-    if (opt.nl === card.nl) setTimeout(() => onNext("known"), 700);
-  };
-  useEffect(() => {
-    const onKey = e => {
-      const n = parseInt(e.key, 10);
-      if (!picked && n >= 1 && n <= options.length) choose(options[n - 1]);
-      else if (picked && !isRight && (e.key === "Enter" || e.key === " ")) onNext("unknown");
-    };
+    const onKey = e => { const n = parseInt(e.key, 10); if (picked === null && n >= 1 && n <= options.length) onPick(options[n - 1]); };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   });
-  const pct = total > 0 ? ((known + unknown) / total) * 100 : 0;
-  const optStyle = opt => {
-    const base = { width: "100%", padding: "16px 18px", marginBottom: 10, borderRadius: 14, fontSize: opt.nl.length > 28 ? 15 : 17, fontWeight: 500, textAlign: "left", cursor: picked ? "default" : "pointer", fontFamily: "'DM Sans',sans-serif", display: "flex", alignItems: "center", gap: 12, transition: "background 0.2s, border-color 0.2s, opacity 0.2s", background: "rgba(var(--surface-rgb),0.8)", border: "1px solid rgba(var(--accent-rgb),0.15)", color: "var(--text)" };
-    if (!picked) return base;
-    if (opt.nl === card.nl) return { ...base, background: "rgba(var(--green-rgb),0.12)", border: "1px solid rgba(var(--green-rgb),0.5)", color: "var(--green)", fontWeight: 600 };
-    if (opt === picked) return { ...base, background: "rgba(var(--red-rgb),0.1)", border: "1px solid rgba(var(--red-rgb),0.45)", color: "var(--red)" };
-    return { ...base, opacity: 0.45 };
+  return options.map((opt, i) => {
+    const base = { width: "100%", padding: "16px 18px", marginBottom: 10, borderRadius: 14, fontSize: opt.length > 28 ? 15 : 17, fontWeight: 500, textAlign: "left", cursor: picked === null ? "pointer" : "default", fontFamily: "'DM Sans',sans-serif", display: "flex", alignItems: "center", gap: 12, transition: "background 0.2s, border-color 0.2s, opacity 0.2s", background: "rgba(var(--surface-rgb),0.8)", border: `1px solid rgba(var(--${accent}-rgb),0.15)`, color: "var(--text)" };
+    const st = picked === null ? base
+      : opt === answer ? { ...base, background: "rgba(var(--green-rgb),0.12)", border: "1px solid rgba(var(--green-rgb),0.5)", color: "var(--green)", fontWeight: 600 }
+      : opt === picked ? { ...base, background: "rgba(var(--red-rgb),0.1)", border: "1px solid rgba(var(--red-rgb),0.45)", color: "var(--red)" }
+      : { ...base, opacity: 0.45 };
+    return (
+      <button key={opt} onClick={() => onPick(opt)} className={picked === null ? "card-in" : opt === answer ? "pop" : opt === picked ? "shake" : undefined} style={{ ...st, animationDelay: picked === null ? `${60 + i * 45}ms` : undefined }}>
+        <span style={{ width: 24, height: 24, flexShrink: 0, borderRadius: 7, background: `rgba(var(--${accent}-rgb),0.08)`, color: `var(--${accent})`, fontSize: 12, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center" }}>{i + 1}</span>
+        <span>{opt}</span>
+      </button>
+    );
+  });
+}
+
+// Middle ground between flashcards and typing: recognise the translation among
+// 4 options. Distractors come from the same deck so they're plausible.
+function ChoiceCard({ card, pool, index, total, known, unknown, onNext }) {
+  const [reverse, setReverse] = useState(() => localStorage.getItem("dutch-mc-reverse") === "1");
+  const [pickState, setPickState] = useState(null);
+  const [q, a] = reverse ? ["nl", "en"] : ["en", "nl"];
+  const picked = pickState && pickState.index === index && pickState.reverse === reverse ? pickState.opt : null;
+  const options = useMemo(() => {
+    const others = [...new Set(pool.filter(c => c.nl !== card.nl && c.en !== card.en).map(c => c[a]))];
+    return shuffle([card[a], ...shuffle(others).slice(0, 3)]);
+  }, [index, card, reverse]);
+  const later = useLater();
+  const wrong = picked !== null && picked !== card[a];
+  const pick = opt => {
+    if (picked !== null) return;
+    setPickState({ index, reverse, opt });
+    if (opt === card[a]) later(() => onNext("known"), 700);
   };
+  const enterRef = useEnterToAdvance(wrong);
+  enterRef.current = () => onNext("unknown");
+  const swap = () => { localStorage.setItem("dutch-mc-reverse", reverse ? "0" : "1"); setReverse(r => !r); };
+  const pct = total > 0 ? (index / total) * 100 : 0;
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "100vh", padding: "20px", position: "relative" }}>
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: "rgba(var(--surface-rgb),0.85)" }}><div style={{ height: "100%", width: `${pct}%`, background: "linear-gradient(90deg,var(--accent),var(--red))", transition: "width 0.4s", borderRadius: "0 2px 2px 0" }} /></div>
@@ -788,17 +934,13 @@ function ChoiceCard({ card, pool, index, total, known, unknown, onNext }) {
         {(known > 0 || unknown > 0) && <><span style={{ color: "var(--green)" }}>✓ {known}</span><span style={{ color: "var(--red)" }}>✗ {unknown}</span></>}
       </div>
       <div style={{ width: "100%", maxWidth: 380, marginTop: 40 }}>
-        <div key={index} className="card-in" style={{ background: "rgba(var(--surface-rgb),0.75)", border: "1px solid rgba(var(--accent-rgb),0.12)", borderRadius: 20, padding: "28px 24px", textAlign: "center", marginBottom: 20 }}>
-          <div style={s.label}>English</div>
-          <div style={{ fontSize: card.en.length > 35 ? 20 : 24, fontWeight: 600, color: "var(--text)", lineHeight: 1.4, fontFamily: "'Playfair Display',serif", marginTop: 10 }}>{card.en}</div>
+        <div key={`q-${index}-${reverse}`} className="card-in" style={{ background: "rgba(var(--surface-rgb),0.75)", border: "1px solid rgba(var(--accent-rgb),0.12)", borderRadius: 20, padding: "22px 24px", textAlign: "center", marginBottom: 20 }}>
+          <button onClick={swap} aria-label="Wissel richting" style={{ ...s.label, letterSpacing: 2, background: "none", border: "1px solid rgba(var(--accent-rgb),0.25)", borderRadius: 20, padding: "5px 12px", cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>{reverse ? "Nederlands → English" : "English → Nederlands"} ⇄</button>
+          <div style={{ fontSize: card[q].length > 35 ? 20 : 24, fontWeight: 600, color: "var(--text)", lineHeight: 1.4, fontFamily: "'Playfair Display',serif", marginTop: 14 }}>{card[q]}</div>
+          {canSpeak && <div style={{ marginTop: 12, height: 38, visibility: reverse || picked !== null ? "visible" : "hidden" }}><SpeakBtn text={card.nl} /></div>}
         </div>
-        {options.map((opt, i) => (
-          <button key={opt.nl} onClick={() => choose(opt)} className={!picked ? "card-in" : opt.nl === card.nl ? "pop" : opt === picked ? "shake" : undefined} style={{ ...optStyle(opt), animationDelay: picked ? undefined : `${60 + i * 45}ms` }}>
-            <span style={{ width: 24, height: 24, flexShrink: 0, borderRadius: 7, background: "rgba(var(--accent-rgb),0.08)", color: "var(--accent)", fontSize: 12, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center" }}>{i + 1}</span>
-            <span>{opt.nl}</span>
-          </button>
-        ))}
-        <button onClick={() => onNext("unknown")} disabled={!(picked && !isRight)} style={{ visibility: picked && !isRight ? "visible" : "hidden", marginTop: 6, width: "100%", background: "linear-gradient(135deg,rgba(var(--accent-rgb),0.2),rgba(var(--accent-rgb),0.08))", border: "1px solid rgba(var(--accent-rgb),0.3)", borderRadius: 14, color: "var(--accent)", fontSize: 16, fontWeight: 600, padding: "16px", cursor: "pointer", fontFamily: "system-ui,sans-serif" }}>Volgende →</button>
+        <OptionButtons key={`o-${index}-${reverse}`} options={options} answer={card[a]} picked={picked} onPick={pick} />
+        <button onClick={() => onNext("unknown")} disabled={!wrong} style={{ visibility: wrong ? "visible" : "hidden", marginTop: 6, width: "100%", background: "linear-gradient(135deg,rgba(var(--accent-rgb),0.2),rgba(var(--accent-rgb),0.08))", border: "1px solid rgba(var(--accent-rgb),0.3)", borderRadius: 14, color: "var(--accent)", fontSize: 16, fontWeight: 600, padding: "16px", cursor: "pointer", fontFamily: "system-ui,sans-serif" }}>Volgende →</button>
       </div>
     </div>
   );
@@ -904,7 +1046,7 @@ function ExpressionsBrowse({ onBack, expressions, categories }) {
 }
 
 // ── Expressions test setup ─────────────────────────────────────────────────────
-function ExpressionsTestSetup({ onBack, onStart, categories }) {
+function ExpressionsTestSetup({ onBack, onStart, categories, mc, onMc }) {
   const [selectedCats, setSelectedCats] = useState(() => new Set(categories));
   const [count, setCount] = useState(15);
   const toggleCat = cat => {
@@ -930,6 +1072,7 @@ function ExpressionsTestSetup({ onBack, onStart, categories }) {
           ))}
         </div>
       </div>
+      <InputModeToggle mc={mc} onMc={onMc} accent="teal" />
       <div style={{ width: "100%", maxWidth: 340, marginBottom: 24 }}>
         <div style={{ fontSize: 11, letterSpacing: 3, textTransform: "uppercase", color: "var(--muted)", fontWeight: 600, marginBottom: 10 }}>Aantal vragen</div>
         <div style={{ display: "flex", gap: 8 }}>
@@ -944,23 +1087,36 @@ function ExpressionsTestSetup({ onBack, onStart, categories }) {
 }
 
 // ── Expression test ────────────────────────────────────────────────────────────
-function ExpressionTest({ items, onComplete, onBack }) {
+function ExpressionTest({ items, onComplete, onBack, inputMode, optionsFor }) {
   const [index, setIndex] = useState(0);
   const [input, setInput] = useState("");
   const [status, setStatus] = useState(null);
   const [score, setScore] = useState({ right: 0, wrong: 0, wrongs: [] });
   const inputRef = useRef(null);
   const current = items[index];
+  const typing = inputMode !== "mc";
+  const [pickState, setPickState] = useState(null);
+  const picked = pickState && pickState.index === index ? pickState.opt : null;
+  const options = useMemo(() => (!typing && current ? optionsFor(current) : []), [current, typing]);
+  const pickedWrong = picked !== null && picked !== current?.answer;
+  const later = useLater();
+  const enterRef = useEnterToAdvance(typing ? !!status : pickedWrong);
   useEffect(() => { setInput(""); setStatus(null); setTimeout(() => inputRef.current?.focus(), 80); }, [index]);
   if (!current) return null;
   const submit = () => { if (!input.trim()) return; setStatus(checkAnswer(input, current.answer)); };
-  const advance = () => {
-    const wasRight = status === "exact" || status === "close";
+  const advance = (forced) => {
+    const wasRight = typeof forced === "boolean" ? forced : status === "exact" || status === "close";
     recordAttempt(exprSentId(current), wasRight);
     const newScore = { right: score.right + (wasRight ? 1 : 0), wrong: score.wrong + (wasRight ? 0 : 1), wrongs: wasRight ? score.wrongs : [...score.wrongs, current] };
     setScore(newScore);
     if (index >= items.length - 1) onComplete(newScore);
     else setIndex(i => i + 1);
+  };
+  enterRef.current = () => advance(typing ? undefined : false);
+  const pick = opt => {
+    if (picked !== null) return;
+    setPickState({ index, opt });
+    if (opt === current.answer) later(() => advance(true), 700);
   };
   const handleKey = e => { if (e.key === "Enter") { if (status) advance(); else submit(); } };
   const pct = (index / items.length) * 100;
@@ -973,7 +1129,7 @@ function ExpressionTest({ items, onComplete, onBack }) {
       <button onClick={onBack} style={{ ...s.backBtn, position: "absolute", top: 18, left: 18 }}>← Test menu</button>
       <div style={{ position: "absolute", top: 18, right: 18, fontSize: 12, color: "var(--muted)" }}>{index + 1} / {items.length} · <span style={{ color: "var(--green)" }}>✓ {score.right}</span> <span style={{ color: "var(--red)" }}>✗ {score.wrong}</span></div>
       <div style={{ width: "100%", maxWidth: 400 }}>
-        <div key={index} className="card-in" style={{ background: "rgba(var(--surface-rgb),0.75)", border: "1px solid rgba(var(--teal-rgb),0.18)", borderRadius: 20, padding: "28px 24px", textAlign: "center", marginBottom: 18 }}>
+        <div key={`q-${index}`} className="card-in" style={{ background: "rgba(var(--surface-rgb),0.75)", border: "1px solid rgba(var(--teal-rgb),0.18)", borderRadius: 20, padding: "28px 24px", textAlign: "center", marginBottom: 18 }}>
           <div style={s.label}>Vul in</div>
           <div style={{ fontSize: 18, color: "var(--text)", lineHeight: 1.7, marginTop: 12, fontFamily: "'Playfair Display',serif" }}>
             {parts.map((p, i) => (
@@ -982,14 +1138,20 @@ function ExpressionTest({ items, onComplete, onBack }) {
           </div>
           <div style={{ fontSize: 12, color: "var(--muted)", marginTop: 14, fontStyle: "italic" }}>{current.hint}</div>
         </div>
-        {!status && (
+        {!typing && (
+          <>
+            <OptionButtons key={index} options={options} answer={current.answer} picked={picked} onPick={pick} accent="teal" />
+            <button onClick={() => advance(false)} disabled={!pickedWrong} style={{ visibility: pickedWrong ? "visible" : "hidden", marginTop: 4, width: "100%", background: "linear-gradient(135deg,rgba(var(--teal-rgb),0.2),rgba(var(--teal-rgb),0.08))", border: "1px solid rgba(var(--teal-rgb),0.35)", borderRadius: 14, color: "var(--teal)", fontSize: 16, fontWeight: 600, padding: "15px", cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>{index >= items.length - 1 ? "Klaar →" : "Volgende →"}</button>
+          </>
+        )}
+        {typing && !status && (
           <div style={{ position: "relative" }}>
             <input ref={inputRef} value={input} onChange={e => setInput(e.target.value)} onKeyDown={handleKey} placeholder="type the expression..." style={{ width: "100%", boxSizing: "border-box", padding: "16px 60px 16px 18px", fontSize: 17, background: "rgba(var(--surface-rgb),0.85)", border: "1px solid rgba(var(--teal-rgb),0.25)", borderRadius: 14, color: "var(--text)", outline: "none", fontFamily: "'DM Sans',sans-serif", caretColor: "var(--teal)" }} />
             <button onClick={submit} style={{ position: "absolute", right: 10, top: "50%", transform: "translateY(-50%)", background: "rgba(var(--teal-rgb),0.18)", border: "1px solid rgba(var(--teal-rgb),0.35)", borderRadius: 8, color: "var(--teal)", padding: "8px 14px", fontSize: 13, cursor: "pointer", fontFamily: "'DM Sans',sans-serif", fontWeight: 600 }}>↵</button>
           </div>
         )}
-        {!status && <button onClick={() => setStatus("wrong")} style={{ marginTop: 12, width: "100%", background: "none", border: "1px solid rgba(var(--ink-rgb),0.05)", borderRadius: 12, color: "var(--faint)", fontSize: 13, padding: "10px", cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>Toon antwoord</button>}
-        {status && (
+        {typing && !status && <button onClick={() => setStatus("wrong")} style={{ marginTop: 12, width: "100%", background: "none", border: "1px solid rgba(var(--ink-rgb),0.05)", borderRadius: 12, color: "var(--faint)", fontSize: 13, padding: "10px", cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>Toon antwoord</button>}
+        {typing && status && (
           <>
             <div style={{ background: `rgba(${status === "exact" ? "78,205,196" : status === "close" ? "244,162,97" : "231,111,81"},0.08)`, border: `1px solid rgba(${status === "exact" ? "78,205,196" : status === "close" ? "244,162,97" : "231,111,81"},0.25)`, borderRadius: 16, padding: "20px", textAlign: "center" }}>
               <div style={{ fontSize: 13, fontWeight: 700, color: sc, marginBottom: 14, letterSpacing: 1 }}>{sm}</div>
@@ -1200,6 +1362,8 @@ function App() {
   const [practiceTitle, setPracticeTitle] = useState("");
   const [practiceSource, setPracticeSource] = useState("vocabHome");
   const [podcastEpisode, setPodcastEpisode] = useState(null);
+  const [testMc, setTestMc] = useState(() => localStorage.getItem("dutch-test-mc") === "1");
+  useEffect(() => { localStorage.setItem("dutch-test-mc", testMc ? "1" : "0"); }, [testMc]);
 
   useEffect(() => {
     document.documentElement.dataset.theme = darkMode ? "dark" : "light";
@@ -1241,13 +1405,21 @@ function App() {
     setMode(m); setScreen("cards");
   }, [chunkSize]);
 
+  // The score counts first tries only. A missed card is put back a few cards
+  // further on and keeps coming back until it's answered right; those repeat
+  // attempts feed the per-word stats but not the session score. Swiping past a
+  // flashcard without judging it (no result) records nothing.
   const handleNext = useCallback((result) => {
-    recordAttempt(vocabId(cards[idx]), result === "known");
-    if (result === "known") setKnown(k => [...k, cards[idx]]);
-    if (result === "unknown") setUnknown(u => [...u, cards[idx]]);
-    if (idx >= cards.length - 1) setTimeout(() => setScreen("results"), 100);
+    const card = cards[idx];
+    if (result) recordAttempt(vocabId(card), result === "known");
+    const isRepeat = unknown.includes(card);
+    if (result === "known" && !isRepeat) setKnown(k => [...k, card]);
+    if (result === "unknown" && !isRepeat) setUnknown(u => [...u, card]);
+    let deck = cards;
+    if (result === "unknown") { deck = [...cards]; deck.splice(Math.min(idx + 4, deck.length), 0, card); setCards(deck); }
+    if (idx >= deck.length - 1) setTimeout(() => setScreen("results"), 100);
     else { setIdx(i => i + 1); setFlipped(false); }
-  }, [idx, cards]);
+  }, [idx, cards, unknown]);
 
   const handlePrev = useCallback(() => {
     if (idx > 0) { setIdx(i => i - 1); setFlipped(false); }
@@ -1287,6 +1459,10 @@ function App() {
   };
 
   const handlePractice = (deck, title, source = "vocabHome") => { setPracticePool(deck); setPracticeTitle(title); setPracticeSource(source); setScreen("mode"); };
+  const startQuick = () => {
+    setPracticePool(allVocab); setPracticeTitle("Snelle ronde"); setPracticeSource("home"); setChunkSize(15);
+    startDeck(quickPick(allVocab, 15), "mc", 15);
+  };
   const handleMode = (m, size) => { setChunkSize(size); startDeck(practicePool, m, size); };
 
   const nextMode = { flip: "mc", mc: "type", type: "flip" }[mode];
@@ -1306,7 +1482,7 @@ function App() {
       <style>{`*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg1);font-family:system-ui,sans-serif}input::placeholder{color:var(--faint)}::-webkit-scrollbar{display:none}input{color:var(--text)}`}</style>
       <button onClick={() => setDarkMode(d => !d)} style={{ position: "fixed", bottom: 20, right: 20, zIndex: 9999, width: 44, height: 44, borderRadius: "50%", border: "1px solid rgba(var(--ink-rgb),0.12)", background: "rgba(var(--surface-rgb),0.85)", fontSize: 20, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", backdropFilter: "blur(8px)", boxShadow: "0 2px 12px rgba(var(--ink-rgb),0.1)" }}>{darkMode ? "☀️" : "🌙"}</button>
       <div key={screen} className="screen-in">
-      {screen === "home" && <Home allVocab={allVocab} allVerbs={allVerbs} allExpressions={expressions} nuances={nuances} podcastEpisodes={podcastEpisodes} onVocab={() => setScreen("vocabHome")} onVerbs={() => setScreen("verbs")} onExpressions={() => setScreen("expressions")} onNuances={() => setScreen("nuances")} onPodcast={() => setScreen("podcast")} />}
+      {screen === "home" && <Home allVocab={allVocab} allVerbs={allVerbs} allExpressions={expressions} nuances={nuances} podcastEpisodes={podcastEpisodes} onVocab={() => setScreen("vocabHome")} onVerbs={() => setScreen("verbs")} onExpressions={() => setScreen("expressions")} onNuances={() => setScreen("nuances")} onPodcast={() => setScreen("podcast")} onQuick={startQuick} />}
       {screen === "podcast" && <PodcastHome episodes={podcastEpisodes} onBack={() => setScreen("home")} onBrowse={ep => { setPodcastEpisode(ep); setScreen("podcastBrowse"); }} onPractice={ep => { const deck = ep.sections.flatMap(s => s.words); handlePractice(deck, ep.title, "podcast"); }} />}
       {screen === "podcastBrowse" && podcastEpisode && <EpisodeBrowse episode={podcastEpisode} onBack={() => setScreen("podcast")} />}
       {screen === "nuances" && <NuancesBrowse nuances={nuances} onBack={() => setScreen("home")} />}
@@ -1314,13 +1490,13 @@ function App() {
       {screen === "glossary" && <Glossary vocab={vocab} allVocab={allVocab} chapters={chapters} onBack={() => setScreen("vocabHome")} />}
       {screen === "verbs" && <VerbsHome allVerbs={allVerbs} onBack={() => setScreen("home")} onStudy={() => setScreen("verbStudy")} onTest={() => setScreen("verbTestSetup")} />}
       {screen === "verbStudy" && <VerbStudy verbGroups={verbGroups} verbGroupNames={verbGroupNames} onBack={() => setScreen("verbs")} />}
-      {screen === "verbTestSetup" && <VerbTestSetup onBack={() => setScreen("verbs")} onStart={startVerbTest} verbGroupNames={verbGroupNames} />}
-      {screen === "verbTest" && <VerbTest items={verbTestItems} mode={verbTestMode} onBack={() => setScreen("verbTestSetup")} onComplete={scr => { setVerbScore(scr); setScreen("verbResults"); }} />}
+      {screen === "verbTestSetup" && <VerbTestSetup onBack={() => setScreen("verbs")} onStart={startVerbTest} verbGroupNames={verbGroupNames} mc={testMc} onMc={setTestMc} />}
+      {screen === "verbTest" && <VerbTest items={verbTestItems} mode={verbTestMode} inputMode={testMc ? "mc" : "type"} optionsFor={it => verbOptions(it, sentences, allVerbs)} onBack={() => setScreen("verbTestSetup")} onComplete={scr => { setVerbScore(scr); setScreen("verbResults"); }} />}
       {screen === "verbResults" && verbScore && <VerbResults score={verbScore} onRestart={() => startVerbTest(verbTestMode, verbTestItems.length, verbTestTenses, verbTestGroups)} onRetry={wrongs => { setVerbTestItems(wrongs); setVerbScore(null); setScreen("verbTest"); }} onHome={() => setScreen("verbs")} />}
       {screen === "expressions" && <ExpressionsHome allExpressions={expressions} onBack={() => setScreen("home")} onBrowse={() => setScreen("exprBrowse")} onTest={() => setScreen("exprTestSetup")} />}
       {screen === "exprBrowse" && <ExpressionsBrowse expressions={expressions} categories={exprCategories} onBack={() => setScreen("expressions")} />}
-      {screen === "exprTestSetup" && <ExpressionsTestSetup categories={exprCategories} onBack={() => setScreen("expressions")} onStart={startExpressionTest} />}
-      {screen === "exprTest" && <ExpressionTest items={exprTestItems} onBack={() => setScreen("exprTestSetup")} onComplete={scr => { setExprScore(scr); setScreen("exprResults"); }} />}
+      {screen === "exprTestSetup" && <ExpressionsTestSetup categories={exprCategories} onBack={() => setScreen("expressions")} onStart={startExpressionTest} mc={testMc} onMc={setTestMc} />}
+      {screen === "exprTest" && <ExpressionTest items={exprTestItems} inputMode={testMc ? "mc" : "type"} optionsFor={it => exprOptions(it, expressions)} onBack={() => setScreen("exprTestSetup")} onComplete={scr => { setExprScore(scr); setScreen("exprResults"); }} />}
       {screen === "exprResults" && exprScore && <ExpressionResults score={exprScore} onRestart={() => startExpressionTest(exprTestItems.length, exprTestCats)} onRetry={wrongs => { setExprTestItems(wrongs); setExprScore(null); setScreen("exprTest"); }} onHome={() => setScreen("expressions")} />}
       {screen === "mode" && <ModeSelect title={practiceTitle} total={practicePool.length} onSelect={handleMode} onBack={() => setScreen(practiceSource)} />}
       {screen === "cards" && cards.length > 0 && cardsScreen}
