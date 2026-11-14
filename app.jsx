@@ -590,7 +590,7 @@ function ModeSelect({ title, total, onSelect, onBack }) {
           <button onClick={() => setChunk(total)} style={{ flex: 1, padding: "10px 0", borderRadius: 12, fontSize: 15, fontWeight: 600, cursor: "pointer", fontFamily: "'DM Sans',sans-serif", background: chunk === total ? "rgba(184,109,30,0.15)" : "rgba(255,255,255,0.75)", border: chunk === total ? "1px solid rgba(184,109,30,0.5)" : "1px solid rgba(0,0,0,0.07)", color: chunk === total ? "#b86d1e" : "#6b6560" }}>Alles<br /><span style={{ fontSize: 11, fontWeight: 400, opacity: 0.7 }}>{total}</span></button>
         </div>
       </div>
-      {[{ id: "flip", icon: "🃏", name: "Flashcards", desc: "Tap to flip · swipe to navigate" }, { id: "type", icon: "⌨️", name: "Typen", desc: "See English, type the Dutch" }].map(m => (
+      {[{ id: "flip", icon: "🃏", name: "Flashcards", desc: "Tap to flip · swipe to navigate" }, { id: "mc", icon: "👆", name: "Kiezen", desc: "See English, tap the Dutch (4 options)" }, { id: "type", icon: "⌨️", name: "Typen", desc: "See English, type the Dutch" }].map(m => (
         <button key={m.id} onClick={() => onSelect(m.id, chunk)} style={{ ...s.chapterBtn, display: "flex", alignItems: "center", gap: 16 }}>
           <span style={{ fontSize: 28 }}>{m.icon}</span>
           <div>
@@ -678,6 +678,68 @@ function TypingCard({ card, index, total, known, unknown, onNext }) {
         )}
         {!status && <button onClick={() => setStatus("wrong")} style={{ marginTop: 14, width: "100%", background: "none", border: "1px solid rgba(0,0,0,0.05)", borderRadius: 12, color: "#a09890", fontSize: 14, padding: "12px", cursor: "pointer", fontFamily: "system-ui,sans-serif" }}>Toon antwoord</button>}
         {status && <button onClick={advance} style={{ marginTop: 16, width: "100%", background: "linear-gradient(135deg,rgba(184,109,30,0.2),rgba(184,109,30,0.08))", border: "1px solid rgba(184,109,30,0.3)", borderRadius: 14, color: "#b86d1e", fontSize: 16, fontWeight: 600, padding: "16px", cursor: "pointer", fontFamily: "system-ui,sans-serif" }}>Volgende →</button>}
+      </div>
+    </div>
+  );
+}
+
+// ── Multiple choice card ──────────────────────────────────────────────────────
+// Middle ground between flashcards and typing: recognise the Dutch among 4
+// options. Distractors come from the same deck so they're plausible.
+function ChoiceCard({ card, pool, index, total, known, unknown, onNext }) {
+  const [picked, setPicked] = useState(null);
+  const [options, setOptions] = useState([]);
+  useEffect(() => {
+    const others = pool.filter(c => c.nl !== card.nl && c.en !== card.en);
+    const uniq = Array.from(new Map(others.map(c => [c.nl, c])).values());
+    const distractors = [];
+    while (distractors.length < 3 && uniq.length) distractors.push(uniq.splice(Math.floor(Math.random() * uniq.length), 1)[0]);
+    const opts = [card, ...distractors];
+    for (let i = opts.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [opts[i], opts[j]] = [opts[j], opts[i]]; }
+    setOptions(opts); setPicked(null);
+  }, [index, card]);
+  const isRight = picked && picked.nl === card.nl;
+  const choose = opt => {
+    if (picked) return;
+    setPicked(opt);
+    if (opt.nl === card.nl) setTimeout(() => onNext("known"), 700);
+  };
+  useEffect(() => {
+    const onKey = e => {
+      const n = parseInt(e.key, 10);
+      if (!picked && n >= 1 && n <= options.length) choose(options[n - 1]);
+      else if (picked && !isRight && (e.key === "Enter" || e.key === " ")) onNext("unknown");
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  });
+  const pct = total > 0 ? ((known + unknown) / total) * 100 : 0;
+  const optStyle = opt => {
+    const base = { width: "100%", padding: "16px 18px", marginBottom: 10, borderRadius: 14, fontSize: opt.nl.length > 28 ? 15 : 17, fontWeight: 500, textAlign: "left", cursor: picked ? "default" : "pointer", fontFamily: "'DM Sans',sans-serif", display: "flex", alignItems: "center", gap: 12, transition: "background 0.2s, border-color 0.2s, opacity 0.2s", background: "rgba(255,255,255,0.8)", border: "1px solid rgba(184,109,30,0.15)", color: "#1c1917" };
+    if (!picked) return base;
+    if (opt.nl === card.nl) return { ...base, background: "rgba(15,157,145,0.12)", border: "1px solid rgba(15,157,145,0.5)", color: "#0b7a70", fontWeight: 600 };
+    if (opt === picked) return { ...base, background: "rgba(201,74,58,0.1)", border: "1px solid rgba(201,74,58,0.45)", color: "#c94a3a" };
+    return { ...base, opacity: 0.45 };
+  };
+  return (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "100vh", padding: "20px", position: "relative" }}>
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: "rgba(255,255,255,0.85)" }}><div style={{ height: "100%", width: `${pct}%`, background: "linear-gradient(90deg,#b86d1e,#c94a3a)", transition: "width 0.4s", borderRadius: "0 2px 2px 0" }} /></div>
+      <div style={{ position: "absolute", bottom: 24, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 20, fontSize: 13, color: "#6b6560" }}>
+        <span>{index + 1} / {total}</span>
+        {(known > 0 || unknown > 0) && <><span style={{ color: "#0f9d91" }}>✓ {known}</span><span style={{ color: "#c94a3a" }}>✗ {unknown}</span></>}
+      </div>
+      <div style={{ width: "100%", maxWidth: 380, marginTop: 40 }}>
+        <div style={{ background: "rgba(255,255,255,0.75)", border: "1px solid rgba(184,109,30,0.12)", borderRadius: 20, padding: "28px 24px", textAlign: "center", marginBottom: 20 }}>
+          <div style={s.label}>English</div>
+          <div style={{ fontSize: card.en.length > 35 ? 20 : 24, fontWeight: 600, color: "#1c1917", lineHeight: 1.4, fontFamily: "'Playfair Display',serif", marginTop: 10 }}>{card.en}</div>
+        </div>
+        {options.map((opt, i) => (
+          <button key={opt.nl} onClick={() => choose(opt)} style={optStyle(opt)}>
+            <span style={{ width: 24, height: 24, flexShrink: 0, borderRadius: 7, background: "rgba(184,109,30,0.08)", color: "#b86d1e", fontSize: 12, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center" }}>{i + 1}</span>
+            <span>{opt.nl}</span>
+          </button>
+        ))}
+        <button onClick={() => onNext("unknown")} disabled={!(picked && !isRight)} style={{ visibility: picked && !isRight ? "visible" : "hidden", marginTop: 6, width: "100%", background: "linear-gradient(135deg,rgba(184,109,30,0.2),rgba(184,109,30,0.08))", border: "1px solid rgba(184,109,30,0.3)", borderRadius: 14, color: "#b86d1e", fontSize: 16, fontWeight: 600, padding: "16px", cursor: "pointer", fontFamily: "system-ui,sans-serif" }}>Volgende →</button>
       </div>
     </div>
   );
@@ -1169,15 +1231,15 @@ function App() {
   const handlePractice = (deck, title, source = "vocabHome") => { setPracticePool(deck); setPracticeTitle(title); setPracticeSource(source); setScreen("mode"); };
   const handleMode = (m, size) => { setChunkSize(size); startDeck(practicePool, m, size); };
 
+  const nextMode = { flip: "mc", mc: "type", type: "flip" }[mode];
   const cardsScreen = (
     <div style={{ minHeight: "100vh", background: "linear-gradient(160deg,#f5f0ea 0%,#ebe5dc 50%,#e2dbd2 100%)", fontFamily: "system-ui,sans-serif", position: "relative" }}>
       <button onClick={() => setScreen(practiceSource)} style={{ ...s.backBtn, position: "absolute", top: 18, left: 18, zIndex: 10 }}>← Menu</button>
       <button onClick={() => setScreen("glossary")} style={{ position: "absolute", top: 14, left: "50%", transform: "translateX(-50%)", zIndex: 10, background: "rgba(43,108,176,0.08)", border: "1px solid rgba(43,108,176,0.2)", borderRadius: 8, color: "#2b6cb0", fontSize: 12, padding: "6px 12px", cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>📖 Lijst</button>
-      <button onClick={() => startDeck(practicePool, mode === "flip" ? "type" : "flip", chunkSize)} style={{ position: "absolute", top: 14, right: 16, zIndex: 10, background: "rgba(0,0,0,0.05)", border: "1px solid rgba(184,109,30,0.15)", borderRadius: 8, color: "#b86d1e", fontSize: 12, padding: "6px 12px", cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>{mode === "flip" ? "⌨️ Typen" : "🃏 Kaarten"}</button>
-      {mode === "flip"
-        ? <Flashcard card={cards[idx]} flipped={flipped} onFlip={() => setFlipped(f => !f)} onNext={handleNext} onPrev={handlePrev} index={idx} total={cards.length} known={known.length} unknown={unknown.length} />
-        : <TypingCard card={cards[idx]} index={idx} total={cards.length} known={known.length} unknown={unknown.length} onNext={handleNext} />
-      }
+      <button onClick={() => startDeck(practicePool, nextMode, chunkSize)} style={{ position: "absolute", top: 14, right: 16, zIndex: 10, background: "rgba(0,0,0,0.05)", border: "1px solid rgba(184,109,30,0.15)", borderRadius: 8, color: "#b86d1e", fontSize: 12, padding: "6px 12px", cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>{{ flip: "🃏 Kaarten", mc: "👆 Kiezen", type: "⌨️ Typen" }[nextMode]}</button>
+      {mode === "flip" && <Flashcard card={cards[idx]} flipped={flipped} onFlip={() => setFlipped(f => !f)} onNext={handleNext} onPrev={handlePrev} index={idx} total={cards.length} known={known.length} unknown={unknown.length} />}
+      {mode === "mc" && <ChoiceCard card={cards[idx]} pool={practicePool.length >= 4 ? practicePool : allVocab} index={idx} total={cards.length} known={known.length} unknown={unknown.length} onNext={handleNext} />}
+      {mode === "type" && <TypingCard card={cards[idx]} index={idx} total={cards.length} known={known.length} unknown={unknown.length} onNext={handleNext} />}
     </div>
   );
 
