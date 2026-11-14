@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>B1 → B2</title>
     <meta name="theme-color" content="#f5f0ea" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="B1 → B2" />
     <script>
       (function () {
         var v = null; try { v = localStorage.getItem('dutch-dark-mode'); } catch (e) {}
@@ -61,9 +67,9 @@
       @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Versions are pinned so the service worker (sw.js) can cache them forever. -->
+    <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin></script>
   </head>
   <body style="margin:0">
     <div id="root">
@@ -72,20 +78,42 @@
       </div>
     </div>
     <script>
-      fetch('./app.jsx')
-        .then(function(r) { return r.text(); })
-        .then(function(code) {
-          var result = Babel.transform(code, { presets: [['react', { runtime: 'classic' }]], filename: 'app.jsx' });
+      // app.jsx is compiled in the browser by Babel, which is a big download
+      // and slow on a phone. So the compiled result is kept in localStorage
+      // and Babel is only loaded when app.jsx has actually changed.
+      var BABEL_URL = 'https://unpkg.com/@babel/standalone@7.26.4/babel.min.js';
+      var COMPILED_KEY = 'b1b2-compiled'; // not "dutch-…": stays out of progress backups
+      function run(code) { var s = document.createElement('script'); s.text = code; document.body.appendChild(s); }
+      function loadScript(src) {
+        return new Promise(function (resolve, reject) {
           var s = document.createElement('script');
-          s.text = result.code;
-          document.body.appendChild(s);
+          s.src = src; s.crossOrigin = 'anonymous';
+          s.onload = resolve; s.onerror = function () { reject(new Error('kon ' + src + ' niet laden')); };
+          document.head.appendChild(s);
+        });
+      }
+      function fingerprint(str) { var h = 5381; for (var i = 0; i < str.length; i++) h = ((h << 5) + h + str.charCodeAt(i)) | 0; return h + ':' + str.length; }
+      fetch('./app.jsx')
+        .then(function (r) { if (!r.ok) throw new Error('app.jsx: HTTP ' + r.status); return r.text(); })
+        .then(function (src) {
+          var key = fingerprint(src), cached = null;
+          try { var c = JSON.parse(localStorage.getItem(COMPILED_KEY)); if (c && c.key === key) cached = c.code; } catch (e) {}
+          if (cached) return run(cached);
+          return loadScript(BABEL_URL).then(function () {
+            var code = Babel.transform(src, { presets: [['react', { runtime: 'classic' }]], filename: 'app.jsx' }).code;
+            try { localStorage.setItem(COMPILED_KEY, JSON.stringify({ key: key, code: code })); } catch (e) {}
+            run(code);
+          });
         })
-        .catch(function(err) {
+        .catch(function (err) {
           document.getElementById('root').innerHTML =
-            '<div style="color:#e76f51;font-family:system-ui;padding:40px;text-align:center">' +
+            '<div style="color:var(--red);font-family:system-ui;padding:40px;text-align:center">' +
             '<b>Fout bij laden:</b><br><code>' + err.message + '</code><br><br>' +
             'Open via <b>http://localhost:8000</b> (niet als file://)</div>';
         });
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () { navigator.serviceWorker.register('./sw.js').catch(function (e) { console.warn('service worker:', e); }); });
+      }
     </script>
   </body>
 </html>
