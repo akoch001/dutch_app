@@ -4,14 +4,70 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>B1 → B2</title>
+    <meta name="theme-color" content="#f5f0ea" />
+    <script>
+      (function () {
+        var v = null; try { v = localStorage.getItem('dutch-dark-mode'); } catch (e) {}
+        var dark = v === null ? window.matchMedia('(prefers-color-scheme: dark)').matches : v === '1';
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+      })();
+    </script>
+    <style>
+      /* Design tokens — every colour in app.jsx comes from here. */
+      :root {
+        --bg1: #f5f0ea; --bg2: #ebe5dc; --bg3: #e2dbd2;
+        --text: #1c1917; --muted: #6b6560; --faint: #a09890;
+        --accent: #b86d1e; --accent-rgb: 184,109,30;
+        --red: #c94a3a; --red-rgb: 201,74,58;
+        --green: #0f9d91; --green-rgb: 15,157,145;
+        --purple: #6b46c1; --purple2: #8c6dff; --purple-rgb: 107,70,193;
+        --teal: #2a7a65; --teal-rgb: 42,122,101;
+        --blue: #2b6cb0; --blue-rgb: 43,108,176;
+        --amber: #92600a; --amber-rgb: 146,96,10;
+        --podcast: #1a6985; --podcast-rgb: 26,105,133;
+        --surface-rgb: 255,255,255; --ink-rgb: 0,0,0; --overlay-rgb: 28,25,23;
+      }
+      :root[data-theme="dark"] {
+        color-scheme: dark;
+        --bg1: #14110e; --bg2: #18140f; --bg3: #1d1812;
+        --text: #f3ede5; --muted: #a8a097; --faint: #756d65;
+        --accent: #e59f52; --accent-rgb: 229,159,82;
+        --red: #f08672; --red-rgb: 240,134,114;
+        --green: #3fcbbd; --green-rgb: 63,203,189;
+        --purple: #a990fb; --purple2: #c7b9ff; --purple-rgb: 169,144,251;
+        --teal: #55c4a7; --teal-rgb: 85,196,167;
+        --blue: #6fadec; --blue-rgb: 111,173,236;
+        --amber: #e2ae4c; --amber-rgb: 226,174,76;
+        --podcast: #5bbbdb; --podcast-rgb: 91,187,219;
+        --surface-rgb: 46,40,33; --ink-rgb: 255,255,255; --overlay-rgb: 0,0,0;
+      }
+      html, body { background: var(--bg1); }
+
+      /* Motion */
+      button { transition: transform .12s ease; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+      button:active { transform: scale(.97); }
+      @keyframes screenIn { from { opacity: 0; } to { opacity: 1; } }
+      .screen-in { animation: screenIn .25s ease-out; }
+      @keyframes cardIn { from { opacity: 0; transform: translateX(22px); } to { opacity: 1; transform: none; } }
+      .card-in { animation: cardIn .26s cubic-bezier(.2,.8,.2,1) backwards; }
+      @keyframes flipIn { from { opacity: .2; transform: perspective(700px) rotateX(-75deg); } to { opacity: 1; transform: perspective(700px) rotateX(0); } }
+      .flip-in { animation: flipIn .3s cubic-bezier(.2,.8,.2,1); }
+      @keyframes pop { 40% { transform: scale(1.04); } }
+      .pop { animation: pop .35s ease; }
+      @keyframes shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+      .shake { animation: shake .35s ease; }
+      @keyframes confettiFall { from { transform: translateY(-10vh) rotate(0); opacity: 1; } to { transform: translateY(110vh) rotate(720deg); opacity: .9; } }
+      .confetti { position: absolute; top: 0; border-radius: 2px; animation: confettiFall linear forwards; }
+      @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+    </style>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   </head>
-  <body style="margin:0;background:#0a0e17">
+  <body style="margin:0">
     <div id="root">
-      <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;color:#6b7a96;font-family:system-ui;font-size:16px">
+      <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;color:var(--muted);font-family:system-ui;font-size:16px">
         Laden... 🇳🇱
       </div>
     </div>
