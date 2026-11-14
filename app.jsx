@@ -331,7 +331,7 @@ function Confetti() {
 }
 
 // ── Home ──────────────────────────────────────────────────────────────────────
-function Home({ allVocab, allVerbs, allExpressions, nuances, podcastEpisodes, onVocab, onVerbs, onExpressions, onNuances, onPodcast, onQuick }) {
+function Home({ allVocab, allVerbs, allExpressions, nuances, podcastEpisodes, onVocab, onVerbs, onExpressions, onNuances, onPodcast, onQuick, onQuickVerbs }) {
   const [showProgress, setShowProgress] = useState(false);
   return (
     <div style={{ ...s.screen, paddingBottom: 80 }}>
@@ -341,13 +341,21 @@ function Home({ allVocab, allVerbs, allExpressions, nuances, podcastEpisodes, on
         <h1 style={{ fontSize: 32, fontWeight: 700, color: "var(--text)", fontFamily: "'Playfair Display',serif", marginTop: 8 }}>B1 → B2</h1>
       </div>
       <StreakStrip />
-      <button onClick={onQuick} style={{ ...s.allBtn, marginTop: 0, marginBottom: 16, padding: "16px 20px", display: "flex", alignItems: "center", gap: 14 }}>
-        <span style={{ fontSize: 24 }}>🚀</span>
-        <div>
-          <div style={{ fontWeight: 700, fontSize: 16 }}>Snelle ronde</div>
-          <div style={{ color: "var(--muted)", fontSize: 13, marginTop: 2, fontWeight: 400 }}>15 woorden · kiezen · nieuw & lastig eerst</div>
+      <div style={{ width: "100%", maxWidth: 340, marginBottom: 16 }}>
+        <div style={{ fontSize: 11, letterSpacing: 2, textTransform: "uppercase", color: "var(--muted)", fontWeight: 600, marginBottom: 8, fontFamily: "'DM Sans',sans-serif" }}>🚀 Snelle ronde · 15 vragen · kiezen</div>
+        <div style={{ display: "flex", gap: 10 }}>
+          <button onClick={onQuick} style={{ ...s.allBtn, width: "auto", flex: 1, marginTop: 0, padding: "14px 12px", textAlign: "center" }}>
+            <div style={{ fontSize: 22 }}>📖</div>
+            <div style={{ fontWeight: 700, fontSize: 15, marginTop: 4 }}>Woorden</div>
+            <div style={{ color: "var(--muted)", fontSize: 12, marginTop: 2, fontWeight: 400 }}>nieuw & lastig eerst</div>
+          </button>
+          <button onClick={onQuickVerbs} style={{ ...s.allBtn, width: "auto", flex: 1, marginTop: 0, padding: "14px 12px", textAlign: "center", background: "linear-gradient(135deg,rgba(var(--purple-rgb),0.15),rgba(var(--purple-rgb),0.05))", border: "1px solid rgba(var(--purple-rgb),0.3)", color: "var(--purple)" }}>
+            <div style={{ fontSize: 22 }}>⚡</div>
+            <div style={{ fontWeight: 700, fontSize: 15, marginTop: 4 }}>Werkwoorden</div>
+            <div style={{ color: "var(--muted)", fontSize: 12, marginTop: 2, fontWeight: 400 }}>presens · imperf. · perf.</div>
+          </button>
         </div>
-      </button>
+      </div>
       <div style={{ width: "100%", maxWidth: 340, display: "flex", flexDirection: "column", gap: 12 }}>
         <button onClick={onVocab} style={{ padding: "16px 20px", background: "linear-gradient(135deg,rgba(var(--blue-rgb),0.1),rgba(var(--blue-rgb),0.04))", border: "1px solid rgba(var(--blue-rgb),0.2)", borderRadius: 16, display: "flex", alignItems: "center", gap: 14, cursor: "pointer", fontFamily: "'DM Sans',sans-serif", textAlign: "left" }}>
           <span style={{ fontSize: 24 }}>📖</span>
@@ -681,7 +689,7 @@ function VerbTestSetup({ onBack, onStart, verbGroupNames, mc, onMc }) {
 }
 
 // ── Verb test ─────────────────────────────────────────────────────────────────
-function VerbTest({ items, mode, onComplete, onBack, inputMode, optionsFor, explain }) {
+function VerbTest({ items, mode, onComplete, onBack, backLabel = "← Test menu", inputMode, optionsFor, explain }) {
   const [index, setIndex] = useState(0);
   const [input, setInput] = useState("");
   const [status, setStatus] = useState(null);
@@ -765,7 +773,7 @@ function VerbTest({ items, mode, onComplete, onBack, inputMode, optionsFor, expl
   return (
     <div style={{ minHeight: "100vh", background: "linear-gradient(160deg,var(--bg1),var(--bg2) 50%,var(--bg3))", fontFamily: "system-ui,sans-serif", position: "relative", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "60px 20px 40px" }}>
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: "rgba(var(--surface-rgb),0.85)" }}><div style={{ height: "100%", width: `${pct}%`, background: "linear-gradient(90deg,var(--purple),var(--purple2))", transition: "width 0.4s", borderRadius: "0 2px 2px 0" }} /></div>
-      <button onClick={onBack} style={{ ...s.backBtn, position: "absolute", top: 18, left: 18 }}>← Test menu</button>
+      <button onClick={onBack} style={{ ...s.backBtn, position: "absolute", top: 18, left: 18 }}>{backLabel}</button>
       <div style={{ position: "absolute", top: 18, right: 18, fontSize: 12, color: "var(--muted)" }}>{index + 1} / {queue.length} · <span style={{ color: "var(--green)" }}>✓ {score.right}</span> <span style={{ color: "var(--red)" }}>✗ {score.wrong}</span></div>
       <div style={{ width: "100%", maxWidth: 400 }}>
         <div key={`q-${index}`} className="card-in" style={{ background: "rgba(var(--surface-rgb),0.75)", border: "1px solid rgba(var(--purple-rgb),0.18)", borderRadius: 20, padding: "28px 24px", textAlign: "center", marginBottom: 18 }}>{display}</div>
@@ -1434,6 +1442,7 @@ function App() {
   const [practiceTitle, setPracticeTitle] = useState("");
   const [practiceSource, setPracticeSource] = useState("vocabHome");
   const [podcastEpisode, setPodcastEpisode] = useState(null);
+  const [quickVerbs, setQuickVerbs] = useState(false);
   const [testMc, setTestMc] = useState(() => localStorage.getItem("dutch-test-mc") === "1");
   useEffect(() => { localStorage.setItem("dutch-test-mc", testMc ? "1" : "0"); }, [testMc]);
 
@@ -1507,7 +1516,10 @@ function App() {
 
   const { vocab, chapters, allVocab, allVerbs, verbGroups, verbGroupNames, sentences, expressions, exprSentences, exprCategories, nuances, podcastEpisodes } = appData;
 
-  const startVerbTest = (testMode, count, selectedTenses, selectedGroups) => {
+  // `quick` = started from the home screen's Snelle ronde: always multiple
+  // choice, and back / done return to the home screen instead of the setup.
+  const startVerbTest = (testMode, count, selectedTenses, selectedGroups, quick = false) => {
+    setQuickVerbs(quick);
     const groups = selectedGroups || verbGroupNames;
     const verbSet = new Set(groups.flatMap(g => (verbGroups[g] || []).map(v => v.inf)));
     const pool = sentences.filter(snt => selectedTenses.includes(snt.tense) && verbSet.has(snt.verb));
@@ -1535,6 +1547,7 @@ function App() {
     setPracticePool(allVocab); setPracticeTitle("Snelle ronde"); setPracticeSource("home"); setChunkSize(15);
     startDeck(quickPick(allVocab, 15), "mc", 15);
   };
+  const startQuickVerbs = () => startVerbTest("context", 15, ["presens", "imperfectum", "perfectum"], verbGroupNames, true);
   const handleMode = (m, size) => { setChunkSize(size); startDeck(practicePool, m, size); };
 
   const nextMode = { flip: "mc", mc: "type", type: "flip" }[mode];
@@ -1554,7 +1567,7 @@ function App() {
       <style>{`*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg1);font-family:system-ui,sans-serif}input::placeholder{color:var(--faint)}::-webkit-scrollbar{display:none}input{color:var(--text)}`}</style>
       <button onClick={() => setDarkMode(d => !d)} style={{ position: "fixed", bottom: 20, right: 20, zIndex: 9999, width: 44, height: 44, borderRadius: "50%", border: "1px solid rgba(var(--ink-rgb),0.12)", background: "rgba(var(--surface-rgb),0.85)", fontSize: 20, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", backdropFilter: "blur(8px)", boxShadow: "0 2px 12px rgba(var(--ink-rgb),0.1)" }}>{darkMode ? "☀️" : "🌙"}</button>
       <div key={screen} className="screen-in">
-      {screen === "home" && <Home allVocab={allVocab} allVerbs={allVerbs} allExpressions={expressions} nuances={nuances} podcastEpisodes={podcastEpisodes} onVocab={() => setScreen("vocabHome")} onVerbs={() => setScreen("verbs")} onExpressions={() => setScreen("expressions")} onNuances={() => setScreen("nuances")} onPodcast={() => setScreen("podcast")} onQuick={startQuick} />}
+      {screen === "home" && <Home allVocab={allVocab} allVerbs={allVerbs} allExpressions={expressions} nuances={nuances} podcastEpisodes={podcastEpisodes} onVocab={() => setScreen("vocabHome")} onVerbs={() => setScreen("verbs")} onExpressions={() => setScreen("expressions")} onNuances={() => setScreen("nuances")} onPodcast={() => setScreen("podcast")} onQuick={startQuick} onQuickVerbs={startQuickVerbs} />}
       {screen === "podcast" && <PodcastHome episodes={podcastEpisodes} onBack={() => setScreen("home")} onBrowse={ep => { setPodcastEpisode(ep); setScreen("podcastBrowse"); }} onPractice={ep => { const deck = ep.sections.flatMap(s => s.words); handlePractice(deck, ep.title, "podcast"); }} />}
       {screen === "podcastBrowse" && podcastEpisode && <EpisodeBrowse episode={podcastEpisode} onBack={() => setScreen("podcast")} />}
       {screen === "nuances" && <NuancesBrowse nuances={nuances} onBack={() => setScreen("home")} onPractice={() => handlePractice(nuances.flatMap(n => n.examples), "Nuances · voorbeeldzinnen", "nuances")} />}
@@ -1563,8 +1576,8 @@ function App() {
       {screen === "verbs" && <VerbsHome allVerbs={allVerbs} onBack={() => setScreen("home")} onStudy={() => setScreen("verbStudy")} onTest={() => setScreen("verbTestSetup")} />}
       {screen === "verbStudy" && <VerbStudy verbGroups={verbGroups} verbGroupNames={verbGroupNames} onBack={() => setScreen("verbs")} />}
       {screen === "verbTestSetup" && <VerbTestSetup onBack={() => setScreen("verbs")} onStart={startVerbTest} verbGroupNames={verbGroupNames} mc={testMc} onMc={setTestMc} />}
-      {screen === "verbTest" && <VerbTest items={verbTestItems} mode={verbTestMode} inputMode={testMc ? "mc" : "type"} optionsFor={it => verbOptions(it, sentences, allVerbs)} explain={it => { const v = allVerbs.find(x => x.inf === it.verb); return v && { head: `${v.inf} · ${v.en}`, body: `${v.presIk || v.inf} – ${v.impSg} – ${v.vd} (${v.aux})` }; }} onBack={() => setScreen("verbTestSetup")} onComplete={scr => { setVerbScore(scr); setScreen("verbResults"); }} />}
-      {screen === "verbResults" && verbScore && <VerbResults score={verbScore} onRestart={() => startVerbTest(verbTestMode, verbTestItems.length, verbTestTenses, verbTestGroups)} onRetry={wrongs => { setVerbTestItems(wrongs); setVerbScore(null); setScreen("verbTest"); }} onHome={() => setScreen("verbs")} />}
+      {screen === "verbTest" && <VerbTest items={verbTestItems} mode={verbTestMode} inputMode={quickVerbs || testMc ? "mc" : "type"} optionsFor={it => verbOptions(it, sentences, allVerbs)} explain={it => { const v = allVerbs.find(x => x.inf === it.verb); return v && { head: `${v.inf} · ${v.en}`, body: `${v.presIk || v.inf} – ${v.impSg} – ${v.vd} (${v.aux})` }; }} onBack={() => setScreen(quickVerbs ? "home" : "verbTestSetup")} backLabel={quickVerbs ? "← Menu" : undefined} onComplete={scr => { setVerbScore(scr); setScreen("verbResults"); }} />}
+      {screen === "verbResults" && verbScore && <VerbResults score={verbScore} onRestart={() => startVerbTest(verbTestMode, verbTestItems.length, verbTestTenses, verbTestGroups, quickVerbs)} onRetry={wrongs => { setVerbTestItems(wrongs); setVerbScore(null); setScreen("verbTest"); }} onHome={() => setScreen(quickVerbs ? "home" : "verbs")} />}
       {screen === "expressions" && <ExpressionsHome allExpressions={expressions} onBack={() => setScreen("home")} onBrowse={() => setScreen("exprBrowse")} onTest={() => setScreen("exprTestSetup")} />}
       {screen === "exprBrowse" && <ExpressionsBrowse expressions={expressions} categories={exprCategories} onBack={() => setScreen("expressions")} />}
       {screen === "exprTestSetup" && <ExpressionsTestSetup categories={exprCategories} onBack={() => setScreen("expressions")} onStart={startExpressionTest} mc={testMc} onMc={setTestMc} />}
