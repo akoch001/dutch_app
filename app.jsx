@@ -51,10 +51,12 @@ function Say({ text, children }) {
 const STATS_KEY = "dutch-item-stats-v1";
 function statsLoad() { try { return JSON.parse(localStorage.getItem(STATS_KEY)) || {}; } catch { return {}; } }
 function statsSave(stats) { try { localStorage.setItem(STATS_KEY, JSON.stringify(stats)); } catch (e) { console.error("save failed", e); } }
-function recordAttempt(id, wasRight) {
+// `typed` = the answer was typed out rather than chosen or self-judged.
+// typedStreak counts typed right answers since the last miss in any mode.
+function recordAttempt(id, wasRight, typed = false) {
   const stats = statsLoad();
   const cur = stats[id] || { seen: 0, wrong: 0 };
-  stats[id] = { seen: cur.seen + 1, wrong: cur.wrong + (wasRight ? 0 : 1), streak: wasRight ? (cur.streak || 0) + 1 : 0, lastSeen: Date.now() };
+  stats[id] = { seen: cur.seen + 1, wrong: cur.wrong + (wasRight ? 0 : 1), streak: wasRight ? (cur.streak || 0) + 1 : 0, typedStreak: wasRight ? (cur.typedStreak || 0) + (typed ? 1 : 0) : 0, lastSeen: Date.now() };
   statsSave(stats);
   const daily = dailyLoad(), k = dayKey();
   daily[k] = (daily[k] || 0) + 1;
@@ -82,6 +84,10 @@ const exprSentId = (it) => `exprSent:${it.sentence}|${it.answer}`;
 // A word counts as "learned" once it's been practised at least twice and
 // answered right at least two times out of three.
 const isKnown = (st) => !!st && st.seen >= 2 && st.wrong / st.seen <= 1 / 3;
+// "Typed" is the stronger level: learned, and produced from memory by typing
+// (not just recognised in Kiezen or self-judged on a flashcard) since the
+// last miss.
+const isTyped = (st) => isKnown(st) && (st.typedStreak || 0) >= 1;
 const isShaky = (st) => !!st && st.seen >= 1 && st.wrong / st.seen > 1 / 3;
 
 // Quick round: up to half the cards are words you've been getting wrong, the
@@ -432,13 +438,14 @@ function VocabHome({ onBack, onGlossary, onPractice, chapters, vocab, allVocab }
       {chapters.map((ch, i) => {
         const active = selected.has(ch);
         const learned = vocab[ch].filter(c => isKnown(stats[vocabId(c)])).length;
+        const typed = vocab[ch].filter(c => isTyped(stats[vocabId(c)])).length;
         return (
           <button key={ch} onClick={() => toggle(ch)} style={{ ...s.chapterBtn, borderColor: active ? "rgba(var(--accent-rgb),0.4)" : "rgba(var(--accent-rgb),0.15)", background: active ? "rgba(var(--accent-rgb),0.08)" : "rgba(var(--surface-rgb),0.75)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <div style={{ flex: 1, marginRight: 16 }}>
               <div style={{ fontSize: 11, color: "var(--accent)", letterSpacing: 2, textTransform: "uppercase", marginBottom: 6 }}>Hoofdstuk {i + 1}</div>
               <div style={{ color: "var(--text)" }}>{ch.split("–")[1]?.trim()}</div>
-              <div style={{ fontSize: 13, color: "var(--muted)", marginTop: 4 }}>{vocab[ch].length} woorden · <span style={{ color: learned > 0 ? "var(--green)" : "var(--muted)" }}>{learned} geleerd</span></div>
-              <div style={{ height: 4, borderRadius: 2, background: "rgba(var(--ink-rgb),0.07)", marginTop: 8, overflow: "hidden" }}><div style={{ height: "100%", width: `${(learned / vocab[ch].length) * 100}%`, background: "var(--green)", borderRadius: 2 }} /></div>
+              <div style={{ fontSize: 13, color: "var(--muted)", marginTop: 4 }}>{vocab[ch].length} woorden · <span style={{ color: learned > 0 ? "var(--green)" : "var(--muted)" }}>{learned} geleerd</span>{typed > 0 && <> · <span style={{ color: "var(--blue)" }}>{typed} getypt</span></>}</div>
+              <div style={{ height: 4, borderRadius: 2, background: "rgba(var(--ink-rgb),0.07)", marginTop: 8, overflow: "hidden", display: "flex" }}><div style={{ height: "100%", width: `${(typed / vocab[ch].length) * 100}%`, background: "var(--blue)" }} /><div style={{ height: "100%", width: `${((learned - typed) / vocab[ch].length) * 100}%`, background: "var(--green)" }} /></div>
             </div>
             <div style={{ width: 22, height: 22, borderRadius: "50%", border: `2px solid ${active ? "var(--accent)" : "rgba(var(--ink-rgb),0.15)"}`, background: active ? "var(--accent)" : "transparent", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
               {active && <span style={{ color: "var(--bg1)", fontSize: 13, fontWeight: 700 }}>✓</span>}
@@ -463,8 +470,9 @@ const WORD_STATUS = {
   shaky: { label: "Lastig", color: "var(--red)" },
   busy: { label: "Bezig", color: "var(--accent)" },
   known: { label: "Geleerd", color: "var(--green)" },
+  typed: { label: "Getypt", color: "var(--blue)" },
 };
-const wordStatus = (st) => !st || !st.seen ? "new" : isKnown(st) ? "known" : isShaky(st) ? "shaky" : "busy";
+const wordStatus = (st) => !st || !st.seen ? "new" : isTyped(st) ? "typed" : isKnown(st) ? "known" : isShaky(st) ? "shaky" : "busy";
 
 function Glossary({ onBack, onPractice, vocab, allVocab, chapters }) {
   const [search, setSearch] = useState("");
@@ -495,10 +503,10 @@ function Glossary({ onBack, onPractice, vocab, allVocab, chapters }) {
           <span style={{ position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)", color: "var(--faint)", fontSize: 15 }}>🔍</span>
           <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Zoeken..." style={{ width: "100%", boxSizing: "border-box", padding: "12px 14px 12px 38px", background: "rgba(var(--surface-rgb),0.85)", border: "1px solid rgba(var(--accent-rgb),0.15)", borderRadius: 12, color: "var(--text)", fontSize: 15, outline: "none", fontFamily: "'DM Sans',sans-serif", caretColor: "var(--accent)" }} />
         </div>
-        <div style={{ display: "flex", gap: 6, marginBottom: 10 }}>
+        <div style={{ display: "flex", gap: 6, marginBottom: 10, overflowX: "auto", scrollbarWidth: "none" }}>
           {[["all", { label: "Alle" }], ...Object.entries(WORD_STATUS)].map(([k, v]) => {
             const active = statusFilter === k;
-            return <button key={k} onClick={() => setStatusFilter(k)} style={{ flex: 1, padding: "7px 0", borderRadius: 10, fontSize: 12, fontWeight: 600, cursor: "pointer", fontFamily: "'DM Sans',sans-serif", background: active ? "rgba(var(--accent-rgb),0.15)" : "rgba(var(--surface-rgb),0.75)", border: active ? "1px solid rgba(var(--accent-rgb),0.5)" : "1px solid rgba(var(--ink-rgb),0.07)", color: active ? "var(--accent)" : "var(--muted)", display: "flex", alignItems: "center", justifyContent: "center", gap: 5 }}>{v.color && <span style={{ width: 7, height: 7, borderRadius: "50%", background: v.color }} />}{v.label}</button>;
+            return <button key={k} onClick={() => setStatusFilter(k)} style={{ flex: "1 0 auto", padding: "7px 9px", borderRadius: 10, fontSize: 12, fontWeight: 600, cursor: "pointer", fontFamily: "'DM Sans',sans-serif", background: active ? "rgba(var(--accent-rgb),0.15)" : "rgba(var(--surface-rgb),0.75)", border: active ? "1px solid rgba(var(--accent-rgb),0.5)" : "1px solid rgba(var(--ink-rgb),0.07)", color: active ? "var(--accent)" : "var(--muted)", display: "flex", alignItems: "center", justifyContent: "center", gap: 5 }}>{v.color && <span style={{ width: 7, height: 7, borderRadius: "50%", background: v.color }} />}{v.label}</button>;
           })}
         </div>
         <div style={{ fontSize: 12, color: "var(--faint)", paddingBottom: 8 }}>{sorted.length} woorden</div>
@@ -720,7 +728,7 @@ function VerbTest({ items, mode, onComplete, onBack, backLabel = "← Test menu"
   const submit = () => { if (!input.trim()) return; setStatus(checkAnswer(input, current.answer)); };
   const advance = (forced) => {
     const wasRight = typeof forced === "boolean" ? forced : status === "exact" || status === "close";
-    recordAttempt(verbSentId(current), wasRight);
+    recordAttempt(verbSentId(current), wasRight, typing);
     const newScore = score.wrongs.includes(current) ? score : { right: score.right + (wasRight ? 1 : 0), wrong: score.wrong + (wasRight ? 0 : 1), wrongs: wasRight ? score.wrongs : [...score.wrongs, current] };
     setScore(newScore);
     let q = queue;
@@ -1180,7 +1188,7 @@ function ExpressionTest({ items, onComplete, onBack, inputMode, optionsFor, expl
   const submit = () => { if (!input.trim()) return; setStatus(checkAnswer(input, current.answer)); };
   const advance = (forced) => {
     const wasRight = typeof forced === "boolean" ? forced : status === "exact" || status === "close";
-    recordAttempt(exprSentId(current), wasRight);
+    recordAttempt(exprSentId(current), wasRight, typing);
     const newScore = score.wrongs.includes(current) ? score : { right: score.right + (wasRight ? 1 : 0), wrong: score.wrong + (wasRight ? 0 : 1), wrongs: wasRight ? score.wrongs : [...score.wrongs, current] };
     setScore(newScore);
     let q = queue;
@@ -1492,7 +1500,7 @@ function App() {
   // flashcard without judging it (no result) records nothing.
   const handleNext = useCallback((result) => {
     const card = cards[idx];
-    if (result) recordAttempt(vocabId(card), result === "known");
+    if (result) recordAttempt(vocabId(card), result === "known", mode === "type");
     const isRepeat = unknown.includes(card);
     if (result === "known" && !isRepeat) setKnown(k => [...k, card]);
     if (result === "unknown" && !isRepeat) setUnknown(u => [...u, card]);
@@ -1500,11 +1508,48 @@ function App() {
     if (result === "unknown") { deck = [...cards]; deck.splice(Math.min(idx + 4, deck.length), 0, card); setCards(deck); }
     if (idx >= deck.length - 1) setTimeout(() => setScreen("results"), 100);
     else { setIdx(i => i + 1); setFlipped(false); }
-  }, [idx, cards, unknown]);
+  }, [idx, cards, unknown, mode]);
 
   const handlePrev = useCallback(() => {
     if (idx > 0) { setIdx(i => i - 1); setFlipped(false); }
   }, [idx]);
+
+  // ── Back button ────────────────────────────────────────────────────────────
+  // Where the phone's / browser's back button goes from each screen. Mirrors
+  // the on-screen back buttons — keep the two in step.
+  const parentOf = sc => ({
+    vocabHome: "home", glossary: "vocabHome", mode: practiceSource, cards: practiceSource, results: practiceSource,
+    verbs: "home", verbStudy: "verbs", verbTestSetup: "verbs", verbTest: quickVerbs ? "home" : "verbTestSetup", verbResults: quickVerbs ? "home" : "verbs",
+    expressions: "home", exprBrowse: "expressions", exprTestSetup: "expressions", exprTest: "exprTestSetup", exprResults: "expressions",
+    nuances: "home", podcast: "home", podcastBrowse: "podcast",
+  })[sc];
+  const depthOf = sc => { let d = 0; while ((sc = parentOf(sc)) && d < 10) d++; return d; };
+  // The app is one page, so without this "back" leaves the site. We keep one
+  // browser-history entry per level below the home screen (nav.depth of them):
+  // going deeper adds entries, going up by an on-screen button removes them,
+  // and a back press (popstate) moves to the parent screen.
+  const nav = useRef({ depth: 0, ignore: 0 });
+  const parentRef = useRef(null);
+  parentRef.current = () => parentOf(screen);
+  useEffect(() => {
+    const n = nav.current, d = depthOf(screen);
+    for (let i = n.depth; i < d; i++) history.pushState({ depth: i + 1 }, "");
+    if (d < n.depth) { n.ignore++; history.go(d - n.depth); }
+    n.depth = d;
+  }, [screen]);
+  useEffect(() => {
+    const onPop = e => {
+      const n = nav.current, target = e.state?.depth || 0;
+      if (n.ignore > 0) { n.ignore--; return; }
+      if (target > n.depth) { n.ignore++; history.back(); return; } // forward button: undo
+      n.depth = target;
+      const to = parentRef.current();
+      if (to) setScreen(to);
+      else history.back(); // already home (e.g. after a reload): keep leaving
+    };
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
 
   if (!appData) {
     return (
