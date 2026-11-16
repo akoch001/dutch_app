@@ -121,6 +121,40 @@ function verbOptions(item, sentences, allVerbs) {
   }
   return shuffle([item.answer, ...wrong]);
 }
+// Forms drill: no sentence, just "lopen → imperfectum?" or "→ voltooid
+// deelwoord?". Items have the same shape as verb sentences so VerbTest and the
+// results screen handle them unchanged. Verbs with two accepted forms
+// ("waaide/woei") are left out because a single typed answer can't match.
+const AUX_HIJ = { hebben: "hij heeft", zijn: "hij is" };
+const DRILL_FORMS = {
+  presens: v => ({ form: "pres", answer: v.presJijHij, subject: "hij / zij", tense: "presens" }),
+  imperfectum: v => ({ form: "imp", answer: v.impSg, subject: "ik / hij", tense: "imperfectum" }),
+  perfectum: v => ({ form: "vd", answer: v.vd, subject: AUX_HIJ[v.aux] || "hij heeft / is", tense: "voltooid deelwoord" }),
+};
+function drillItems(verbs, tenses) {
+  return verbs.flatMap(v => tenses.map(t => ({ ...DRILL_FORMS[t](v), drill: true, verb: v.inf, template: "{}", hint: v.en })))
+    .filter(it => it.answer && !it.answer.includes("/"));
+}
+// Wrong options are the mistakes people actually make: treating a strong verb
+// as regular (loopte, geloopt), the wrong -t/-d ending, or mixing the
+// imperfect vowel into the participle (geliepen). Real other forms of the verb
+// fill the list when those happen to be right or too few.
+function drillOptions(item, v) {
+  const [stem, ...rest] = v.presIk.split(" ");
+  const part = rest.join(" "), imp = v.impSg.split(" ")[0];
+  const fakes = item.form === "vd"
+    ? [!stem.endsWith("t") && `${part}ge${stem}t`, !stem.endsWith("d") && `${part}ge${stem}d`, !imp.endsWith("e") && `${part}ge${imp}en`, v.impSg, v.impPl, v.inf]
+    : item.form === "imp"
+      ? [`${stem}te${part && " " + part}`, `${stem}de${part && " " + part}`, v.impPl, v.vd, v.presJijHij]
+      : [v.presIk, v.presWij, v.impSg, v.inf, v.vd, v.impPl];
+  const seen = new Set([normalize(item.answer)]), wrong = [];
+  for (const c of fakes) {
+    if (wrong.length === 3) break;
+    if (!c || seen.has(normalize(c))) continue;
+    seen.add(normalize(c)); wrong.push(c);
+  }
+  return shuffle([item.answer, ...wrong]);
+}
 // Wrong options come from other categories: expressions in the same category
 // are often near-synonyms that would fit the sentence just as well.
 function exprOptions(item, expressions) {
@@ -337,7 +371,7 @@ function Confetti() {
 }
 
 // ── Home ──────────────────────────────────────────────────────────────────────
-function Home({ allVocab, allVerbs, allExpressions, nuances, podcastEpisodes, onVocab, onVerbs, onExpressions, onNuances, onPodcast, onQuick, onQuickVerbs }) {
+function Home({ allVocab, allVerbs, allExpressions, nuances, podcastEpisodes, onVocab, onVerbs, onExpressions, onNuances, onPodcast, onQuick, onQuickVerbs, onQuickDrill }) {
   const [showProgress, setShowProgress] = useState(false);
   return (
     <div style={{ ...s.screen, paddingBottom: 80 }}>
@@ -349,16 +383,21 @@ function Home({ allVocab, allVerbs, allExpressions, nuances, podcastEpisodes, on
       <StreakStrip />
       <div style={{ width: "100%", maxWidth: 340, marginBottom: 16 }}>
         <div style={{ fontSize: 11, letterSpacing: 2, textTransform: "uppercase", color: "var(--muted)", fontWeight: 600, marginBottom: 8, fontFamily: "'DM Sans',sans-serif" }}>🚀 Snelle ronde · 15 vragen · kiezen</div>
-        <div style={{ display: "flex", gap: 10 }}>
-          <button onClick={onQuick} style={{ ...s.allBtn, width: "auto", flex: 1, marginTop: 0, padding: "14px 12px", textAlign: "center" }}>
-            <div style={{ fontSize: 22 }}>📖</div>
-            <div style={{ fontWeight: 700, fontSize: 15, marginTop: 4 }}>Woorden</div>
-            <div style={{ color: "var(--muted)", fontSize: 12, marginTop: 2, fontWeight: 400 }}>nieuw & lastig eerst</div>
+        <div style={{ display: "flex", gap: 8 }}>
+          <button onClick={onQuick} style={{ ...s.allBtn, width: "auto", flex: 1, minWidth: 0, marginTop: 0, padding: "12px 4px", textAlign: "center" }}>
+            <div style={{ fontSize: 20 }}>📖</div>
+            <div style={{ fontWeight: 700, fontSize: 13, marginTop: 4 }}>Woorden</div>
+            <div style={{ color: "var(--muted)", fontSize: 11, marginTop: 2, fontWeight: 400 }}>nieuw & lastig</div>
           </button>
-          <button onClick={onQuickVerbs} style={{ ...s.allBtn, width: "auto", flex: 1, marginTop: 0, padding: "14px 12px", textAlign: "center", background: "linear-gradient(135deg,rgba(var(--purple-rgb),0.15),rgba(var(--purple-rgb),0.05))", border: "1px solid rgba(var(--purple-rgb),0.3)", color: "var(--purple)" }}>
-            <div style={{ fontSize: 22 }}>⚡</div>
-            <div style={{ fontWeight: 700, fontSize: 15, marginTop: 4 }}>Werkwoorden</div>
-            <div style={{ color: "var(--muted)", fontSize: 12, marginTop: 2, fontWeight: 400 }}>presens · imperf. · perf.</div>
+          <button onClick={onQuickVerbs} style={{ ...s.allBtn, width: "auto", flex: 1, minWidth: 0, marginTop: 0, padding: "12px 4px", textAlign: "center", background: "linear-gradient(135deg,rgba(var(--purple-rgb),0.15),rgba(var(--purple-rgb),0.05))", border: "1px solid rgba(var(--purple-rgb),0.3)", color: "var(--purple)" }}>
+            <div style={{ fontSize: 20 }}>⚡</div>
+            <div style={{ fontWeight: 700, fontSize: 13, marginTop: 4 }}>Werkwoorden</div>
+            <div style={{ color: "var(--muted)", fontSize: 11, marginTop: 2, fontWeight: 400 }}>in zinnen</div>
+          </button>
+          <button onClick={onQuickDrill} style={{ ...s.allBtn, width: "auto", flex: 1, minWidth: 0, marginTop: 0, padding: "12px 4px", textAlign: "center", background: "linear-gradient(135deg,rgba(var(--purple-rgb),0.15),rgba(var(--purple-rgb),0.05))", border: "1px solid rgba(var(--purple-rgb),0.3)", color: "var(--purple)" }}>
+            <div style={{ fontSize: 20 }}>🔨</div>
+            <div style={{ fontWeight: 700, fontSize: 13, marginTop: 4 }}>Vormen</div>
+            <div style={{ color: "var(--muted)", fontSize: 11, marginTop: 2, fontWeight: 400 }}>imperf. & v.d.</div>
           </button>
         </div>
       </div>
@@ -672,7 +711,7 @@ function VerbTestSetup({ onBack, onStart, verbGroupNames, mc, onMc }) {
       </div>
       <div style={{ width: "100%", maxWidth: 340, marginBottom: 20 }}>
         <div style={{ fontSize: 11, letterSpacing: 3, textTransform: "uppercase", color: "var(--muted)", fontWeight: 600, marginBottom: 10 }}>Modus</div>
-        {[{ id: "context", icon: "📝", name: "Met context", desc: "Read the sentence, fill in the verb" }, { id: "nocontext", icon: "⚡", name: "Zonder context", desc: "Just verb + tense → type the form" }].map(m => (
+        {[{ id: "context", icon: "📝", name: "Met context", desc: "Read the sentence, fill in the verb" }, { id: "nocontext", icon: "⚡", name: "Zonder context", desc: "Just verb + tense → type the form" }, { id: "drill", icon: "🔨", name: "Vormen-drill", desc: "No sentence: verb → imperfectum / voltooid deelwoord" }].map(m => (
           <button key={m.id} onClick={() => setMode(m.id)} style={{ width: "100%", marginBottom: 8, padding: "14px 16px", borderRadius: 14, cursor: "pointer", fontFamily: "'DM Sans',sans-serif", textAlign: "left", background: mode === m.id ? "rgba(var(--purple-rgb),0.15)" : "rgba(var(--surface-rgb),0.75)", border: mode === m.id ? "1px solid rgba(var(--purple-rgb),0.5)" : "1px solid rgba(var(--ink-rgb),0.07)", display: "flex", alignItems: "center", gap: 12 }}>
             <span style={{ fontSize: 20 }}>{m.icon}</span>
             <div>
@@ -701,7 +740,7 @@ function VerbTest({ items, mode, onComplete, onBack, backLabel = "← Test menu"
   const [index, setIndex] = useState(0);
   const [input, setInput] = useState("");
   const [status, setStatus] = useState(null);
-  const [score, setScore] = useState({ right: 0, wrong: 0, wrongs: [] });
+  const [score, setScore] = useState({ right: 0, wrong: 0, wrongs: [], rights: [] });
   const inputRef = useRef(null);
   // Missed items are put back a few places further on until answered right;
   // the score counts first tries only.
@@ -729,7 +768,7 @@ function VerbTest({ items, mode, onComplete, onBack, backLabel = "← Test menu"
   const advance = (forced) => {
     const wasRight = typeof forced === "boolean" ? forced : status === "exact" || status === "close";
     recordAttempt(verbSentId(current), wasRight, typing);
-    const newScore = score.wrongs.includes(current) ? score : { right: score.right + (wasRight ? 1 : 0), wrong: score.wrong + (wasRight ? 0 : 1), wrongs: wasRight ? score.wrongs : [...score.wrongs, current] };
+    const newScore = score.wrongs.includes(current) ? score : { right: score.right + (wasRight ? 1 : 0), wrong: score.wrong + (wasRight ? 0 : 1), wrongs: wasRight ? score.wrongs : [...score.wrongs, current], rights: wasRight ? [...score.rights, current] : score.rights };
     setScore(newScore);
     let q = queue;
     if (!wasRight) { q = [...queue]; q.splice(Math.min(index + 4, q.length), 0, current); setQueue(q); }
@@ -813,6 +852,27 @@ function VerbTest({ items, mode, onComplete, onBack, backLabel = "← Test menu"
   );
 }
 
+// ── Results review ────────────────────────────────────────────────────────────
+// What you missed and what you got right (first tries), switchable.
+function ReviewList({ wrong, right, row }) {
+  const [tab, setTab] = useState(wrong.length > 0 ? "wrong" : "right");
+  if (wrong.length + right.length === 0) return null;
+  const list = tab === "wrong" ? wrong : right;
+  const tabs = [{ id: "wrong", label: "✗ Nog te leren", n: wrong.length, c: "red" }, { id: "right", label: "✓ Goed", n: right.length, c: "green" }];
+  return (
+    <div style={{ width: "100%", maxWidth: 360, marginBottom: 22, background: "rgba(var(--surface-rgb),0.65)", border: "1px solid rgba(var(--ink-rgb),0.07)", borderRadius: 16, padding: "12px 16px 6px", fontFamily: "'DM Sans',sans-serif" }}>
+      <div style={{ display: "flex", gap: 8, marginBottom: 6 }}>
+        {tabs.map(t => (
+          <button key={t.id} onClick={() => setTab(t.id)} disabled={t.n === 0} style={{ flex: 1, padding: "8px 0", borderRadius: 10, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, cursor: t.n === 0 ? "default" : "pointer", fontFamily: "'DM Sans',sans-serif", opacity: t.n === 0 ? 0.4 : 1, background: tab === t.id ? `rgba(var(--${t.c}-rgb),0.12)` : "transparent", border: tab === t.id ? `1px solid rgba(var(--${t.c}-rgb),0.4)` : "1px solid rgba(var(--ink-rgb),0.07)", color: tab === t.id ? `var(--${t.c})` : "var(--muted)" }}>{t.label} · {t.n}</button>
+        ))}
+      </div>
+      <div style={{ maxHeight: 220, overflowY: "auto" }}>
+        {list.map((it, i) => <div key={i} style={{ padding: "8px 0", borderBottom: i < list.length - 1 ? "1px solid rgba(var(--ink-rgb),0.06)" : "none", fontSize: 13 }}>{row(it)}</div>)}
+      </div>
+    </div>
+  );
+}
+
 // ── Verb results ──────────────────────────────────────────────────────────────
 function VerbResults({ score, onRestart, onRetry, onHome }) {
   const total = score.right + score.wrong;
@@ -822,17 +882,7 @@ function VerbResults({ score, onRestart, onRetry, onHome }) {
       <div style={{ fontSize: 64, fontWeight: 700, fontFamily: "'Playfair Display',serif", color: pct >= 80 ? "var(--green)" : pct >= 50 ? "var(--accent)" : "var(--red)", marginBottom: 8 }}><CountUp to={pct} />%{pct >= 80 && <Confetti />}</div>
       <div style={{ color: "var(--muted)", fontSize: 15, marginBottom: 8 }}>{score.right} goed · {score.wrong} fout</div>
       <div style={{ color: "var(--text)", fontSize: 20, fontWeight: 600, marginBottom: 32, fontFamily: "'Playfair Display',serif" }}>{pct >= 90 ? "Uitstekend!" : pct >= 70 ? "Goed bezig!" : pct >= 50 ? "Ga zo door!" : "Blijf oefenen!"}</div>
-      {score.wrongs.length > 0 && (
-        <div style={{ width: "100%", maxWidth: 360, marginBottom: 22, background: "rgba(var(--surface-rgb),0.65)", border: "1px solid rgba(var(--red-rgb),0.15)", borderRadius: 16, padding: "16px 20px", maxHeight: 240, overflowY: "auto" }}>
-          <div style={{ fontSize: 11, letterSpacing: 2, textTransform: "uppercase", color: "var(--red)", marginBottom: 10, fontWeight: 600 }}>Nog te leren</div>
-          {score.wrongs.map((w, i) => (
-            <div key={i} style={{ padding: "8px 0", borderBottom: i < score.wrongs.length - 1 ? "1px solid rgba(var(--surface-rgb),0.75)" : "none", fontSize: 13 }}>
-              <div style={{ color: "var(--text)" }}>{w.verb} → <span style={{ color: "var(--accent)" }}>{w.answer}</span></div>
-              <div style={{ color: "var(--muted)", fontSize: 11, marginTop: 2 }}>{w.hint}</div>
-            </div>
-          ))}
-        </div>
-      )}
+      <ReviewList wrong={score.wrongs} right={score.rights} row={w => <><div style={{ color: "var(--text)" }}>{w.verb} → <span style={{ color: "var(--accent)" }}><Say text={w.answer} /></span></div><div style={{ color: "var(--muted)", fontSize: 11, marginTop: 2 }}>{w.hint}</div></>} />
       <div style={{ display: "flex", flexDirection: "column", gap: 10, width: "100%", maxWidth: 340 }}>
         {score.wrongs.length > 0 && <button onClick={() => onRetry(score.wrongs)} style={{ ...s.wrongBtn, width: "100%" }}>Oefen fouten opnieuw</button>}
         <button onClick={onRestart} style={s.chapterBtn}>Opnieuw</button>
@@ -1032,17 +1082,7 @@ function Results({ known, unknown, onRestart, onHome, onRetry }) {
       <div style={{ fontSize: 64, fontWeight: 700, fontFamily: "'Playfair Display',serif", color: pct >= 80 ? "var(--green)" : pct >= 50 ? "var(--accent)" : "var(--red)", marginBottom: 8 }}><CountUp to={pct} />%{pct >= 80 && <Confetti />}</div>
       <div style={{ color: "var(--muted)", fontSize: 15, marginBottom: 8 }}>{known.length} goed · {unknown.length} fout</div>
       <div style={{ color: "var(--text)", fontSize: 20, fontWeight: 600, marginBottom: 40, fontFamily: "'Playfair Display',serif" }}>{pct >= 90 ? "Uitstekend!" : pct >= 70 ? "Goed bezig!" : pct >= 50 ? "Ga zo door!" : "Blijf oefenen!"}</div>
-      {unknown.length > 0 && (
-        <div style={{ width: "100%", maxWidth: 340, marginBottom: 24, background: "rgba(var(--surface-rgb),0.65)", border: "1px solid rgba(var(--red-rgb),0.15)", borderRadius: 16, padding: "16px 20px", maxHeight: 200, overflowY: "auto" }}>
-          <div style={{ fontSize: 11, letterSpacing: 2, textTransform: "uppercase", color: "var(--red)", marginBottom: 12, fontWeight: 600 }}>Nog te leren</div>
-          {unknown.map((card, i) => (
-            <div key={i} style={{ display: "flex", justifyContent: "space-between", padding: "6px 0", borderBottom: i < unknown.length - 1 ? "1px solid rgba(var(--surface-rgb),0.75)" : "none", fontSize: 14 }}>
-              <span style={{ color: "var(--text)" }}>{card.nl}</span>
-              <span style={{ color: "var(--muted)", marginLeft: 12 }}>{card.en}</span>
-            </div>
-          ))}
-        </div>
-      )}
+      <ReviewList wrong={unknown} right={known} row={c => <div style={{ display: "flex", justifyContent: "space-between", gap: 12, fontSize: 14 }}><span style={{ color: "var(--text)" }}><Say text={c.nl} /></span><span style={{ color: "var(--muted)", textAlign: "right" }}>{c.en}</span></div>} />
       <div style={{ display: "flex", flexDirection: "column", gap: 10, width: "100%", maxWidth: 340 }}>
         {unknown.length > 0 && <button onClick={onRetry} style={{ ...s.wrongBtn, width: "100%" }}>Oefen fouten opnieuw</button>}
         <button onClick={onRestart} style={s.chapterBtn}>Opnieuw shufflen</button>
@@ -1169,7 +1209,7 @@ function ExpressionTest({ items, onComplete, onBack, inputMode, optionsFor, expl
   const [index, setIndex] = useState(0);
   const [input, setInput] = useState("");
   const [status, setStatus] = useState(null);
-  const [score, setScore] = useState({ right: 0, wrong: 0, wrongs: [] });
+  const [score, setScore] = useState({ right: 0, wrong: 0, wrongs: [], rights: [] });
   const inputRef = useRef(null);
   // Missed items are put back a few places further on until answered right;
   // the score counts first tries only.
@@ -1189,7 +1229,7 @@ function ExpressionTest({ items, onComplete, onBack, inputMode, optionsFor, expl
   const advance = (forced) => {
     const wasRight = typeof forced === "boolean" ? forced : status === "exact" || status === "close";
     recordAttempt(exprSentId(current), wasRight, typing);
-    const newScore = score.wrongs.includes(current) ? score : { right: score.right + (wasRight ? 1 : 0), wrong: score.wrong + (wasRight ? 0 : 1), wrongs: wasRight ? score.wrongs : [...score.wrongs, current] };
+    const newScore = score.wrongs.includes(current) ? score : { right: score.right + (wasRight ? 1 : 0), wrong: score.wrong + (wasRight ? 0 : 1), wrongs: wasRight ? score.wrongs : [...score.wrongs, current], rights: wasRight ? [...score.rights, current] : score.rights };
     setScore(newScore);
     let q = queue;
     if (!wasRight) { q = [...queue]; q.splice(Math.min(index + 4, q.length), 0, current); setQueue(q); }
@@ -1262,17 +1302,7 @@ function ExpressionResults({ score, onRestart, onRetry, onHome }) {
       <div style={{ fontSize: 64, fontWeight: 700, fontFamily: "'Playfair Display',serif", color: pct >= 80 ? "var(--green)" : pct >= 50 ? "var(--accent)" : "var(--red)", marginBottom: 8 }}><CountUp to={pct} />%{pct >= 80 && <Confetti />}</div>
       <div style={{ color: "var(--muted)", fontSize: 15, marginBottom: 8 }}>{score.right} goed · {score.wrong} fout</div>
       <div style={{ color: "var(--text)", fontSize: 20, fontWeight: 600, marginBottom: 32, fontFamily: "'Playfair Display',serif" }}>{pct >= 90 ? "Uitstekend!" : pct >= 70 ? "Goed bezig!" : pct >= 50 ? "Ga zo door!" : "Blijf oefenen!"}</div>
-      {score.wrongs.length > 0 && (
-        <div style={{ width: "100%", maxWidth: 360, marginBottom: 22, background: "rgba(var(--surface-rgb),0.65)", border: "1px solid rgba(var(--red-rgb),0.15)", borderRadius: 16, padding: "16px 20px", maxHeight: 240, overflowY: "auto" }}>
-          <div style={{ fontSize: 11, letterSpacing: 2, textTransform: "uppercase", color: "var(--red)", marginBottom: 10, fontWeight: 600 }}>Nog te leren</div>
-          {score.wrongs.map((w, i) => (
-            <div key={i} style={{ padding: "8px 0", borderBottom: i < score.wrongs.length - 1 ? "1px solid rgba(var(--surface-rgb),0.75)" : "none", fontSize: 13 }}>
-              <div style={{ color: "var(--accent)" }}>{w.answer}</div>
-              <div style={{ color: "var(--muted)", fontSize: 11, marginTop: 2 }}>{w.hint}</div>
-            </div>
-          ))}
-        </div>
-      )}
+      <ReviewList wrong={score.wrongs} right={score.rights} row={w => <><div style={{ color: "var(--accent)" }}><Say text={w.answer} /></div><div style={{ color: "var(--muted)", fontSize: 11, marginTop: 2 }}>{w.hint}</div></>} />
       <div style={{ display: "flex", flexDirection: "column", gap: 10, width: "100%", maxWidth: 340 }}>
         {score.wrongs.length > 0 && <button onClick={() => onRetry(score.wrongs)} style={{ ...s.wrongBtn, width: "100%" }}>Oefen fouten opnieuw</button>}
         <button onClick={onRestart} style={s.chapterBtn}>Opnieuw</button>
@@ -1567,8 +1597,19 @@ function App() {
     setQuickVerbs(quick);
     const groups = selectedGroups || verbGroupNames;
     const verbSet = new Set(groups.flatMap(g => (verbGroups[g] || []).map(v => v.inf)));
-    const pool = sentences.filter(snt => selectedTenses.includes(snt.tense) && verbSet.has(snt.verb));
-    const items = weightedPick(pool, verbSentId, count);
+    let items;
+    if (testMode === "drill") {
+      const inGroups = allVerbs.filter(v => verbSet.has(v.inf));
+      const core = new Set((verbGroups["Kern werkwoorden"] || []).map(v => v.inf));
+      if (quick) {
+        // Quick drill: two thirds core verbs, one third from the other chapters.
+        const fromCore = weightedPick(drillItems(inGroups.filter(v => core.has(v.inf)), selectedTenses), verbSentId, Math.ceil(count * 2 / 3));
+        items = shuffle([...fromCore, ...weightedPick(drillItems(inGroups.filter(v => !core.has(v.inf)), selectedTenses), verbSentId, count - fromCore.length)]);
+      } else items = weightedPick(drillItems(inGroups, selectedTenses), verbSentId, count);
+    } else {
+      const pool = sentences.filter(snt => selectedTenses.includes(snt.tense) && verbSet.has(snt.verb));
+      items = weightedPick(pool, verbSentId, count);
+    }
     setVerbTestItems(items);
     setVerbTestMode(testMode);
     setVerbTestTenses(selectedTenses);
@@ -1592,6 +1633,7 @@ function App() {
     setPracticePool(allVocab); setPracticeTitle("Snelle ronde"); setPracticeSource("home"); setChunkSize(15);
     startDeck(quickPick(allVocab, 15), "mc", 15);
   };
+  const startQuickDrill = () => startVerbTest("drill", 15, ["imperfectum", "perfectum"], verbGroupNames, true);
   const startQuickVerbs = () => startVerbTest("context", 15, ["presens", "imperfectum", "perfectum"], verbGroupNames, true);
   const handleMode = (m, size) => { setChunkSize(size); startDeck(practicePool, m, size); };
 
@@ -1612,7 +1654,7 @@ function App() {
       <style>{`*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg1);font-family:system-ui,sans-serif}input::placeholder{color:var(--faint)}::-webkit-scrollbar{display:none}input{color:var(--text)}`}</style>
       <button onClick={() => setDarkMode(d => !d)} style={{ position: "fixed", bottom: 20, right: 20, zIndex: 9999, width: 44, height: 44, borderRadius: "50%", border: "1px solid rgba(var(--ink-rgb),0.12)", background: "rgba(var(--surface-rgb),0.85)", fontSize: 20, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", backdropFilter: "blur(8px)", boxShadow: "0 2px 12px rgba(var(--ink-rgb),0.1)" }}>{darkMode ? "☀️" : "🌙"}</button>
       <div key={screen} className="screen-in">
-      {screen === "home" && <Home allVocab={allVocab} allVerbs={allVerbs} allExpressions={expressions} nuances={nuances} podcastEpisodes={podcastEpisodes} onVocab={() => setScreen("vocabHome")} onVerbs={() => setScreen("verbs")} onExpressions={() => setScreen("expressions")} onNuances={() => setScreen("nuances")} onPodcast={() => setScreen("podcast")} onQuick={startQuick} onQuickVerbs={startQuickVerbs} />}
+      {screen === "home" && <Home allVocab={allVocab} allVerbs={allVerbs} allExpressions={expressions} nuances={nuances} podcastEpisodes={podcastEpisodes} onVocab={() => setScreen("vocabHome")} onVerbs={() => setScreen("verbs")} onExpressions={() => setScreen("expressions")} onNuances={() => setScreen("nuances")} onPodcast={() => setScreen("podcast")} onQuick={startQuick} onQuickVerbs={startQuickVerbs} onQuickDrill={startQuickDrill} />}
       {screen === "podcast" && <PodcastHome episodes={podcastEpisodes} onBack={() => setScreen("home")} onBrowse={ep => { setPodcastEpisode(ep); setScreen("podcastBrowse"); }} onPractice={ep => { const deck = ep.sections.flatMap(s => s.words); handlePractice(deck, ep.title, "podcast"); }} />}
       {screen === "podcastBrowse" && podcastEpisode && <EpisodeBrowse episode={podcastEpisode} onBack={() => setScreen("podcast")} />}
       {screen === "nuances" && <NuancesBrowse nuances={nuances} onBack={() => setScreen("home")} onPractice={() => handlePractice(nuances.flatMap(n => n.examples), "Nuances · voorbeeldzinnen", "nuances")} />}
@@ -1621,7 +1663,7 @@ function App() {
       {screen === "verbs" && <VerbsHome allVerbs={allVerbs} onBack={() => setScreen("home")} onStudy={() => setScreen("verbStudy")} onTest={() => setScreen("verbTestSetup")} />}
       {screen === "verbStudy" && <VerbStudy verbGroups={verbGroups} verbGroupNames={verbGroupNames} onBack={() => setScreen("verbs")} />}
       {screen === "verbTestSetup" && <VerbTestSetup onBack={() => setScreen("verbs")} onStart={startVerbTest} verbGroupNames={verbGroupNames} mc={testMc} onMc={setTestMc} />}
-      {screen === "verbTest" && <VerbTest items={verbTestItems} mode={verbTestMode} inputMode={quickVerbs || testMc ? "mc" : "type"} optionsFor={it => verbOptions(it, sentences, allVerbs)} explain={it => { const v = allVerbs.find(x => x.inf === it.verb); return v && { head: `${v.inf} · ${v.en}`, body: `${v.presIk || v.inf} – ${v.impSg} – ${v.vd} (${v.aux})` }; }} onBack={() => setScreen(quickVerbs ? "home" : "verbTestSetup")} backLabel={quickVerbs ? "← Menu" : undefined} onComplete={scr => { setVerbScore(scr); setScreen("verbResults"); }} />}
+      {screen === "verbTest" && <VerbTest items={verbTestItems} mode={verbTestMode} inputMode={quickVerbs || testMc ? "mc" : "type"} optionsFor={it => it.drill ? drillOptions(it, allVerbs.find(x => x.inf === it.verb)) : verbOptions(it, sentences, allVerbs)} explain={it => { const v = allVerbs.find(x => x.inf === it.verb); return v && { head: `${v.inf} · ${v.en}`, body: `${v.presIk || v.inf} – ${v.impSg} – ${v.vd} (${v.aux})` }; }} onBack={() => setScreen(quickVerbs ? "home" : "verbTestSetup")} backLabel={quickVerbs ? "← Menu" : undefined} onComplete={scr => { setVerbScore(scr); setScreen("verbResults"); }} />}
       {screen === "verbResults" && verbScore && <VerbResults score={verbScore} onRestart={() => startVerbTest(verbTestMode, verbTestItems.length, verbTestTenses, verbTestGroups, quickVerbs)} onRetry={wrongs => { setVerbTestItems(wrongs); setVerbScore(null); setScreen("verbTest"); }} onHome={() => setScreen(quickVerbs ? "home" : "verbs")} />}
       {screen === "expressions" && <ExpressionsHome allExpressions={expressions} onBack={() => setScreen("home")} onBrowse={() => setScreen("exprBrowse")} onTest={() => setScreen("exprTestSetup")} />}
       {screen === "exprBrowse" && <ExpressionsBrowse expressions={expressions} categories={exprCategories} onBack={() => setScreen("expressions")} />}
