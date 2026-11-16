@@ -43,7 +43,7 @@
     "verb": "gaan",
     "tense": "presens",
     "subject": "jij",
-    "answer": "gaat",
+    "answer": "ga",
     "template": "{} jij vanavond mee naar het feest?",
     "hint": "Are you coming to the party tonight?"
   },
@@ -91,7 +91,7 @@
     "verb": "zijn",
     "tense": "presens",
     "subject": "jij",
-    "answer": "bent",
+    "answer": "ben",
     "template": "{} jij vrolijk vandaag?",
     "hint": "Are you cheerful today?"
   },
@@ -123,7 +123,7 @@
     "verb": "hebben",
     "tense": "presens",
     "subject": "jij",
-    "answer": "hebt",
+    "answer": "heb",
     "template": "{} jij gelijk over die regel?",
     "hint": "Are you right about that rule?"
   },
@@ -132,7 +132,7 @@
     "tense": "presens",
     "subject": "ze",
     "answer": "heeft",
-    "template": "Zij {} een nieuwe horloge gekocht.",
+    "template": "Zij {} een nieuw horloge gekocht.",
     "hint": "She has bought a new watch."
   },
   {
@@ -268,8 +268,8 @@
     "tense": "presens",
     "subject": "ik",
     "answer": "krijg",
-    "template": "Ik {} elke maand mijn vakantiegeld.",
-    "hint": "I get my holiday pay every month."
+    "template": "Ik {} in mei mijn vakantiegeld.",
+    "hint": "I get my holiday pay in May."
   },
   {
     "verb": "blijven",
@@ -508,8 +508,8 @@
     "tense": "imperfectum",
     "subject": "wij",
     "answer": "kregen",
-    "template": "Wij {} een mooie verrassing bij de specialiteit.",
-    "hint": "We got a nice surprise with the speciality."
+    "template": "Wij {} een mooi compliment van de eigenaar.",
+    "hint": "We got a nice compliment from the owner."
   },
   {
     "verb": "houden",
@@ -596,8 +596,8 @@
     "tense": "imperfectum",
     "subject": "wij",
     "answer": "brachten",
-    "template": "Wij {} de hele vakantie door op het eiland.",
-    "hint": "We spent the whole holiday on the island."
+    "template": "Wij {} de kinderen elke dag naar school.",
+    "hint": "We took the children to school every day."
   },
   {
     "verb": "besluiten",
@@ -652,7 +652,7 @@
     "split": true
   },
   {
-    "verb": "genieten",
+    "verb": "genieten (van)",
     "tense": "imperfectum",
     "subject": "ik",
     "answer": "genoot",
@@ -981,7 +981,7 @@
     "tense": "perfectum",
     "subject": "wij",
     "answer": "hebben besloten",
-    "template": "Wij {} om naar Nederland te verhuizen {}.",
+    "template": "Wij {} {} om naar Nederland te verhuizen.",
     "hint": "We decided to move to the Netherlands.",
     "split": true
   },
@@ -1022,7 +1022,7 @@
     "split": true
   },
   {
-    "verb": "genieten",
+    "verb": "genieten (van)",
     "tense": "perfectum",
     "subject": "wij",
     "answer": "hebben genoten",
@@ -1053,8 +1053,8 @@
     "tense": "perfectum",
     "subject": "ik",
     "answer": "ben vergeten",
-    "template": "Ik {} mijn klamboe thuis te laten {}.",
-    "hint": "I forgot to leave my mosquito net at home.",
+    "template": "Ik {} mijn klamboe {}.",
+    "hint": "I forgot my mosquito net.",
     "split": true
   },
   {
@@ -1356,7 +1356,7 @@
     "tense": "perfectum",
     "subject": "wij",
     "answer": "hebben gevraagd",
-    "template": "Wij {} of het mogelijk was {}.",
+    "template": "Wij {} {} of het mogelijk was.",
     "hint": "We asked if it was possible.",
     "split": true
   },
@@ -1854,7 +1854,7 @@
     "subject": "het",
     "answer": "speet",
     "template": "Het {} me dat we de trein niet hadden genomen.",
-    "hint": "We regretted not having taken the train."
+    "hint": "I was sorry that we hadn't taken the train."
   },
   {
     "verb": "uitputten",
@@ -2201,7 +2201,7 @@
     "tense": "perfectum",
     "subject": "ze",
     "answer": "is opgevallen",
-    "template": "Ze {} positief door haar rustige aanpak {}.",
+    "template": "Ze {} positief {} door haar rustige aanpak.",
     "hint": "She has stood out positively for her calm approach.",
     "split": true
   },
@@ -2291,7 +2291,7 @@
     "tense": "presens",
     "subject": "ik",
     "answer": "kom toe",
-    "template": "Ik {} er gewoon niet {} om te bellen.",
+    "template": "Ik {} er gewoon niet aan {} om te bellen.",
     "hint": "I simply don't get around to calling.",
     "split": true
   },
@@ -2300,7 +2300,7 @@
     "tense": "imperfectum",
     "subject": "ik",
     "answer": "kwam toe",
-    "template": "Ik {} er gisteren niet {} om te antwoorden.",
+    "template": "Ik {} er gisteren niet aan {} om te antwoorden.",
     "hint": "I didn't get around to replying yesterday.",
     "split": true
   },
@@ -2309,7 +2309,7 @@
     "tense": "perfectum",
     "subject": "hij",
     "answer": "is toegekomen",
-    "template": "Hij {} er nooit aan het gesprek {}.",
+    "template": "Hij {} nooit aan het gesprek {}.",
     "hint": "He never got around to having the conversation.",
     "split": true
   },
@@ -2388,7 +2388,7 @@
     "tense": "perfectum",
     "subject": "het",
     "answer": "is voorgekomen",
-    "template": "Het {} meerdere keren dat ze te laat was {}.",
+    "template": "Het {} meerdere keren {} dat ze te laat was.",
     "hint": "It has happened multiple times that she was late.",
     "split": true
   },
@@ -2596,7 +2596,7 @@
     "tense": "perfectum",
     "subject": "ik",
     "answer": "heb voorgesteld",
-    "template": "Ik {} al eerder dat we de kosten zouden delen {}.",
+    "template": "Ik {} al eerder {} dat we de kosten zouden delen.",
     "hint": "I already suggested earlier that we split the costs.",
     "split": true
   },
@@ -2632,17 +2632,17 @@
     "tense": "presens",
     "subject": "hij",
     "answer": "sluipt in",
-    "template": "Er {} langzaam een fout {} in zijn werk.",
+    "template": "In zijn werk {} langzaam een fout {}.",
     "hint": "An error slowly creeps into his work.",
     "split": true
   },
   {
     "verb": "insluipen",
     "tense": "imperfectum",
-    "subject": "ik",
+    "subject": "hij",
     "answer": "sloop in",
-    "template": "Ik {} stiekem {} tijdens de voorstelling.",
-    "hint": "I sneaked in quietly during the performance.",
+    "template": "Die slechte gewoonte {} er langzaam {}.",
+    "hint": "That bad habit slowly crept in.",
     "split": true
   },
   {
@@ -2729,7 +2729,7 @@
     "tense": "perfectum",
     "subject": "hij",
     "answer": "heeft overgeslagen",
-    "template": "Hij {} het eerste deel en begreep het verhaal niet {}.",
+    "template": "Hij {} het eerste deel {} en begreep het verhaal niet.",
     "hint": "He skipped the first part and did not understand the story.",
     "split": true
   },
@@ -2835,7 +2835,7 @@
     "tense": "perfectum",
     "subject": "ik",
     "answer": "heb opgemerkt",
-    "template": "Ik {} dat het museum de openingstijden had aangepast {}.",
+    "template": "Ik {} {} dat het museum de openingstijden had aangepast.",
     "hint": "I noticed that the museum had adjusted its opening hours.",
     "split": true
   },
@@ -2891,6 +2891,2361 @@
     "answer": "heb opgestuurd",
     "template": "Ik {} mijn eerste roman naar drie uitgeverijen {}.",
     "hint": "I have sent my first novel to three publishers.",
+    "split": true
+  },
+  {
+    "verb": "beginnen",
+    "tense": "presens",
+    "subject": "de lezing",
+    "answer": "begint",
+    "template": "De lezing {} over tien minuten.",
+    "hint": "The lecture starts in ten minutes."
+  },
+  {
+    "verb": "beginnen",
+    "tense": "imperfectum",
+    "subject": "wij",
+    "answer": "begonnen",
+    "template": "Wij {} de avond met een ronde van de pubquiz.",
+    "hint": "We started the evening with a round of the pub quiz."
+  },
+  {
+    "verb": "beginnen",
+    "tense": "perfectum",
+    "subject": "ze",
+    "answer": "is begonnen",
+    "template": "Ze {} aan een opleiding tot voedingsdeskundige {}.",
+    "hint": "She has started training as a nutritionist.",
+    "split": true
+  },
+  {
+    "verb": "brengen",
+    "tense": "presens",
+    "subject": "ik",
+    "answer": "breng",
+    "template": "Ik {} het afval elke week naar de container.",
+    "hint": "I take the waste to the container every week."
+  },
+  {
+    "verb": "brengen",
+    "tense": "perfectum",
+    "subject": "wij",
+    "answer": "hebben gebracht",
+    "template": "Wij {} de spullen naar het ziekenhuis {}.",
+    "hint": "We took the things to the hospital.",
+    "split": true
+  },
+  {
+    "verb": "houden",
+    "tense": "presens",
+    "subject": "hij",
+    "answer": "houdt",
+    "template": "Hij {} zich altijd aan de richtlijnen.",
+    "hint": "He always sticks to the guidelines."
+  },
+  {
+    "verb": "houden",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "heb gehouden",
+    "template": "Ik {} altijd van hechte vriendschappen {}.",
+    "hint": "I have always loved close friendships.",
+    "split": true
+  },
+  {
+    "verb": "kunnen",
+    "tense": "perfectum",
+    "subject": "hij",
+    "answer": "heeft gekund",
+    "template": "Hij {} dat nooit goed {}.",
+    "hint": "He has never been able to do that well.",
+    "split": true
+  },
+  {
+    "verb": "mogen",
+    "tense": "perfectum",
+    "subject": "wij",
+    "answer": "hebben gemogen",
+    "template": "Wij {} dat van de docent nooit {}.",
+    "hint": "The teacher never allowed us to do that.",
+    "split": true
+  },
+  {
+    "verb": "moeten",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "heb gemoeten",
+    "template": "Het was niet leuk, maar ik {} het wel {}.",
+    "hint": "It wasn't fun, but I did have to.",
+    "split": true
+  },
+  {
+    "verb": "rijden",
+    "tense": "presens",
+    "subject": "wij",
+    "answer": "rijden",
+    "template": "Wij {} elke zomer naar een camping in Frankrijk.",
+    "hint": "We drive to a campsite in France every summer."
+  },
+  {
+    "verb": "rijden",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "heb gereden",
+    "template": "Ik {} nog nooit in een elektrische auto {}.",
+    "hint": "I have never driven an electric car.",
+    "split": true
+  },
+  {
+    "verb": "spreken",
+    "tense": "presens",
+    "subject": "ze",
+    "answer": "spreekt",
+    "template": "Ze {} vloeiend Nederlands met haar buurtbewoners.",
+    "hint": "She speaks fluent Dutch with her neighbours."
+  },
+  {
+    "verb": "willen",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "heb gewild",
+    "template": "Ik {} altijd al een eigen groentebak {}.",
+    "hint": "I have always wanted my own vegetable planter.",
+    "split": true
+  },
+  {
+    "verb": "werken",
+    "tense": "imperfectum",
+    "subject": "ik",
+    "answer": "werkte",
+    "template": "Vroeger {} ik als vrijwilliger in het ziekenhuis.",
+    "hint": "I used to work as a volunteer at the hospital."
+  },
+  {
+    "verb": "wonen",
+    "tense": "perfectum",
+    "subject": "wij",
+    "answer": "hebben gewoond",
+    "template": "Wij {} jarenlang op het platteland {}.",
+    "hint": "We lived in the countryside for years.",
+    "split": true
+  },
+  {
+    "verb": "maken",
+    "tense": "imperfectum",
+    "subject": "hij",
+    "answer": "maakte",
+    "template": "Hij {} een onbeleefde opmerking tijdens het etentje.",
+    "hint": "He made a rude remark during the dinner."
+  },
+  {
+    "verb": "kopen",
+    "tense": "perfectum",
+    "subject": "jullie",
+    "answer": "hebben gekocht",
+    "template": "Jullie {} veel te veel voorverpakt eten {}.",
+    "hint": "You (plural) have bought far too much pre-packaged food.",
+    "split": true
+  },
+  {
+    "verb": "vragen",
+    "tense": "presens",
+    "subject": "jij",
+    "answer": "vraagt",
+    "template": "Jij {} altijd naar de reden.",
+    "hint": "You always ask about the reason."
+  },
+  {
+    "verb": "antwoorden",
+    "tense": "presens",
+    "subject": "hij",
+    "answer": "antwoordt",
+    "template": "Hij {} altijd razendsnel op mijn appjes.",
+    "hint": "He always answers my messages lightning fast."
+  },
+  {
+    "verb": "antwoorden",
+    "tense": "perfectum",
+    "subject": "ze",
+    "answer": "heeft geantwoord",
+    "template": "Ze {} nog niet op het verzoek {}.",
+    "hint": "She hasn't replied to the request yet.",
+    "split": true
+  },
+  {
+    "verb": "leren",
+    "tense": "imperfectum",
+    "subject": "wij",
+    "answer": "leerden",
+    "template": "Wij {} op school over het klimaat en de toekomst van de aarde.",
+    "hint": "At school we learned about the climate and the future of the earth."
+  },
+  {
+    "verb": "spelen",
+    "tense": "imperfectum",
+    "subject": "ik",
+    "answer": "speelde",
+    "template": "Als tiener {} ik gitaar in een band.",
+    "hint": "As a teenager I played guitar in a band."
+  },
+  {
+    "verb": "spelen",
+    "tense": "perfectum",
+    "subject": "ze (meervoud)",
+    "answer": "hebben gespeeld",
+    "template": "De kinderen {} de hele middag binnenshuis {}.",
+    "hint": "The children played indoors all afternoon.",
+    "split": true
+  },
+  {
+    "verb": "kennen",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "heb gekend",
+    "template": "Ik {} haar goed {}, maar we zien elkaar nooit meer.",
+    "hint": "I knew her well, but we never see each other any more.",
+    "split": true
+  },
+  {
+    "verb": "begrijpen",
+    "tense": "perfectum",
+    "subject": "wij",
+    "answer": "hebben begrepen",
+    "template": "Wij {} het misverstand eindelijk {}.",
+    "hint": "We have finally understood the misunderstanding.",
+    "split": true
+  },
+  {
+    "verb": "luisteren",
+    "tense": "imperfectum",
+    "subject": "ze",
+    "answer": "luisterde",
+    "template": "Ze {} elke ochtend naar een podcast over kunst.",
+    "hint": "She listened to a podcast about art every morning."
+  },
+  {
+    "verb": "kijken",
+    "tense": "perfectum",
+    "subject": "wij",
+    "answer": "hebben gekeken",
+    "template": "Wij {} gisteren naar een indrukwekkende performance {}.",
+    "hint": "We watched an impressive performance yesterday.",
+    "split": true
+  },
+  {
+    "verb": "vertrekken",
+    "tense": "imperfectum",
+    "subject": "ze (meervoud)",
+    "answer": "vertrokken",
+    "template": "Ze {} onaangekondigd, midden in het etentje.",
+    "hint": "They left unannounced, in the middle of the dinner."
+  },
+  {
+    "verb": "vertellen",
+    "tense": "presens",
+    "subject": "hij",
+    "answer": "vertelt",
+    "template": "Hij {} altijd grappige verhalen over zijn studiegenoten.",
+    "hint": "He always tells funny stories about his fellow students."
+  },
+  {
+    "verb": "zitten",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "heb gezeten",
+    "template": "Ik {} de hele dag achter een computerscherm {}.",
+    "hint": "I have sat behind a computer screen all day.",
+    "split": true
+  },
+  {
+    "verb": "staan",
+    "tense": "perfectum",
+    "subject": "wij",
+    "answer": "hebben gestaan",
+    "template": "Wij {} een uur in de rij voor de tentoonstelling {}.",
+    "hint": "We stood in the queue for the exhibition for an hour.",
+    "split": true
+  },
+  {
+    "verb": "liggen",
+    "tense": "perfectum",
+    "subject": "hij",
+    "answer": "heeft gelegen",
+    "template": "Hij {} een week in het ziekenhuis {}.",
+    "hint": "He was in hospital for a week.",
+    "split": true
+  },
+  {
+    "verb": "proberen",
+    "tense": "imperfectum",
+    "subject": "wij",
+    "answer": "probeerden",
+    "template": "Wij {} de werkdruk te verminderen met meer pauzes.",
+    "hint": "We tried to reduce the workload with more breaks."
+  },
+  {
+    "verb": "afsteken",
+    "tense": "presens",
+    "subject": "wij",
+    "answer": "steken af",
+    "template": "Met Nieuwjaar {} wij vuurwerk {} op de stoep.",
+    "hint": "At New Year we set off fireworks on the pavement.",
+    "split": true
+  },
+  {
+    "verb": "afsteken",
+    "tense": "imperfectum",
+    "subject": "hij",
+    "answer": "stak af",
+    "template": "Hij {} om middernacht het vuurwerk {}.",
+    "hint": "He set off the fireworks at midnight.",
+    "split": true
+  },
+  {
+    "verb": "afsteken",
+    "tense": "perfectum",
+    "subject": "ze (meervoud)",
+    "answer": "hebben afgestoken",
+    "template": "Ze {} dit jaar minder vuurwerk {}.",
+    "hint": "They set off fewer fireworks this year.",
+    "split": true
+  },
+  {
+    "verb": "afvragen, zich",
+    "tense": "presens",
+    "subject": "ze",
+    "answer": "vraagt af",
+    "template": "Ze {} zich {} of de traditie nog bestaat.",
+    "hint": "She wonders whether the tradition still exists.",
+    "split": true
+  },
+  {
+    "verb": "afvragen, zich",
+    "tense": "imperfectum",
+    "subject": "wij",
+    "answer": "vroegen af",
+    "template": "Wij {} ons {} waar de legende vandaan kwam.",
+    "hint": "We wondered where the legend came from.",
+    "split": true
+  },
+  {
+    "verb": "afvragen, zich",
+    "tense": "perfectum",
+    "subject": "hij",
+    "answer": "heeft afgevraagd",
+    "template": "Hij {} zich nooit {} waarom dat zo is.",
+    "hint": "He has never wondered why that is.",
+    "split": true
+  },
+  {
+    "verb": "bedenken",
+    "tense": "presens",
+    "subject": "ik",
+    "answer": "bedenk",
+    "template": "Ik {} elk jaar een nieuw ritueel voor de kerst.",
+    "hint": "Every year I think up a new ritual for Christmas."
+  },
+  {
+    "verb": "bedenken",
+    "tense": "imperfectum",
+    "subject": "ze",
+    "answer": "bedacht",
+    "template": "Ze {} een creatieve oplossing voor het probleem.",
+    "hint": "She came up with a creative solution to the problem."
+  },
+  {
+    "verb": "bedenken",
+    "tense": "perfectum",
+    "subject": "wij",
+    "answer": "hebben bedacht",
+    "template": "Wij {} een alternatief voor het diner {}.",
+    "hint": "We have come up with an alternative for the dinner.",
+    "split": true
+  },
+  {
+    "verb": "besluiten",
+    "tense": "presens",
+    "subject": "hij",
+    "answer": "besluit",
+    "template": "Hij {} vandaag of hij meegaat op uitwisseling.",
+    "hint": "He decides today whether he's going on the exchange."
+  },
+  {
+    "verb": "doorbrengen",
+    "tense": "presens",
+    "subject": "wij",
+    "answer": "brengen door",
+    "template": "Wij {} de kerst {} bij onze grootouders.",
+    "hint": "We spend Christmas at our grandparents'.",
+    "split": true
+  },
+  {
+    "verb": "doorbrengen",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "heb doorgebracht",
+    "template": "Ik {} de hele zomer op het stadsstrand {}.",
+    "hint": "I spent the whole summer at the city beach.",
+    "split": true
+  },
+  {
+    "verb": "meedoen",
+    "tense": "imperfectum",
+    "subject": "hij",
+    "answer": "deed mee",
+    "template": "Hij {} vorig jaar {} aan het uitwisselingsprogramma.",
+    "hint": "He took part in the exchange programme last year.",
+    "split": true
+  },
+  {
+    "verb": "meedoen",
+    "tense": "perfectum",
+    "subject": "wij",
+    "answer": "hebben meegedaan",
+    "template": "Wij {} met z'n twintigen aan de pubquiz {}.",
+    "hint": "The twenty of us took part in the pub quiz.",
+    "split": true
+  },
+  {
+    "verb": "opkrijgen",
+    "tense": "presens",
+    "subject": "wij",
+    "answer": "krijgen op",
+    "template": "Wij {} elke week veel huiswerk {}.",
+    "hint": "We are given a lot of homework every week.",
+    "split": true
+  },
+  {
+    "verb": "opkrijgen",
+    "tense": "imperfectum",
+    "subject": "ze (meervoud)",
+    "answer": "kregen op",
+    "template": "De studenten {} een lastige opdracht {}.",
+    "hint": "The students were given a tricky assignment.",
+    "split": true
+  },
+  {
+    "verb": "opkrijgen",
+    "tense": "perfectum",
+    "subject": "ze",
+    "answer": "heeft opgekregen",
+    "template": "Ze {} een hoofdstuk over de samenleving {}.",
+    "hint": "She has been set a chapter about society.",
+    "split": true
+  },
+  {
+    "verb": "optreden",
+    "tense": "presens",
+    "subject": "de band",
+    "answer": "treedt op",
+    "template": "De band {} vanavond {} in de kroeg.",
+    "hint": "The band is performing in the pub tonight.",
+    "split": true
+  },
+  {
+    "verb": "optreden",
+    "tense": "imperfectum",
+    "subject": "de dj",
+    "answer": "trad op",
+    "template": "De dj {} {} tijdens het lichtjesfeest.",
+    "hint": "The DJ performed during the festival of lights.",
+    "split": true
+  },
+  {
+    "verb": "optreden",
+    "tense": "perfectum",
+    "subject": "ze",
+    "answer": "heeft opgetreden",
+    "template": "Ze {} al op veel festivals {}.",
+    "hint": "She has already performed at many festivals.",
+    "split": true
+  },
+  {
+    "verb": "opzeggen",
+    "tense": "presens",
+    "subject": "ik",
+    "answer": "zeg op",
+    "template": "Ik {} mijn abonnement op de krant {}.",
+    "hint": "I'm cancelling my newspaper subscription.",
+    "split": true
+  },
+  {
+    "verb": "opzeggen",
+    "tense": "perfectum",
+    "subject": "hij",
+    "answer": "heeft opgezegd",
+    "template": "Hij {} zijn huurappartement {}.",
+    "hint": "He has given notice on his rented flat.",
+    "split": true
+  },
+  {
+    "verb": "overwinnen",
+    "tense": "presens",
+    "subject": "ze",
+    "answer": "overwint",
+    "template": "Ze {} haar heimwee stap voor stap.",
+    "hint": "She is overcoming her homesickness step by step."
+  },
+  {
+    "verb": "overwinnen",
+    "tense": "imperfectum",
+    "subject": "ik",
+    "answer": "overwon",
+    "template": "Ik {} mijn angst om Nederlands te spreken.",
+    "hint": "I overcame my fear of speaking Dutch."
+  },
+  {
+    "verb": "plaatsvinden",
+    "tense": "presens",
+    "subject": "het diner",
+    "answer": "vindt plaats",
+    "template": "Het diner {} dit jaar {} in de haven.",
+    "hint": "The dinner is taking place in the harbour this year.",
+    "split": true
+  },
+  {
+    "verb": "plaatsvinden",
+    "tense": "perfectum",
+    "subject": "de uitwisseling",
+    "answer": "heeft plaatsgevonden",
+    "template": "De uitwisseling {} vorig jaar {} in Den Haag.",
+    "hint": "The exchange took place in The Hague last year.",
+    "split": true
+  },
+  {
+    "verb": "rijgen",
+    "tense": "presens",
+    "subject": "ik",
+    "answer": "rijg",
+    "template": "Ik {} bloemen aan een draad voor de bloemenkrans.",
+    "hint": "I thread flowers onto a string for the flower wreath."
+  },
+  {
+    "verb": "rijgen",
+    "tense": "imperfectum",
+    "subject": "wij",
+    "answer": "regen",
+    "template": "Wij {} lichtjes aan een lange draad.",
+    "hint": "We strung little lights onto a long thread."
+  },
+  {
+    "verb": "rijgen",
+    "tense": "perfectum",
+    "subject": "ze",
+    "answer": "heeft geregen",
+    "template": "Ze {} kralen aan een draad {}.",
+    "hint": "She has threaded beads onto a string.",
+    "split": true
+  },
+  {
+    "verb": "samenkomen",
+    "tense": "presens",
+    "subject": "wij",
+    "answer": "komen samen",
+    "template": "Op midzomerdag {} wij {} bij de meiboom.",
+    "hint": "On Midsummer's Day we gather at the maypole.",
+    "split": true
+  },
+  {
+    "verb": "samenkomen",
+    "tense": "imperfectum",
+    "subject": "ze (meervoud)",
+    "answer": "kwamen samen",
+    "template": "De familieleden {} {} voor het traditionele diner.",
+    "hint": "The family members gathered for the traditional dinner.",
+    "split": true
+  },
+  {
+    "verb": "sluiten",
+    "tense": "presens",
+    "subject": "de kroeg",
+    "answer": "sluit",
+    "template": "De kroeg {} vanavond om middernacht.",
+    "hint": "The pub closes at midnight tonight."
+  },
+  {
+    "verb": "sluiten",
+    "tense": "imperfectum",
+    "subject": "ik",
+    "answer": "sloot",
+    "template": "Ik {} de envelop en bracht hem naar de post.",
+    "hint": "I sealed the envelope and took it to the post."
+  },
+  {
+    "verb": "sluiten",
+    "tense": "perfectum",
+    "subject": "ze (meervoud)",
+    "answer": "hebben gesloten",
+    "template": "Ze {} het museum vanwege de hittegolf {}.",
+    "hint": "They have closed the museum because of the heatwave.",
+    "split": true
+  },
+  {
+    "verb": "terechtkunnen",
+    "tense": "presens",
+    "subject": "jij",
+    "answer": "kan terecht",
+    "template": "Jij {} altijd bij mij {} met je vragen.",
+    "hint": "You can always come to me with your questions.",
+    "split": true
+  },
+  {
+    "verb": "terechtkunnen",
+    "tense": "imperfectum",
+    "subject": "wij",
+    "answer": "konden terecht",
+    "template": "Wij {} nergens {} met onze labrador.",
+    "hint": "We couldn't go anywhere with our labrador.",
+    "split": true
+  },
+  {
+    "verb": "terechtkunnen",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "heb terechtgekund",
+    "template": "Ik {} altijd bij mijn huisgenoot {}.",
+    "hint": "I have always been able to turn to my housemate.",
+    "split": true
+  },
+  {
+    "verb": "thuiskomen",
+    "tense": "imperfectum",
+    "subject": "hij",
+    "answer": "kwam thuis",
+    "template": "Hij {} pas na het vuurwerk {}.",
+    "hint": "He only came home after the fireworks.",
+    "split": true
+  },
+  {
+    "verb": "uitkijken",
+    "tense": "imperfectum",
+    "subject": "ik",
+    "answer": "keek uit",
+    "template": "Ik {} enorm {} naar de midzomerdag.",
+    "hint": "I was really looking forward to Midsummer's Day.",
+    "split": true
+  },
+  {
+    "verb": "uitkijken",
+    "tense": "perfectum",
+    "subject": "wij",
+    "answer": "hebben uitgekeken",
+    "template": "Wij {} lang naar dit diner {}.",
+    "hint": "We have looked forward to this dinner for a long time.",
+    "split": true
+  },
+  {
+    "verb": "uitlaten",
+    "tense": "perfectum",
+    "subject": "ze",
+    "answer": "heeft uitgelaten",
+    "template": "Ze {} de hond al {}.",
+    "hint": "She has already walked the dog.",
+    "split": true
+  },
+  {
+    "verb": "uitschelden",
+    "tense": "presens",
+    "subject": "hij",
+    "answer": "scheldt uit",
+    "template": "Hij {} nooit iemand {}, zelfs niet als hij boos is.",
+    "hint": "He never insults anyone, even when he's angry.",
+    "split": true
+  },
+  {
+    "verb": "uitschelden",
+    "tense": "imperfectum",
+    "subject": "de toerist",
+    "answer": "schold uit",
+    "template": "De toerist {} de ober {} na het diner.",
+    "hint": "The tourist swore at the waiter after dinner.",
+    "split": true
+  },
+  {
+    "verb": "uitschelden",
+    "tense": "perfectum",
+    "subject": "ze (meervoud)",
+    "answer": "hebben uitgescholden",
+    "template": "Ze {} elkaar tijdens de ruzie {}.",
+    "hint": "They insulted each other during the argument.",
+    "split": true
+  },
+  {
+    "verb": "vallen",
+    "tense": "presens",
+    "subject": "de regen",
+    "answer": "valt",
+    "template": "De regen {} met bakken uit de lucht.",
+    "hint": "The rain is pouring down."
+  },
+  {
+    "verb": "vallen",
+    "tense": "imperfectum",
+    "subject": "ik",
+    "answer": "viel",
+    "template": "Ik {} van mijn fiets op de stoep.",
+    "hint": "I fell off my bike onto the pavement."
+  },
+  {
+    "verb": "vallen",
+    "tense": "perfectum",
+    "subject": "de olielamp",
+    "answer": "is gevallen",
+    "template": "De olielamp {} van de tafel {}.",
+    "hint": "The oil lamp has fallen off the table.",
+    "split": true
+  },
+  {
+    "verb": "voortkomen",
+    "tense": "presens",
+    "subject": "de traditie",
+    "answer": "komt voort",
+    "template": "Deze traditie {} {} uit een oude legende.",
+    "hint": "This tradition stems from an old legend.",
+    "split": true
+  },
+  {
+    "verb": "voortkomen",
+    "tense": "imperfectum",
+    "subject": "het probleem",
+    "answer": "kwam voort",
+    "template": "Het probleem {} {} uit een misverstand.",
+    "hint": "The problem arose from a misunderstanding.",
+    "split": true
+  },
+  {
+    "verb": "voortkomen",
+    "tense": "perfectum",
+    "subject": "het ritueel",
+    "answer": "is voortgekomen",
+    "template": "Het ritueel {} uit de zonnekalender {}.",
+    "hint": "The ritual has its origins in the solar calendar.",
+    "split": true
+  },
+  {
+    "verb": "zwemmen",
+    "tense": "presens",
+    "subject": "wij",
+    "answer": "zwemmen",
+    "template": "Wij {} elke ochtend in de zee.",
+    "hint": "We swim in the sea every morning."
+  },
+  {
+    "verb": "zwemmen",
+    "tense": "imperfectum",
+    "subject": "ze",
+    "answer": "zwom",
+    "template": "Ze {} vroeger elke week bij de studentenvereniging.",
+    "hint": "She used to swim every week at the student association."
+  },
+  {
+    "verb": "zwemmen",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "heb gezwommen",
+    "template": "Ik {} vandaag een uur {}.",
+    "hint": "I swam for an hour today.",
+    "split": true
+  },
+  {
+    "verb": "aanbreken",
+    "tense": "presens",
+    "subject": "de dag",
+    "answer": "breekt aan",
+    "template": "Een nieuwe dag {} {} op de heide.",
+    "hint": "A new day is dawning on the heath.",
+    "split": true
+  },
+  {
+    "verb": "aanbreken",
+    "tense": "imperfectum",
+    "subject": "de dag",
+    "answer": "brak aan",
+    "template": "De laatste dag van de groepsreis {} {}.",
+    "hint": "The last day of the group trip dawned.",
+    "split": true
+  },
+  {
+    "verb": "aanbreken",
+    "tense": "perfectum",
+    "subject": "de tijd",
+    "answer": "is aangebroken",
+    "template": "De tijd {} {} om te vertrekken.",
+    "hint": "The time has come to leave.",
+    "split": true
+  },
+  {
+    "verb": "aanspreken",
+    "tense": "presens",
+    "subject": "het avontuur",
+    "answer": "spreekt aan",
+    "template": "Dat avontuur {} mij erg {}.",
+    "hint": "That adventure really appeals to me.",
+    "split": true
+  },
+  {
+    "verb": "aanspreken",
+    "tense": "imperfectum",
+    "subject": "hij",
+    "answer": "sprak aan",
+    "template": "Hij {} een onbekende reiziger {} op het strand.",
+    "hint": "He approached an unknown traveller on the beach.",
+    "split": true
+  },
+  {
+    "verb": "aanspreken",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "heb aangesproken",
+    "template": "Ik {} haar {} over het lawaai.",
+    "hint": "I spoke to her about the noise.",
+    "split": true
+  },
+  {
+    "verb": "afvallen",
+    "tense": "presens",
+    "subject": "ik",
+    "answer": "val af",
+    "template": "Ik {} langzaam {} door meer lichaamsbeweging.",
+    "hint": "I'm slowly losing weight through more exercise.",
+    "split": true
+  },
+  {
+    "verb": "afvallen",
+    "tense": "imperfectum",
+    "subject": "hij",
+    "answer": "viel af",
+    "template": "Hij {} vijf kilo {} tijdens de kanotocht.",
+    "hint": "He lost five kilos during the canoe trip.",
+    "split": true
+  },
+  {
+    "verb": "afvallen",
+    "tense": "perfectum",
+    "subject": "ze",
+    "answer": "is afgevallen",
+    "template": "Ze {} flink {} dankzij een nieuwe levensstijl.",
+    "hint": "She has lost a lot of weight thanks to a new lifestyle.",
+    "split": true
+  },
+  {
+    "verb": "dichtdoen",
+    "tense": "presens",
+    "subject": "ik",
+    "answer": "doe dicht",
+    "template": "Ik {} de tent {} tegen de muggen.",
+    "hint": "I close the tent against the mosquitoes.",
+    "split": true
+  },
+  {
+    "verb": "dichtdoen",
+    "tense": "imperfectum",
+    "subject": "ze",
+    "answer": "deed dicht",
+    "template": "Ze {} snel de koelkast {}.",
+    "hint": "She quickly closed the fridge.",
+    "split": true
+  },
+  {
+    "verb": "dichtdoen",
+    "tense": "perfectum",
+    "subject": "wij",
+    "answer": "hebben dichtgedaan",
+    "template": "Wij {} alle ramen {} vanwege de regen.",
+    "hint": "We have closed all the windows because of the rain.",
+    "split": true
+  },
+  {
+    "verb": "druipen",
+    "tense": "presens",
+    "subject": "het zweet",
+    "answer": "druipt",
+    "template": "Het zweet {} van mijn voorhoofd.",
+    "hint": "The sweat is dripping from my forehead."
+  },
+  {
+    "verb": "druipen",
+    "tense": "imperfectum",
+    "subject": "de regen",
+    "answer": "droop",
+    "template": "De regen {} van de tent.",
+    "hint": "The rain dripped off the tent."
+  },
+  {
+    "verb": "druipen",
+    "tense": "perfectum",
+    "subject": "het water",
+    "answer": "heeft gedropen",
+    "template": "Het water {} de hele nacht van het dak {}.",
+    "hint": "Water dripped from the roof all night.",
+    "split": true
+  },
+  {
+    "verb": "ervaren",
+    "tense": "presens",
+    "subject": "ik",
+    "answer": "ervaar",
+    "template": "Ik {} de warmte hier als heel broeierig.",
+    "hint": "I experience the warmth here as very sultry."
+  },
+  {
+    "verb": "ervaren",
+    "tense": "imperfectum",
+    "subject": "wij",
+    "answer": "ervoeren",
+    "template": "Wij {} de tocht als een echt avontuur.",
+    "hint": "We experienced the trip as a real adventure."
+  },
+  {
+    "verb": "flauwvallen",
+    "tense": "presens",
+    "subject": "hij",
+    "answer": "valt flauw",
+    "template": "Hij {} bijna {} van de warmte.",
+    "hint": "He's nearly fainting from the heat.",
+    "split": true
+  },
+  {
+    "verb": "flauwvallen",
+    "tense": "imperfectum",
+    "subject": "ze",
+    "answer": "viel flauw",
+    "template": "Ze {} {} tijdens de hittegolf.",
+    "hint": "She fainted during the heatwave.",
+    "split": true
+  },
+  {
+    "verb": "flauwvallen",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "ben flauwgevallen",
+    "template": "Ik {} één keer {} in een snikhete tent.",
+    "hint": "I have fainted once in a boiling hot tent.",
+    "split": true
+  },
+  {
+    "verb": "genieten (van)",
+    "tense": "presens",
+    "subject": "wij",
+    "answer": "genieten",
+    "template": "Wij {} van de frisse avondlucht.",
+    "hint": "We're enjoying the fresh evening air."
+  },
+  {
+    "verb": "kruipen",
+    "tense": "presens",
+    "subject": "de mug",
+    "answer": "kruipt",
+    "template": "Een mug {} onder de klamboe.",
+    "hint": "A mosquito is crawling under the net."
+  },
+  {
+    "verb": "kruipen",
+    "tense": "imperfectum",
+    "subject": "wij",
+    "answer": "kropen",
+    "template": "Wij {} ijskoud in onze tent.",
+    "hint": "We crawled into our tent, freezing cold."
+  },
+  {
+    "verb": "kruipen",
+    "tense": "perfectum",
+    "subject": "ze",
+    "answer": "is gekropen",
+    "template": "Ze {} onder het dekbed {}.",
+    "hint": "She has crawled under the duvet.",
+    "split": true
+  },
+  {
+    "verb": "meevallen",
+    "tense": "presens",
+    "subject": "de warmte",
+    "answer": "valt mee",
+    "template": "De warmte {} vandaag gelukkig {}.",
+    "hint": "Fortunately the heat isn't too bad today.",
+    "split": true
+  },
+  {
+    "verb": "meevallen",
+    "tense": "perfectum",
+    "subject": "de tocht",
+    "answer": "is meegevallen",
+    "template": "De kanotocht {} erg {}.",
+    "hint": "The canoe trip turned out much better than expected.",
+    "split": true
+  },
+  {
+    "verb": "ontbreken",
+    "tense": "presens",
+    "subject": "een reiziger",
+    "answer": "ontbreekt",
+    "template": "Er {} nog een reiziger in de groep.",
+    "hint": "One traveller is still missing from the group."
+  },
+  {
+    "verb": "ontbreken",
+    "tense": "imperfectum",
+    "subject": "het",
+    "answer": "ontbrak",
+    "template": "Het {} ons aan tijd om alles te ontdekken.",
+    "hint": "We lacked the time to discover everything."
+  },
+  {
+    "verb": "ontbreken",
+    "tense": "perfectum",
+    "subject": "het",
+    "answer": "heeft ontbroken",
+    "template": "Het {} ons aan niets {}.",
+    "hint": "We lacked for nothing.",
+    "split": true
+  },
+  {
+    "verb": "opvangen",
+    "tense": "presens",
+    "subject": "wij",
+    "answer": "vangen op",
+    "template": "Wij {} het regenwater {} in een grote kom.",
+    "hint": "We catch the rainwater in a large bowl.",
+    "split": true
+  },
+  {
+    "verb": "opvangen",
+    "tense": "imperfectum",
+    "subject": "ze",
+    "answer": "ving op",
+    "template": "Ze {} een verdwaalde reiziger {} in haar yurt.",
+    "hint": "She took in a lost traveller in her yurt.",
+    "split": true
+  },
+  {
+    "verb": "opvangen",
+    "tense": "perfectum",
+    "subject": "ze (meervoud)",
+    "answer": "hebben opgevangen",
+    "template": "Ze {} de toeristen {} na de storm.",
+    "hint": "They took care of the tourists after the storm.",
+    "split": true
+  },
+  {
+    "verb": "ruiken",
+    "tense": "presens",
+    "subject": "ik",
+    "answer": "ruik",
+    "template": "Ik {} de zee al vanuit de tent.",
+    "hint": "I can already smell the sea from the tent."
+  },
+  {
+    "verb": "ruiken",
+    "tense": "perfectum",
+    "subject": "wij",
+    "answer": "hebben geroken",
+    "template": "Wij {} de regen al van ver {}.",
+    "hint": "We could smell the rain from far away.",
+    "split": true
+  },
+  {
+    "verb": "schuilen",
+    "tense": "presens",
+    "subject": "wij",
+    "answer": "schuilen",
+    "template": "Wij {} voor de regenbui onder een boom.",
+    "hint": "We're sheltering from the shower under a tree."
+  },
+  {
+    "verb": "schuilen",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "heb gescholen",
+    "template": "Ik {} in een kroeg voor de regen {}.",
+    "hint": "I sheltered from the rain in a pub.",
+    "split": true
+  },
+  {
+    "verb": "tegenvallen",
+    "tense": "presens",
+    "subject": "het weer",
+    "answer": "valt tegen",
+    "template": "Het weer {} vandaag erg {}.",
+    "hint": "The weather is very disappointing today.",
+    "split": true
+  },
+  {
+    "verb": "tegenvallen",
+    "tense": "imperfectum",
+    "subject": "de bestemming",
+    "answer": "viel tegen",
+    "template": "De bestemming {} helaas {}.",
+    "hint": "Unfortunately the destination was a disappointment.",
+    "split": true
+  },
+  {
+    "verb": "trekken",
+    "tense": "presens",
+    "subject": "ik",
+    "answer": "trek",
+    "template": "Ik {} elke zomer met een rugzak door de heide.",
+    "hint": "Every summer I trek through the heath with a backpack."
+  },
+  {
+    "verb": "trekken",
+    "tense": "perfectum",
+    "subject": "wij",
+    "answer": "zijn getrokken",
+    "template": "Wij {} drie weken door de eilandengroep {}.",
+    "hint": "We travelled through the archipelago for three weeks.",
+    "split": true
+  },
+  {
+    "verb": "varen",
+    "tense": "presens",
+    "subject": "wij",
+    "answer": "varen",
+    "template": "Wij {} morgen met de kano naar de zandplaat.",
+    "hint": "Tomorrow we're taking the canoe to the sandbank."
+  },
+  {
+    "verb": "varen",
+    "tense": "imperfectum",
+    "subject": "hij",
+    "answer": "voer",
+    "template": "Hij {} elke zomer naar een andere eilandengroep.",
+    "hint": "Every summer he sailed to a different archipelago."
+  },
+  {
+    "verb": "vergeten",
+    "tense": "presens",
+    "subject": "ik",
+    "answer": "vergeet",
+    "template": "Ik {} altijd mijn zwemkleding.",
+    "hint": "I always forget my swimwear."
+  },
+  {
+    "verb": "vergeten",
+    "tense": "imperfectum",
+    "subject": "ze",
+    "answer": "vergat",
+    "template": "Ze {} haar zonnebril op het strand.",
+    "hint": "She forgot her sunglasses on the beach."
+  },
+  {
+    "verb": "volhouden",
+    "tense": "presens",
+    "subject": "ze",
+    "answer": "houdt vol",
+    "template": "Ze {} de zware tocht goed {}.",
+    "hint": "She's coping well with the tough trek.",
+    "split": true
+  },
+  {
+    "verb": "volhouden",
+    "tense": "perfectum",
+    "subject": "wij",
+    "answer": "hebben volgehouden",
+    "template": "Wij {} het ondanks de regen {}.",
+    "hint": "We kept going despite the rain.",
+    "split": true
+  },
+  {
+    "verb": "voorbijkruipen",
+    "tense": "presens",
+    "subject": "de tijd",
+    "answer": "kruipt voorbij",
+    "template": "De tijd {} langzaam {} in de hitte.",
+    "hint": "Time crawls by slowly in the heat.",
+    "split": true
+  },
+  {
+    "verb": "voorbijkruipen",
+    "tense": "imperfectum",
+    "subject": "de uren",
+    "answer": "kropen voorbij",
+    "template": "De uren {} {} tijdens de hittegolf.",
+    "hint": "The hours crawled by during the heatwave.",
+    "split": true
+  },
+  {
+    "verb": "voorbijkruipen",
+    "tense": "perfectum",
+    "subject": "de dag",
+    "answer": "is voorbijgekropen",
+    "template": "De dag {} heel langzaam {}.",
+    "hint": "The day crawled by very slowly.",
+    "split": true
+  },
+  {
+    "verb": "waaien",
+    "tense": "presens",
+    "subject": "het",
+    "answer": "waait",
+    "template": "Het {} flink op de zandplaat.",
+    "hint": "It's very windy on the sandbank."
+  },
+  {
+    "verb": "waaien",
+    "tense": "perfectum",
+    "subject": "het",
+    "answer": "heeft gewaaid",
+    "template": "Het {} de hele nacht hard {}.",
+    "hint": "It was very windy all night.",
+    "split": true
+  },
+  {
+    "verb": "zwerven",
+    "tense": "presens",
+    "subject": "hij",
+    "answer": "zwerft",
+    "template": "Hij {} graag in zijn eentje door de wereld.",
+    "hint": "He likes to wander the world on his own."
+  },
+  {
+    "verb": "zwerven",
+    "tense": "imperfectum",
+    "subject": "wij",
+    "answer": "zwierven",
+    "template": "Wij {} wekenlang over de eilanden.",
+    "hint": "We roamed across the islands for weeks."
+  },
+  {
+    "verb": "aantrekken",
+    "tense": "imperfectum",
+    "subject": "de vakbeurs",
+    "answer": "trok aan",
+    "template": "De vakbeurs {} veel ondernemers {}.",
+    "hint": "The trade fair attracted many entrepreneurs.",
+    "split": true
+  },
+  {
+    "verb": "aantrekken",
+    "tense": "perfectum",
+    "subject": "het instituut",
+    "answer": "heeft aangetrokken",
+    "template": "Het instituut {} een nieuwe coördinator {}.",
+    "hint": "The institute has recruited a new coordinator.",
+    "split": true
+  },
+  {
+    "verb": "afschrikken",
+    "tense": "presens",
+    "subject": "het salaris",
+    "answer": "schrikt af",
+    "template": "Het lage salaris {} veel mensen {}.",
+    "hint": "The low salary puts a lot of people off.",
+    "split": true
+  },
+  {
+    "verb": "afschrikken",
+    "tense": "imperfectum",
+    "subject": "de kosten",
+    "answer": "schrikten af",
+    "template": "De hoge kosten {} hem {}.",
+    "hint": "The high costs deterred him.",
+    "split": true
+  },
+  {
+    "verb": "afschrikken",
+    "tense": "perfectum",
+    "subject": "de werkdruk",
+    "answer": "heeft afgeschrikt",
+    "template": "De werkdruk {} haar niet {}.",
+    "hint": "The workload hasn't put her off.",
+    "split": true
+  },
+  {
+    "verb": "afwijken",
+    "tense": "presens",
+    "subject": "zijn perspectief",
+    "answer": "wijkt af",
+    "template": "Zijn perspectief {} sterk {} van het mijne.",
+    "hint": "His perspective differs strongly from mine.",
+    "split": true
+  },
+  {
+    "verb": "afwijken",
+    "tense": "perfectum",
+    "subject": "hij",
+    "answer": "is afgeweken",
+    "template": "Hij {} nooit van de regels {}.",
+    "hint": "He has never deviated from the rules.",
+    "split": true
+  },
+  {
+    "verb": "afzien",
+    "tense": "presens",
+    "subject": "ze",
+    "answer": "ziet af",
+    "template": "Ze {} {} van de functie vanwege de werkdruk.",
+    "hint": "She's declining the position because of the workload.",
+    "split": true
+  },
+  {
+    "verb": "afzien",
+    "tense": "imperfectum",
+    "subject": "wij",
+    "answer": "zagen af",
+    "template": "Wij {} {} van een opleiding in het buitenland.",
+    "hint": "We decided against a course abroad.",
+    "split": true
+  },
+  {
+    "verb": "gelden",
+    "tense": "presens",
+    "subject": "de eis",
+    "answer": "geldt",
+    "template": "Deze eis {} voor al het personeel.",
+    "hint": "This requirement applies to all staff."
+  },
+  {
+    "verb": "gelden",
+    "tense": "perfectum",
+    "subject": "de regel",
+    "answer": "heeft gegolden",
+    "template": "Die regel {} altijd voor iedereen {}.",
+    "hint": "That rule has always applied to everyone.",
+    "split": true
+  },
+  {
+    "verb": "ingaan",
+    "tense": "presens",
+    "subject": "ze",
+    "answer": "gaat in",
+    "template": "Ze {} altijd tegen stereotypering {}.",
+    "hint": "She always goes against stereotyping.",
+    "split": true
+  },
+  {
+    "verb": "ingaan",
+    "tense": "imperfectum",
+    "subject": "hij",
+    "answer": "ging in",
+    "template": "Hij {} tegen het afdelingshoofd {}.",
+    "hint": "He went against the department head.",
+    "split": true
+  },
+  {
+    "verb": "ingaan",
+    "tense": "perfectum",
+    "subject": "wij",
+    "answer": "zijn ingegaan",
+    "template": "Wij {} tegen die onzin {}.",
+    "hint": "We pushed back against that nonsense.",
+    "split": true
+  },
+  {
+    "verb": "ondernemen",
+    "tense": "presens",
+    "subject": "wij",
+    "answer": "ondernemen",
+    "template": "Wij {} actie tegen de hoge werkdruk.",
+    "hint": "We're taking action against the high workload."
+  },
+  {
+    "verb": "ondernemen",
+    "tense": "perfectum",
+    "subject": "ze",
+    "answer": "heeft ondernomen",
+    "template": "Ze {} veel {} om haar talent te ontwikkelen.",
+    "hint": "She has done a lot to develop her talent.",
+    "split": true
+  },
+  {
+    "verb": "ontstaan",
+    "tense": "presens",
+    "subject": "een perspectief",
+    "answer": "ontstaat",
+    "template": "Er {} een nieuw perspectief op mannenbanen.",
+    "hint": "A new perspective on men's jobs is emerging."
+  },
+  {
+    "verb": "ontstaan",
+    "tense": "imperfectum",
+    "subject": "het idee",
+    "answer": "ontstond",
+    "template": "Het idee {} tijdens een overleg.",
+    "hint": "The idea came about during a meeting."
+  },
+  {
+    "verb": "opzien",
+    "tense": "presens",
+    "subject": "ik",
+    "answer": "zie op",
+    "template": "Ik {} {} tegen het gesprek met de hr-manager.",
+    "hint": "I'm dreading the conversation with the HR manager.",
+    "split": true
+  },
+  {
+    "verb": "opzien",
+    "tense": "perfectum",
+    "subject": "hij",
+    "answer": "heeft opgezien",
+    "template": "Hij {} altijd tegen presentaties {}.",
+    "hint": "He has always dreaded presentations.",
+    "split": true
+  },
+  {
+    "verb": "rondlopen",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "heb rondgelopen",
+    "template": "Ik {} de hele dag met een folder {}.",
+    "hint": "I walked around with a leaflet all day.",
+    "split": true
+  },
+  {
+    "verb": "vastzitten",
+    "tense": "presens",
+    "subject": "wij",
+    "answer": "zitten vast",
+    "template": "Wij {} {} aan dit huurappartement.",
+    "hint": "We're stuck with this rented flat.",
+    "split": true
+  },
+  {
+    "verb": "vastzitten",
+    "tense": "imperfectum",
+    "subject": "ze",
+    "answer": "zat vast",
+    "template": "Ze {} jarenlang {} in een hokje.",
+    "hint": "For years she was stuck in a pigeonhole.",
+    "split": true
+  },
+  {
+    "verb": "wegjagen",
+    "tense": "presens",
+    "subject": "het gedoe",
+    "answer": "jaagt weg",
+    "template": "Het gedoe {} goede werknemers {}.",
+    "hint": "The hassle drives good employees away.",
+    "split": true
+  },
+  {
+    "verb": "wegjagen",
+    "tense": "perfectum",
+    "subject": "de eigenaar",
+    "answer": "heeft weggejaagd",
+    "template": "De eigenaar {} de vertegenwoordiger {}.",
+    "hint": "The owner chased the sales rep away.",
+    "split": true
+  },
+  {
+    "verb": "bewijzen",
+    "tense": "presens",
+    "subject": "het onderzoek",
+    "answer": "bewijst",
+    "template": "Dit onderzoek {} dat multitasken niet werkt.",
+    "hint": "This research proves that multitasking doesn't work."
+  },
+  {
+    "verb": "drijven",
+    "tense": "presens",
+    "subject": "een eend",
+    "answer": "drijft",
+    "template": "Er {} een eend in het water naast de faculteit.",
+    "hint": "A duck is floating in the water next to the faculty."
+  },
+  {
+    "verb": "drijven",
+    "tense": "imperfectum",
+    "subject": "de kano",
+    "answer": "dreef",
+    "template": "De kano {} langzaam naar de zee.",
+    "hint": "The canoe drifted slowly towards the sea."
+  },
+  {
+    "verb": "drijven",
+    "tense": "perfectum",
+    "subject": "de boot",
+    "answer": "heeft gedreven",
+    "template": "De boot {} urenlang op het water {}.",
+    "hint": "The boat floated on the water for hours.",
+    "split": true
+  },
+  {
+    "verb": "misgaan",
+    "tense": "presens",
+    "subject": "veel",
+    "answer": "gaat mis",
+    "template": "Er {} veel {} door constante stress.",
+    "hint": "A lot goes wrong because of constant stress.",
+    "split": true
+  },
+  {
+    "verb": "misgaan",
+    "tense": "perfectum",
+    "subject": "het gesprek",
+    "answer": "is misgegaan",
+    "template": "Het beoordelingsgesprek {} helemaal {}.",
+    "hint": "The performance review went completely wrong.",
+    "split": true
+  },
+  {
+    "verb": "onderuitgaan",
+    "tense": "presens",
+    "subject": "ik",
+    "answer": "ga onderuit",
+    "template": "Ik {} bijna {} door de werkdruk.",
+    "hint": "I'm nearly collapsing under the workload.",
+    "split": true
+  },
+  {
+    "verb": "onderuitgaan",
+    "tense": "imperfectum",
+    "subject": "hij",
+    "answer": "ging onderuit",
+    "template": "Hij {} {} tijdens de tentamenweek.",
+    "hint": "He collapsed during exam week.",
+    "split": true
+  },
+  {
+    "verb": "onderuitgaan",
+    "tense": "perfectum",
+    "subject": "ze",
+    "answer": "is onderuitgegaan",
+    "template": "Ze {} door chronische stress {}.",
+    "hint": "She has collapsed from chronic stress.",
+    "split": true
+  },
+  {
+    "verb": "opkomen",
+    "tense": "presens",
+    "subject": "een gedachte",
+    "answer": "komt op",
+    "template": "Er {} een gedachte bij mij {}.",
+    "hint": "A thought occurs to me.",
+    "split": true
+  },
+  {
+    "verb": "opkomen",
+    "tense": "imperfectum",
+    "subject": "de spanning",
+    "answer": "kwam op",
+    "template": "De spanning {} plotseling {} tijdens de lezing.",
+    "hint": "The tension suddenly arose during the lecture.",
+    "split": true
+  },
+  {
+    "verb": "samengaan",
+    "tense": "presens",
+    "subject": "werk en privétijd",
+    "answer": "gaan samen",
+    "template": "Werk en privétijd {} bij haar goed {}.",
+    "hint": "For her, work and private time go together well.",
+    "split": true
+  },
+  {
+    "verb": "samengaan",
+    "tense": "imperfectum",
+    "subject": "stress en slecht slapen",
+    "answer": "gingen samen",
+    "template": "Stress en slecht slapen {} bij mij altijd {}.",
+    "hint": "For me, stress and sleeping badly always went together.",
+    "split": true
+  },
+  {
+    "verb": "samengaan",
+    "tense": "perfectum",
+    "subject": "druk en plezier",
+    "answer": "zijn samengegaan",
+    "template": "Druk en plezier {} hier altijd {}.",
+    "hint": "Pressure and enjoyment have always gone together here.",
+    "split": true
+  },
+  {
+    "verb": "tegengaan",
+    "tense": "perfectum",
+    "subject": "wij",
+    "answer": "zijn tegengegaan",
+    "template": "Wij {} de negativiteit op de afdeling {}.",
+    "hint": "We have countered the negativity in the department.",
+    "split": true
+  },
+  {
+    "verb": "verlaten",
+    "tense": "presens",
+    "subject": "ze",
+    "answer": "verlaat",
+    "template": "Ze {} het computerscherm elk uur voor een korte pauze.",
+    "hint": "She leaves the computer screen every hour for a short break."
+  },
+  {
+    "verb": "verlaten",
+    "tense": "imperfectum",
+    "subject": "wij",
+    "answer": "verlieten",
+    "template": "Wij {} de lezing voordat die afgelopen was.",
+    "hint": "We left the lecture before it had finished."
+  },
+  {
+    "verb": "afsluiten",
+    "tense": "presens",
+    "subject": "wij",
+    "answer": "sluiten af",
+    "template": "Wij {} elke les {} met een lied.",
+    "hint": "We end every lesson with a song.",
+    "split": true
+  },
+  {
+    "verb": "afsluiten",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "heb afgesloten",
+    "template": "Ik {} een nieuwe zorgverzekering {}.",
+    "hint": "I have taken out a new health insurance.",
+    "split": true
+  },
+  {
+    "verb": "doorgaan",
+    "tense": "perfectum",
+    "subject": "wij",
+    "answer": "zijn doorgegaan",
+    "template": "Wij {} met de cursus {} ondanks de obstakels.",
+    "hint": "We carried on with the course despite the obstacles.",
+    "split": true
+  },
+  {
+    "verb": "nadoen",
+    "tense": "presens",
+    "subject": "ik",
+    "answer": "doe na",
+    "template": "Ik {} de klanken van de docent {}.",
+    "hint": "I imitate the teacher's sounds.",
+    "split": true
+  },
+  {
+    "verb": "nadoen",
+    "tense": "perfectum",
+    "subject": "ze",
+    "answer": "heeft nagedaan",
+    "template": "Ze {} de melodie perfect {}.",
+    "hint": "She imitated the melody perfectly.",
+    "split": true
+  },
+  {
+    "verb": "onthouden",
+    "tense": "imperfectum",
+    "subject": "hij",
+    "answer": "onthield",
+    "template": "Hij {} het ritme van de zin meteen.",
+    "hint": "He remembered the rhythm of the sentence straight away."
+  },
+  {
+    "verb": "verbinden",
+    "tense": "presens",
+    "subject": "muziek",
+    "answer": "verbindt",
+    "template": "Muziek {} mensen met elkaar.",
+    "hint": "Music connects people with each other."
+  },
+  {
+    "verb": "verbinden",
+    "tense": "imperfectum",
+    "subject": "ze",
+    "answer": "verbond",
+    "template": "Ze {} elke nieuwe klank met een beeld.",
+    "hint": "She linked every new sound to an image."
+  },
+  {
+    "verb": "vergaan",
+    "tense": "presens",
+    "subject": "het",
+    "answer": "vergaat",
+    "template": "Hoe {} het je op de cursus?",
+    "hint": "How are you getting on at the course?"
+  },
+  {
+    "verb": "vergaan",
+    "tense": "perfectum",
+    "subject": "het",
+    "answer": "is vergaan",
+    "template": "Het {} hem goed {} in Nederland.",
+    "hint": "Things have gone well for him in the Netherlands.",
+    "split": true
+  },
+  {
+    "verb": "vergelijken",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "heb vergeleken",
+    "template": "Ik {} twee zorgverzekeringen met elkaar {}.",
+    "hint": "I have compared two health insurances with each other.",
+    "split": true
+  },
+  {
+    "verb": "verliezen",
+    "tense": "presens",
+    "subject": "ik",
+    "answer": "verlies",
+    "template": "Ik {} nooit mijn motivatie om door te gaan.",
+    "hint": "I never lose my motivation to keep going."
+  },
+  {
+    "verb": "afronden",
+    "tense": "imperfectum",
+    "subject": "wij",
+    "answer": "rondden af",
+    "template": "Wij {} het relocatieprogramma vorige maand {}.",
+    "hint": "We completed the relocation programme last month.",
+    "split": true
+  },
+  {
+    "verb": "afronden",
+    "tense": "perfectum",
+    "subject": "hij",
+    "answer": "heeft afgerond",
+    "template": "Hij {} zijn vrijwilligerswerk met succes {}.",
+    "hint": "He has successfully completed his volunteer work.",
+    "split": true
+  },
+  {
+    "verb": "inburgeren",
+    "tense": "presens",
+    "subject": "wij",
+    "answer": "burgeren in",
+    "template": "Wij {} hier stap voor stap {}.",
+    "hint": "We're integrating here step by step.",
+    "split": true
+  },
+  {
+    "verb": "inburgeren",
+    "tense": "imperfectum",
+    "subject": "hij",
+    "answer": "burgerde in",
+    "template": "Hij {} snel {} dankzij zijn vrijwilligerswerk.",
+    "hint": "He integrated quickly thanks to his volunteer work.",
+    "split": true
+  },
+  {
+    "verb": "invullen",
+    "tense": "presens",
+    "subject": "jij",
+    "answer": "vult in",
+    "template": "Jij {} het formulier voor de verzekering {}.",
+    "hint": "You fill in the form for the insurance.",
+    "split": true
+  },
+  {
+    "verb": "invullen",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "heb ingevuld",
+    "template": "Ik {} alles al {} voor de advocaat.",
+    "hint": "I've already filled everything in for the lawyer.",
+    "split": true
+  },
+  {
+    "verb": "opbouwen",
+    "tense": "presens",
+    "subject": "wij",
+    "answer": "bouwen op",
+    "template": "Wij {} gestaag een nieuw leven {} in Nederland.",
+    "hint": "We're steadily building a new life in the Netherlands.",
+    "split": true
+  },
+  {
+    "verb": "opbouwen",
+    "tense": "imperfectum",
+    "subject": "ze",
+    "answer": "bouwde op",
+    "template": "Ze {} langzamerhand een hechte vriendenkring {}.",
+    "hint": "She gradually built up a close circle of friends.",
+    "split": true
+  },
+  {
+    "verb": "openmaken",
+    "tense": "presens",
+    "subject": "ik",
+    "answer": "maak open",
+    "template": "Ik {} de brief van de verzekering {}.",
+    "hint": "I open the letter from the insurance company.",
+    "split": true
+  },
+  {
+    "verb": "openmaken",
+    "tense": "imperfectum",
+    "subject": "hij",
+    "answer": "maakte open",
+    "template": "Hij {} nerveus de envelop {}.",
+    "hint": "He nervously opened the envelope.",
+    "split": true
+  },
+  {
+    "verb": "openmaken",
+    "tense": "perfectum",
+    "subject": "wij",
+    "answer": "hebben opengemaakt",
+    "template": "Wij {} het pakket samen {}.",
+    "hint": "We opened the parcel together.",
+    "split": true
+  },
+  {
+    "verb": "verhuizen",
+    "tense": "imperfectum",
+    "subject": "ze (meervoud)",
+    "answer": "verhuisden",
+    "template": "Ze {} vorig jaar naar een flat in Den Haag.",
+    "hint": "Last year they moved to a flat in The Hague."
+  },
+  {
+    "verb": "spijten",
+    "tense": "perfectum",
+    "subject": "het",
+    "answer": "heeft gespeten",
+    "template": "Het {} me altijd {} dat ik toen niets heb gezegd.",
+    "hint": "I have always regretted that I said nothing at the time.",
+    "split": true
+  },
+  {
+    "verb": "gaan",
+    "tense": "imperfectum",
+    "subject": "wij",
+    "answer": "gingen",
+    "template": "Wij {} spontaan met de hele kring naar een camping.",
+    "hint": "We spontaneously went to a campsite with the whole circle of friends."
+  },
+  {
+    "verb": "komen",
+    "tense": "perfectum",
+    "subject": "hij",
+    "answer": "is gekomen",
+    "template": "Hij {} onaangekondigd naar ons etentje {}.",
+    "hint": "He turned up unannounced at our dinner.",
+    "split": true
+  },
+  {
+    "verb": "vinden",
+    "tense": "imperfectum",
+    "subject": "ik",
+    "answer": "vond",
+    "template": "Ik {} het onbeleefd dat hij niet van tevoren belde.",
+    "hint": "I thought it rude that he didn't call beforehand."
+  },
+  {
+    "verb": "krijgen",
+    "tense": "perfectum",
+    "subject": "wij",
+    "answer": "hebben gekregen",
+    "template": "Wij {} ruzie over een misverstand {}.",
+    "hint": "We got into an argument over a misunderstanding.",
+    "split": true
+  },
+  {
+    "verb": "zijn",
+    "tense": "imperfectum",
+    "subject": "de sfeer",
+    "answer": "was",
+    "template": "De sfeer {} doodstil na zijn opmerking.",
+    "hint": "The atmosphere was dead silent after his remark."
+  },
+  {
+    "verb": "hebben",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "heb gehad",
+    "template": "Ik {} altijd een hechte kring van vrienden {}.",
+    "hint": "I have always had a close circle of friends.",
+    "split": true
+  },
+  {
+    "verb": "zeggen",
+    "tense": "imperfectum",
+    "subject": "ze",
+    "answer": "zei",
+    "template": "Ze {} dat ze spontane bezoekjes niet op prijs stelt.",
+    "hint": "She said that she doesn't appreciate spontaneous visits."
+  },
+  {
+    "verb": "blijven",
+    "tense": "imperfectum",
+    "subject": "wij",
+    "answer": "bleven",
+    "template": "Wij {} de hele avond binnenshuis vanwege de regen.",
+    "hint": "We stayed indoors all evening because of the rain."
+  },
+  {
+    "verb": "schrijven",
+    "tense": "perfectum",
+    "subject": "hij",
+    "answer": "heeft geschreven",
+    "template": "Hij {} een lang appje in de whatsappgroep {}.",
+    "hint": "He wrote a long message in the WhatsApp group.",
+    "split": true
+  },
+  {
+    "verb": "denken",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "heb gedacht",
+    "template": "Ik {} weleens aan een leven als expat {}.",
+    "hint": "I have sometimes thought about life as an expat.",
+    "split": true
+  },
+  {
+    "verb": "geven",
+    "tense": "perfectum",
+    "subject": "ze (meervoud)",
+    "answer": "hebben gegeven",
+    "template": "Ze {} ons een enorme portie {}.",
+    "hint": "They gave us an enormous portion.",
+    "split": true
+  },
+  {
+    "verb": "nemen",
+    "tense": "imperfectum",
+    "subject": "ik",
+    "answer": "nam",
+    "template": "Ik {} de rekening en stuurde later een Tikkie.",
+    "hint": "I took the bill and sent a Tikkie later."
+  },
+  {
+    "verb": "maken",
+    "tense": "perfectum",
+    "subject": "hij",
+    "answer": "heeft gemaakt",
+    "template": "Hij {} een raar gebaar {}.",
+    "hint": "He made a strange gesture.",
+    "split": true
+  },
+  {
+    "verb": "vinden",
+    "tense": "perfectum",
+    "subject": "wij",
+    "answer": "hebben gevonden",
+    "template": "Wij {} een praktische app {} om de kosten te splitsen.",
+    "hint": "We found a practical app for splitting the costs.",
+    "split": true
+  },
+  {
+    "verb": "worden",
+    "tense": "imperfectum",
+    "subject": "ze",
+    "answer": "werd",
+    "template": "Ze {} verontwaardigd toen hij om een Tikkie vroeg.",
+    "hint": "She became indignant when he asked for a Tikkie."
+  },
+  {
+    "verb": "gaan",
+    "tense": "perfectum",
+    "subject": "wij",
+    "answer": "zijn gegaan",
+    "template": "Wij {} onlangs naar een cocktailbar {}.",
+    "hint": "We recently went to a cocktail bar.",
+    "split": true
+  },
+  {
+    "verb": "zien",
+    "tense": "imperfectum",
+    "subject": "ik",
+    "answer": "zag",
+    "template": "Ik {} opeens mijn studiegenoot bij de automaat.",
+    "hint": "I suddenly saw my fellow student at the machine."
+  },
+  {
+    "verb": "kopen",
+    "tense": "imperfectum",
+    "subject": "hij",
+    "answer": "kocht",
+    "template": "Hij {} telkens koffie voor het hele volleybalteam.",
+    "hint": "He bought coffee for the whole volleyball team every time."
+  },
+  {
+    "verb": "krijgen",
+    "tense": "imperfectum",
+    "subject": "ze",
+    "answer": "kreeg",
+    "template": "Ze {} de indruk dat hij rijk was.",
+    "hint": "She got the impression that he was rich."
+  },
+  {
+    "verb": "willen",
+    "tense": "imperfectum",
+    "subject": "wij",
+    "answer": "wilden",
+    "template": "Wij {} de rekening eerlijk splitsen.",
+    "hint": "We wanted to split the bill fairly."
+  },
+  {
+    "verb": "geven",
+    "tense": "imperfectum",
+    "subject": "ik",
+    "answer": "gaf",
+    "template": "Ik {} een redelijke reden voor mijn verzoek.",
+    "hint": "I gave a reasonable reason for my request."
+  },
+  {
+    "verb": "zeggen",
+    "tense": "perfectum",
+    "subject": "hij",
+    "answer": "heeft gezegd",
+    "template": "Hij {} {} dat hij liever pint dan contant betaalt.",
+    "hint": "He said that he prefers paying by card to paying cash.",
+    "split": true
+  },
+  {
+    "verb": "zien",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "heb gezien",
+    "template": "Ik {} een gloednieuw kunstwerk in de collectie {}.",
+    "hint": "I saw a brand-new artwork in the collection.",
+    "split": true
+  },
+  {
+    "verb": "lopen",
+    "tense": "imperfectum",
+    "subject": "wij",
+    "answer": "liepen",
+    "template": "Wij {} een geluidswandeling door de stad.",
+    "hint": "We did a sound walk through the city."
+  },
+  {
+    "verb": "maken",
+    "tense": "perfectum",
+    "subject": "de kunstenaar",
+    "answer": "heeft gemaakt",
+    "template": "De kunstenaar {} een opname van de regenbui {}.",
+    "hint": "The artist made a recording of the rain shower.",
+    "split": true
+  },
+  {
+    "verb": "schrijven",
+    "tense": "imperfectum",
+    "subject": "ik",
+    "answer": "schreef",
+    "template": "Ik {} een presentatie over mijn verzameling.",
+    "hint": "I wrote a presentation about my collection."
+  },
+  {
+    "verb": "spelen",
+    "tense": "presens",
+    "subject": "ze",
+    "answer": "speelt",
+    "template": "Ze {} de hoofdrol in een nieuwe performance.",
+    "hint": "She plays the lead role in a new performance."
+  },
+  {
+    "verb": "luisteren",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "heb geluisterd",
+    "template": "Ik {} naar het audiobestand van de workshop {}.",
+    "hint": "I listened to the audio file of the workshop.",
+    "split": true
+  },
+  {
+    "verb": "vinden",
+    "tense": "presens",
+    "subject": "ik",
+    "answer": "vind",
+    "template": "Ik {} de tentoonstelling vertrouwd en toch onverwacht.",
+    "hint": "I find the exhibition familiar and yet unexpected."
+  },
+  {
+    "verb": "worden",
+    "tense": "perfectum",
+    "subject": "hij",
+    "answer": "is geworden",
+    "template": "Hij {} na het conservatorium een bekende musicus {}.",
+    "hint": "After the conservatoire he became a well-known musician.",
+    "split": true
+  },
+  {
+    "verb": "zitten",
+    "tense": "imperfectum",
+    "subject": "wij",
+    "answer": "zaten",
+    "template": "Wij {} stil op een traptrede en luisterden naar de regen.",
+    "hint": "We sat quietly on a stair and listened to the rain."
+  },
+  {
+    "verb": "doen",
+    "tense": "imperfectum",
+    "subject": "de schilder",
+    "answer": "deed",
+    "template": "De schilder {} een oproep voor nieuw materiaal.",
+    "hint": "The painter put out a call for new material."
+  },
+  {
+    "verb": "slapen",
+    "tense": "perfectum",
+    "subject": "hij",
+    "answer": "heeft geslapen",
+    "template": "Hij {} tijdens de hele presentatie {}.",
+    "hint": "He slept through the whole presentation.",
+    "split": true
+  },
+  {
+    "verb": "nemen",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "heb genomen",
+    "template": "Ik {} een moeilijke beslissing over mijn proefschrift {}.",
+    "hint": "I have made a difficult decision about my dissertation.",
+    "split": true
+  },
+  {
+    "verb": "krijgen",
+    "tense": "perfectum",
+    "subject": "hij",
+    "answer": "heeft gekregen",
+    "template": "Hij {} een onvoldoende voor zijn beoordeling {}.",
+    "hint": "He got a fail for his assessment.",
+    "split": true
+  },
+  {
+    "verb": "hebben",
+    "tense": "imperfectum",
+    "subject": "ik",
+    "answer": "had",
+    "template": "Ik {} last van spanning in mijn hele lichaam.",
+    "hint": "I was suffering from tension in my whole body."
+  },
+  {
+    "verb": "vinden",
+    "tense": "imperfectum",
+    "subject": "wij",
+    "answer": "vonden",
+    "template": "Wij {} geen balans tussen werk en privétijd.",
+    "hint": "We couldn't find a balance between work and private time."
+  },
+  {
+    "verb": "zijn",
+    "tense": "perfectum",
+    "subject": "de medewerker",
+    "answer": "is geweest",
+    "template": "De medewerker {} wekenlang onbereikbaar {}.",
+    "hint": "The employee was unreachable for weeks.",
+    "split": true
+  },
+  {
+    "verb": "worden",
+    "tense": "presens",
+    "subject": "de werkdruk",
+    "answer": "wordt",
+    "template": "De werkdruk {} voor veel medewerkers te hoog.",
+    "hint": "The workload is becoming too high for many employees."
+  },
+  {
+    "verb": "houden",
+    "tense": "imperfectum",
+    "subject": "ze",
+    "answer": "hield",
+    "template": "Ze {} haar stress goed onder controle.",
+    "hint": "She kept her stress well under control."
+  },
+  {
+    "verb": "gaan",
+    "tense": "imperfectum",
+    "subject": "ik",
+    "answer": "ging",
+    "template": "Ik {} met pijn aan mijn hart naar de spoedeisende hulp.",
+    "hint": "I went to A&E with pain in my heart."
+  },
+  {
+    "verb": "denken",
+    "tense": "presens",
+    "subject": "wij",
+    "answer": "denken",
+    "template": "Wij {} dat het brein rust nodig heeft.",
+    "hint": "We think the brain needs rest."
+  },
+  {
+    "verb": "geven",
+    "tense": "perfectum",
+    "subject": "de docent",
+    "answer": "heeft gegeven",
+    "template": "De docent {} een ingewikkelde lezing over de hersenen {}.",
+    "hint": "The lecturer gave a complicated lecture about the brain.",
+    "split": true
+  },
+  {
+    "verb": "blijven",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "ben gebleven",
+    "template": "Ik {} ondanks de druk mentaal fit {}.",
+    "hint": "I have stayed mentally fit despite the pressure.",
+    "split": true
+  },
+  {
+    "verb": "eten",
+    "tense": "imperfectum",
+    "subject": "ik",
+    "answer": "at",
+    "template": "Vroeger {} ik veel voorverpakte producten.",
+    "hint": "I used to eat a lot of pre-packaged products."
+  },
+  {
+    "verb": "eten",
+    "tense": "perfectum",
+    "subject": "wij",
+    "answer": "hebben gegeten",
+    "template": "Wij {} rosbief met rucola en truffelmayonaise {}.",
+    "hint": "We ate roast beef with rocket and truffle mayonnaise.",
+    "split": true
+  },
+  {
+    "verb": "drinken",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "heb gedronken",
+    "template": "Ik {} vandaag ten minste twee liter water {}.",
+    "hint": "I have drunk at least two litres of water today.",
+    "split": true
+  },
+  {
+    "verb": "kopen",
+    "tense": "presens",
+    "subject": "wij",
+    "answer": "kopen",
+    "template": "Wij {} alleen producten uit het bovenste schap.",
+    "hint": "We only buy products from the top shelf."
+  },
+  {
+    "verb": "lezen",
+    "tense": "presens",
+    "subject": "ik",
+    "answer": "lees",
+    "template": "Ik {} altijd het lijstje met ingrediënten.",
+    "hint": "I always read the list of ingredients."
+  },
+  {
+    "verb": "vragen",
+    "tense": "imperfectum",
+    "subject": "ze",
+    "answer": "vroeg",
+    "template": "Ze {} de voedingsdeskundige om een strategie.",
+    "hint": "She asked the nutritionist for a strategy."
+  },
+  {
+    "verb": "houden",
+    "tense": "perfectum",
+    "subject": "wij",
+    "answer": "hebben gehouden",
+    "template": "Wij {} ons aan de richtlijnen voor gezonde voeding {}.",
+    "hint": "We have stuck to the guidelines for healthy nutrition.",
+    "split": true
+  },
+  {
+    "verb": "weten",
+    "tense": "imperfectum",
+    "subject": "ik",
+    "answer": "wist",
+    "template": "Ik {} weinig over voeding en het lichaam.",
+    "hint": "I knew little about nutrition and the body."
+  },
+  {
+    "verb": "proberen",
+    "tense": "presens",
+    "subject": "hij",
+    "answer": "probeert",
+    "template": "Hij {} zijn levensstijl stap voor stap te veranderen.",
+    "hint": "He's trying to change his lifestyle step by step."
+  },
+  {
+    "verb": "maken",
+    "tense": "presens",
+    "subject": "wij",
+    "answer": "maken",
+    "template": "Wij {} maandelijks een lijstje met gezonde recepten.",
+    "hint": "Every month we make a list of healthy recipes."
+  },
+  {
+    "verb": "worden",
+    "tense": "imperfectum",
+    "subject": "het",
+    "answer": "werd",
+    "template": "Het {} luidruchtig in de kroeg tijdens de pubquiz.",
+    "hint": "It got noisy in the pub during the pub quiz."
+  },
+  {
+    "verb": "kopen",
+    "tense": "imperfectum",
+    "subject": "ik",
+    "answer": "kocht",
+    "template": "Ik {} vroeger alles in plastic.",
+    "hint": "I used to buy everything in plastic."
+  },
+  {
+    "verb": "eten",
+    "tense": "presens",
+    "subject": "ze",
+    "answer": "eet",
+    "template": "Ze {} als vegetariër veel spinazie.",
+    "hint": "As a vegetarian she eats a lot of spinach."
+  },
+  {
+    "verb": "zien",
+    "tense": "presens",
+    "subject": "wij",
+    "answer": "zien",
+    "template": "Wij {} overal onkruid tussen de fruitstruiken.",
+    "hint": "We see weeds everywhere among the fruit bushes."
+  },
+  {
+    "verb": "doen",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "heb gedaan",
+    "template": "Ik {} veel moeite {} om duurzaam te leven.",
+    "hint": "I have made a great effort to live sustainably.",
+    "split": true
+  },
+  {
+    "verb": "wonen",
+    "tense": "imperfectum",
+    "subject": "hij",
+    "answer": "woonde",
+    "template": "Hij {} in een milieubewuste wijk.",
+    "hint": "He lived in an environmentally conscious neighbourhood."
+  },
+  {
+    "verb": "werken",
+    "tense": "perfectum",
+    "subject": "wij",
+    "answer": "hebben gewerkt",
+    "template": "Wij {} samen met de buurtbewoners aan een groentebak {}.",
+    "hint": "We worked together with the neighbours on a vegetable planter.",
+    "split": true
+  },
+  {
+    "verb": "denken",
+    "tense": "imperfectum",
+    "subject": "ze",
+    "answer": "dacht",
+    "template": "Ze {} als tiener al aan de toekomst van de aarde.",
+    "hint": "As a teenager she was already thinking about the future of the earth."
+  },
+  {
+    "verb": "leren",
+    "tense": "perfectum",
+    "subject": "ik",
+    "answer": "heb geleerd",
+    "template": "Ik {} {} om brandnetels te herkennen.",
+    "hint": "I have learned to recognise nettles.",
+    "split": true
+  },
+  {
+    "verb": "geven",
+    "tense": "presens",
+    "subject": "hij",
+    "answer": "geeft",
+    "template": "Hij {} zijn planten elke dag water.",
+    "hint": "He waters his plants every day."
+  },
+  {
+    "verb": "brengen",
+    "tense": "imperfectum",
+    "subject": "ze",
+    "answer": "bracht",
+    "template": "Ze {} haar lege flessen in een zak naar de winkel.",
+    "hint": "She took her empty bottles to the shop in a bag."
+  },
+  {
+    "verb": "vinden",
+    "tense": "perfectum",
+    "subject": "wij",
+    "answer": "hebben gevonden",
+    "template": "Wij {} een oplossing {} voor het voedsel dat over is.",
+    "hint": "We have found a solution for the leftover food.",
     "split": true
   }
 ]
