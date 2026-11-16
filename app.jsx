@@ -140,7 +140,8 @@ function drillItems(verbs, tenses) {
 // imperfect vowel into the participle (geliepen). Real other forms of the verb
 // fill the list when those happen to be right or too few.
 function drillOptions(item, v) {
-  const [stem, ...rest] = v.presIk.split(" ");
+  // presIk is "loop", "kom langs" (separable) or "gedraag me" (reflexive).
+  const [stem, ...rest] = v.presIk.split(" ").filter(w => w !== "me");
   const part = rest.join(" "), imp = v.impSg.split(" ")[0];
   const fakes = item.form === "vd"
     ? [!stem.endsWith("t") && `${part}ge${stem}t`, !stem.endsWith("d") && `${part}ge${stem}d`, !imp.endsWith("e") && `${part}ge${imp}en`, v.impSg, v.impPl, v.inf]
